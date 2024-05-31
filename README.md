@@ -8,7 +8,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Integrante 1** - [Axel Apaza](https://github.com/Akselas)
 * **Integrante 2** - [Ivan Martin Alderete](https://github.com/IMartinAlde)
-* **Integrante 3** - [Juan Ignacio Cruceño]([https://github.com/integrante3](https://github.com/Juan8754))
+* **Integrante 3** - [Juan Ignacio Cruceño]([https://github.com/integrante3](https://github.com/Juan8754)
 * **Integrante 4** - [integrante4](https://github.com/integrante4)
 * **Integrante 5** - [integrante4](https://github.com/integrante4)
 
