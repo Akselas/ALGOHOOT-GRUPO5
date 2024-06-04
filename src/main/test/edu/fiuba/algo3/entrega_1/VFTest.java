@@ -15,10 +15,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VFTest {
-    
+
     @Test
-    public void test01UnaPreguntaRecibeUnaListaDeRespuestasVFYAsignaCorrectamenteElPuntaje() {
-        // Arrange
+    public void test01UnaPreguntaVFRecibeUnaListaDeRespuestasYAsignaCorrectamenteElPuntaje() {
         // Arrange
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
@@ -27,18 +26,18 @@ public class VFTest {
         List<Jugador> jugadores = new List<Jugador>();
         List<HashMap<String, Boolean>> respuestas = new ArrayList();
 
-        opciones.put("Paris es la capital de Francia", true);
+        opciones.put("Paris es la capital de Francia?", true);
         Pregunta pregunta = new Pregunta("Paris es la capital de Francia?", opciones, vfClasico);
 
         Jugador j1 = new Jugador("Axel");
         HashMap<String, Boolean> respuestaJ1 = new HashMap<>();
-        respuestaJ1.put("Paris es la capital de Francia", true);
+        respuestaJ1.put("Paris es la capital de Francia?", true);
         jugadores.add(j1);
         respuestas.add(respuestaJ1);
 
         Jugador j2 = new Jugador("Dani");
         HashMap<String, Boolean> respuestaJ2 = new HashMap<>();
-        respuestaJ2.put("Paris es la capital de Francia", true);
+        respuestaJ2.put("Paris es la capital de Francia?", true);
         jugadores.add(j2);
         respuestas.add(respuestaJ2);
 
@@ -51,16 +50,103 @@ public class VFTest {
     }
 
     @Test
-    public void test02UnaPreguntaRecibeUnaListaDeRespuestasVFYAsignaCorrectamenteElPuntaje() {
+    public void test02UnaPreguntaVFRecibeUnaListaDeRespuestasAsignaCorrectamenteElPuntajeAQuienesFallaron() {
+        // Arrange
+        int puntajeEsperado1 = 0;
+        int puntajeEsperado2 = 0;
+        Modalidad vfClasico = new VFClasico();
+        HashMap<String, Boolean> opciones = new HashMap<>();
+        List<Jugador> jugadores = new List<Jugador>();
+        List<HashMap<String, Boolean>> respuestas = new ArrayList();
+
+        opciones.put("Paris es la capital de Francia?", true);
+        Pregunta pregunta = new Pregunta("Paris es la capital de Francia?", opciones, vfClasico);
+
+        Jugador j1 = new Jugador("Axel");
+        HashMap<String, Boolean> respuestaJ1 = new HashMap<>();
+        respuestaJ1.put("Paris es la capital de Francia?", false);
+        jugadores.add(j1);
+        respuestas.add(respuestaJ1);
+
+        Jugador j2 = new Jugador("Dani");
+        HashMap<String, Boolean> respuestaJ2 = new HashMap<>();
+        respuestaJ2.put("Paris es la capital de Francia?", false);
+        jugadores.add(j2);
+        respuestas.add(respuestaJ2);
+
+        // Act
+        pregunta.evaluarRespuestas(respuestas, jugadores);
+
+        // Assert
+        assertEquals(puntajeEsperado1, jugador1.obtenerPuntaje());
+        assertEquals(puntajeEsperado2, jugador2.obtenerPuntaje());
 
     }
 
     @Test
-    public void test03UnaPreguntaRecibeUnaListaDeRespuestasVFYAsignaCorrectamenteElPuntaje() {
+    public void test03UnaPreguntaDeVFConPenalidadAsignaCorrectamenteElPuntaje() {
+
+        int puntajeEsperado1 = 1;
+        int puntajeEsperado2 = 1;
+        Modalidad vfConPenalidad = new VFConPenalidad();
+        HashMap<String, Boolean> opciones = new HashMap<>();
+        List<Jugador> jugadores = new List<Jugador>();
+        List<HashMap<String, Boolean>> respuestas = new ArrayList();
+
+        opciones.put("Paris es la capital de Francia?", true);
+        Pregunta pregunta = new Pregunta("Paris es la capital de Francia?", opciones, vfConPenalidad);
+
+        Jugador j1 = new Jugador("Axel");
+        HashMap<String, Boolean> respuestaJ1 = new HashMap<>();
+        respuestaJ1.put("Paris es la capital de Francia?", true);
+        jugadores.add(j1);
+        respuestas.add(respuestaJ1);
+
+        Jugador j2 = new Jugador("Dani");
+        HashMap<String, Boolean> respuestaJ2 = new HashMap<>();
+        respuestaJ2.put("Paris es la capital de Francia?", true);
+        jugadores.add(j2);
+        respuestas.add(respuestaJ2);
+
+        // Act
+        pregunta.evaluarRespuestas(respuestas, jugadores);
+
+        // Assert
+        assertEquals(puntajeEsperado1, jugador1.obtenerPuntaje());
+        assertEquals(puntajeEsperado2, jugador2.obtenerPuntaje());
+
     }
 
     @Test
-    public void test04UnaPreguntaRecibeUnaListaDeRespuestasVFYAsignaCorrectamenteElPuntaje() {
+    public void test04UnaPreguntaDeVFConPenalidadAsignaCorrectamenteElPuntaje() {
+        int puntajeEsperado1 = -1;
+        int puntajeEsperado2 = -1;
+        Modalidad vfConPenalidad = new VFConPenalidad();
+        HashMap<String, Boolean> opciones = new HashMap<>();
+        List<Jugador> jugadores = new List<Jugador>();
+        List<HashMap<String, Boolean>> respuestas = new ArrayList();
+
+        opciones.put("Paris es la capital de Francia?", true);
+        Pregunta pregunta = new Pregunta("Paris es la capital de Francia?", opciones, vfConPenalidad);
+
+        Jugador j1 = new Jugador("Axel");
+        HashMap<String, Boolean> respuestaJ1 = new HashMap<>();
+        respuestaJ1.put("Paris es la capital de Francia?", false);
+        jugadores.add(j1);
+        respuestas.add(respuestaJ1);
+
+        Jugador j2 = new Jugador("Dani");
+        HashMap<String, Boolean> respuestaJ2 = new HashMap<>();
+        respuestaJ2.put("Paris es la capital de Francia?", false);
+        jugadores.add(j2);
+        respuestas.add(respuestaJ2);
+
+        // Act
+        pregunta.evaluarRespuestas(respuestas, jugadores);
+
+        // Assert
+        assertEquals(puntajeEsperado1, jugador1.obtenerPuntaje());
+        assertEquals(puntajeEsperado2, jugador2.obtenerPuntaje());
 
     }
 }
