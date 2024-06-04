@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.HashMap;
 
-public class MultipleChoiceClasico extends Modalidad{
+public class MultipleChoiceClasico implements Modalidad{
 
     @Override
     public int calcularPuntaje(HashMap<String, Boolean> respuestasJugador, HashMap<String, Boolean> respuestasCorrectas) {
