@@ -14,25 +14,14 @@ import main.java.edu.fiuba.algo3.entrega_1.VFClasico;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MessageTest {
-    /*
-     * @Test
-     * public void messageGreeting() {
-     * Message message = new Message("Hola Mundo!", "Hello world!");
-     * 
-     * assertEquals("Hello world!", message.greet("us"));
-     * }
-     * 
-     * @Test
-     * public void messageGreetingDefaultLanguage() {
-     * Message message = new Message("Hola Mundo!", "Hello world!");
-     * 
-     * assertEquals("Hola Mundo!", message.greet());
-     * }
-     */
+public class VFTest {
+    
     @Test
     public void test01UnaPreguntaRecibeUnaListaDeRespuestasVFYAsignaCorrectamenteElPuntaje() {
         // Arrange
+        // Arrange
+        int puntajeEsperado1 = 1;
+        int puntajeEsperado2 = 1;
         Modalidad vfClasico = new VFClasico();
         HashMap<String, Boolean> opciones = new HashMap<>();
         List<Jugador> jugadores = new List<Jugador>();
@@ -43,7 +32,7 @@ public class MessageTest {
 
         Jugador j1 = new Jugador("Axel");
         HashMap<String, Boolean> respuestaJ1 = new HashMap<>();
-        respuestaJ1.put("Paris es la capital de Francia", false);
+        respuestaJ1.put("Paris es la capital de Francia", true);
         jugadores.add(j1);
         respuestas.add(respuestaJ1);
 
@@ -53,24 +42,12 @@ public class MessageTest {
         jugadores.add(j2);
         respuestas.add(respuestaJ2);
 
-        Jugador j3 = new Jugador("Juani");
-        HashMap<String, Boolean> respuestaJ3 = new HashMap<>();
-        respuestaJ3.put("Paris es la capital de Francia", true);
-        jugadores.add(j3);
-        respuestas.add(respuestaJ3);
-
-        Jugador j4 = new Jugador("Denisse");
-        HashMap<String, Boolean> respuestaJ4 = new HashMap<>();
-        respuestaJ4.put("Paris es la capital de Francia", false);
-        jugadores.add(j3);
-        respuestas.add(respuestaJ4);
-
         // Act
-        pregunta.evaluarRespuestas(respuestas); // Aca tendria que mandarle tambien por parametro una lista de los
-                                                // jugadores.
+        pregunta.evaluarRespuestas(respuestas, jugadores);
 
         // Assert
-        // assertEquals()
+        assertEquals(puntajeEsperado1, jugador1.obtenerPuntaje());
+        assertEquals(puntajeEsperado2, jugador2.obtenerPuntaje());
     }
 
     @Test
