@@ -11,7 +11,7 @@ public class VFClasico extends Modalidad {
         int puntaje = 0;
 
         for (String opcion : respuestasCorrectas.keyset()) {
-            if (respuestasCorrectas.get(opcion) == respuestasJugador(opcion)) {
+            if (respuestasCorrectas.get(opcion) == respuestasJugador.get(opcion)) {
                 puntaje++;
             }
         }
