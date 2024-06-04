@@ -1,27 +1,26 @@
-package edu.fiuba.algo3.modelo;
+package main.java.edu.fiuba.algo3.entrega_1;
 
 import java.util.HashMap;
 
 public class Pregunta {
-    private String textoPregunta;
-    private HashMap<String, Boolean> opciones;
-    private Modalidad modalidad;
 
-    public Pregunta(String texto, HashMap<String, Boolean> opciones, Modalidad modalidad) {
-        this.textoPregunta = texto;
+    public Pregunta(HashMap<string, bool> opciones, Modalidad modalidad) {
         this.opciones = opciones;
         this.modalidad = modalidad;
     }
 
-    public void evaluarRespuestas(HashMap<String, Boolean>[] respuestasJugador, Jugador[] jugadores) {
-        for (int i = 0; i < respuestasJugador.length; i++) {
-            evaluarRespuesta(respuestasJugador[i], jugadores[i]);
+    public void evaluarRespuestas(List<HashMap<string, bool>> respuestas, List<Jugador> jugadores) {
+
+        for (int i = 0; i < respuestas.size(); i++) {
+            HashMap<String, Boolean> resp = respuestas.get(i);
+            Jugador jugador = jugadores.get(i);
+            this.modalidad.evaluarRespuesta(resp, jugador);
         }
     }
 
-    public void evaluarRespuesta(HashMap<String, Boolean> respuestaJugador, Jugador jugador) {
-        int puntajeCorrespondiente = this.modalidad.calcularPuntaje(respuestaJugador, this.opciones);
-        asignarPuntaje(jugador, puntajeCorrespondiente);
+    public void evaluarRespuesta(HashMap<string, bool> respuestaJugador, Jugador jugador) {
+        int puntaje = this.modalidad.calcularPuntaje(HashMap < string, bool > respuestaJugador, this.opciones);
+        jugador.asignarPuntaje(puntaje);
     }
 
     private void asignarPuntaje(Jugador jugador, int puntaje) {
