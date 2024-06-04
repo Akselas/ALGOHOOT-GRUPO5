@@ -1,29 +1,29 @@
-package main.java.edu.fiuba.algo3.entrega_1;
+package edu.fiuba.algo3.modelo;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Pregunta {
+    private String textoPregunta;
+    private HashMap<String, Boolean> opciones;
+    private Modalidad modalidad;
 
-    public Pregunta(HashMap<string, bool> opciones, Modalidad modalidad) {
+    public Pregunta(String texto, HashMap<String, Boolean> opciones, Modalidad modalidad) {
+        this.textoPregunta = texto;
         this.opciones = opciones;
         this.modalidad = modalidad;
     }
 
-    public void evaluarRespuestas(List<HashMap<string, bool>> respuestas, List<Jugador> jugadores) {
-
+    public void evaluarRespuestas(List<HashMap<String, Boolean>> respuestas, List<Jugador> jugadores) {
         for (int i = 0; i < respuestas.size(); i++) {
             HashMap<String, Boolean> resp = respuestas.get(i);
             Jugador jugador = jugadores.get(i);
-            this.modalidad.evaluarRespuesta(resp, jugador);
+            evaluarRespuesta(resp, jugador);
         }
     }
 
-    public void evaluarRespuesta(HashMap<string, bool> respuestaJugador, Jugador jugador) {
-        int puntaje = this.modalidad.calcularPuntaje(HashMap < string, bool > respuestaJugador, this.opciones);
-        jugador.asignarPuntaje(puntaje);
-    }
-
-    private void asignarPuntaje(Jugador jugador, int puntaje) {
+    public void evaluarRespuesta(HashMap<String, Boolean> respuestaJugador, Jugador jugador) {
+        int puntaje = this.modalidad.calcularPuntaje(respuestaJugador, this.opciones);
         jugador.sumarPuntaje(puntaje);
     }
 }
