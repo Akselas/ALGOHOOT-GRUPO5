@@ -10,7 +10,7 @@ public class VFConPenalidad extends Modalidad {
             HashMap<String, Boolean> respuestasCorrectas) {
         int puntaje = 0;
         for (String opcion : respuestasCorrectas.keyset())
-            if (respuestasCorrectas.get(opcion) == respuestasJugador(opcion)) {
+            if (respuestasCorrectas.get(opcion) == respuestasJugador.get(opcion)) {
                 puntaje++;
             } else {
                 puntaje--;
