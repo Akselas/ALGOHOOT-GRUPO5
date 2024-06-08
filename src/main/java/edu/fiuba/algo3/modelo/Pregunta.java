@@ -24,6 +24,6 @@ public class Pregunta {
 
     public void evaluarRespuesta(HashMap<String, Boolean> respuestaJugador, Jugador jugador) {
         int puntaje = this.modalidad.calcularPuntaje(respuestaJugador, this.opciones);
-        jugador.sumarPuntaje(puntaje);
+        //jugador.sumarPuntaje(puntaje);
     }
 }
