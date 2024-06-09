@@ -1,4 +1,4 @@
-package src.main.java.edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.vista;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
