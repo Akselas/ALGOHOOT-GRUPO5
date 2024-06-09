@@ -18,10 +18,12 @@ public class VFTest {
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
 
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Respuesta("si"), new Clasico());
+        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Clasico());
 
-        Jugador j1 = new Jugador("Pepe", new Respuesta("si"));
-        Jugador j2 = new Jugador("Sandra", new Respuesta("si"));
+        Jugador j1 = new Jugador("Pepe");
+        j1.agregarRespuesta(new Verdadero());
+        Jugador j2 = new Jugador("Sandra");
+        j2.agregarRespuesta(new Verdadero());
 
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(j1);
@@ -43,16 +45,20 @@ public class VFTest {
         //Arrange
         int puntajeEsperado1 = 0;
         int puntajeEsperado2 = 0;
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Respuesta("si"), new Clasico());
-        Jugador j1 = new Jugador("Pablo", new Respuesta("no"));
-        Jugador j2 = new Jugador("Maria", new Respuesta("no"));
+        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Clasico());
+        Jugador j1 = new Jugador("Pepe");
+        j1.agregarRespuesta(new Falso());
+        Jugador j2 = new Jugador("Sandra");
+        j2.agregarRespuesta(new Falso());
 
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(j1);
         jugadores.agregarJugador(j2);
+
         //Act
         Puntajes puntajes = verdaderoFalso.calcularPuntaje(jugadores);
         jugadores.asignarPuntajes(puntajes);
+
         // Assert
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
         assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
@@ -65,10 +71,12 @@ public class VFTest {
         //Arrange
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Respuesta("si"), new Penalidad());
+        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Penalidad());
 
-        Jugador j1 = new Jugador("Pablo", new Respuesta("si"));
-        Jugador j2 = new Jugador("Maria", new Respuesta("si"));
+        Jugador j1 = new Jugador("Pablo");
+        j1.agregarRespuesta(new Verdadero());
+        Jugador j2 = new Jugador("Maria");
+        j2.agregarRespuesta(new Verdadero());
 
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(j1);
@@ -77,6 +85,7 @@ public class VFTest {
         // Act
         Puntajes puntajes = verdaderoFalso.calcularPuntaje(jugadores);
         jugadores.asignarPuntajes(puntajes);
+
         // Assert
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
         assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
@@ -85,15 +94,29 @@ public class VFTest {
 
     @Test
     public void test04UnaPreguntaDeVFConPenalidadAsignaCorrectamenteElPuntaje() {
+
+        //Arrange
         int puntajeEsperado1 = -1;
         int puntajeEsperado2 = -1;
 
+        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Penalidad());
+
+        Jugador j1 = new Jugador("Pablo");
+        j1.agregarRespuesta(new Falso());
+        Jugador j2 = new Jugador("Maria");
+        j2.agregarRespuesta(new Falso());
+
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(j1);
+        jugadores.agregarJugador(j2);
 
         // Act
-
+        Puntajes puntajes = verdaderoFalso.calcularPuntaje(jugadores);
+        jugadores.asignarPuntajes(puntajes);
 
         // Assert
-
+        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
 
     }
 }

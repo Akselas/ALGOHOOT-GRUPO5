@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.HashMap;
-
+/*
 public class MultipleChoiceClasico implements Modalidad{
     public int modalizar(){
         return 1;
@@ -15,3 +15,4 @@ public class MultipleChoiceClasico implements Modalidad{
         return 1;
     }
 }
+*/

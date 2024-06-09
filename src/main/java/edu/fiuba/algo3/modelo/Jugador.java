@@ -5,9 +5,11 @@ public class Jugador {
     final String nombre;
     private Respuesta respuesta;
 
-    public Jugador(String nombre, Respuesta respuesta) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.puntaje = 0;
+    }
+    public void agregarRespuesta(Respuesta respuesta){
         this.respuesta = respuesta;
     }
     public Respuesta responder(){

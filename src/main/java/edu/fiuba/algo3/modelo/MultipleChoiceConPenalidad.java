@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.HashMap;
-
+/*
 public class MultipleChoiceConPenalidad implements Modalidad{
 
     public int modalizar(){
@@ -19,3 +19,4 @@ public class MultipleChoiceConPenalidad implements Modalidad{
         return puntaje;
     }
 }
+*/

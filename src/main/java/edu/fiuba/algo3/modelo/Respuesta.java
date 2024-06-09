@@ -1,12 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-public class Respuesta {
-    private String valor;
+import java.util.Objects;
 
-    public Respuesta(String valor){
-        this.valor = valor;
-    }
-    public String devolverValor(){
-        return this.valor;
-    }
+public interface Respuesta {
+    public Boolean esIgual(Respuesta otraRespuesta);
 }
