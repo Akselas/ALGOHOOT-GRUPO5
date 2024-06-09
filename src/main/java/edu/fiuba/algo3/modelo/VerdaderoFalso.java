@@ -3,10 +3,12 @@ package edu.fiuba.algo3.modelo;
 public class VerdaderoFalso {
     private String texto;
     private Respuesta correcta;
+    private Modalidad modalidad;
 
-    public VerdaderoFalso(String texto, Respuesta correcta){
+    public VerdaderoFalso(String texto, Respuesta correcta, Modalidad modalidad){
         this.texto = texto;
         this.correcta = correcta;
+        this.modalidad = modalidad;
     }
     public Puntajes calcularPuntaje(Jugadores jugadores){
         Puntajes puntajes = new Puntajes();

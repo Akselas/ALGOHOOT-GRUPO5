@@ -11,7 +11,7 @@ public class Pregunta {
     public Pregunta(String texto, HashMap<String, Boolean> opciones, Modalidad modalidad) {
         this.textoPregunta = texto;
         this.opciones = opciones;
-        this.modalidad = modalidad;
+        //this.modalidad = modalidad;
     }
 
     public void evaluarRespuestas(List<HashMap<String, Boolean>> respuestas, List<Jugador> jugadores) {
@@ -23,7 +23,7 @@ public class Pregunta {
     }
 
     public void evaluarRespuesta(HashMap<String, Boolean> respuestaJugador, Jugador jugador) {
-        int puntaje = this.modalidad.calcularPuntaje(respuestaJugador, this.opciones);
+        //int puntaje = this.modalidad.calcularPuntaje(respuestaJugador, this.opciones);
         //jugador.sumarPuntaje(puntaje);
     }
 }

@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 public class MultipleChoiceConPenalidad implements Modalidad{
 
-    @Override
+    public int modalizar(){
+        return 1;
+    }
     public int calcularPuntaje(HashMap<String, Boolean> respuestasJugador, HashMap<String, Boolean> respuestasCorrectas) {
         int puntaje = 0;
         for (String opcion : respuestasCorrectas.keySet()) {
