@@ -9,18 +9,11 @@ public class PreguntaOC {
         this.correcta = respuesta;
     }
 
-    public Integer calcularPuntaje(Jugadores jugadores) {
-        Puntajes puntaje = new Puntajes();
-        for (Jugador jugador : jugadores.devolverJugadores()) {
-            int i = 0;
-            Puntaje p = new Puntaje();
-            while (i < this.correcta.largo() && !jugador.responder().obtenerOpcion(i).esIgual(correcta.obtenerOpcion(i))) {
-                i++;
-            }
-            if (i == this.correcta.largo()) {
-                return 0;
-            }
-            return 1;
+    public Puntaje calcularPuntaje(RespuestaOC respuestaJugador){
+        Puntaje puntaje = new Puntaje();
+        if(respuestaJugador.esIgual(this.correcta)) {
+            puntaje.sumar();
         }
+        return puntaje;
     }
 }

@@ -18,7 +18,7 @@ public class VFTest {
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
 
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Clasico());
+        PreguntaVF verdaderoFalso = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Clasico());
 
         Jugador j1 = new Jugador("Pepe");
         j1.agregarRespuesta(new Verdadero());
@@ -45,7 +45,7 @@ public class VFTest {
         //Arrange
         int puntajeEsperado1 = 0;
         int puntajeEsperado2 = 0;
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Clasico());
+        PreguntaVF verdaderoFalso = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Clasico());
         Jugador j1 = new Jugador("Pepe");
         j1.agregarRespuesta(new Falso());
         Jugador j2 = new Jugador("Sandra");
@@ -71,7 +71,7 @@ public class VFTest {
         //Arrange
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Penalidad());
+        PreguntaVF verdaderoFalso = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Penalidad());
 
         Jugador j1 = new Jugador("Pablo");
         j1.agregarRespuesta(new Verdadero());
@@ -99,7 +99,7 @@ public class VFTest {
         int puntajeEsperado1 = -1;
         int puntajeEsperado2 = -1;
 
-        VerdaderoFalso verdaderoFalso = new VerdaderoFalso("El tomate es una fruta?", new Verdadero(), new Penalidad());
+        PreguntaVF verdaderoFalso = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Penalidad());
 
         Jugador j1 = new Jugador("Pablo");
         j1.agregarRespuesta(new Falso());
