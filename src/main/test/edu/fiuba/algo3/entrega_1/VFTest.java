@@ -119,4 +119,5 @@ public class VFTest {
         assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
 
     }
+
 }
