@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MessageTest {
     @Test
-    public void test01() {
+    public void test01JugadorRespondeCorrectamenteUnaPreguntaOC() {
         //Arrange
         int puntajeEsperado1 = 1;
 
-        OrderedChoice orderedChoice = new OrderedChoice("El tomate es una fruta?", new Verdadero(), new Clasico());
+        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", new RespuestaOC(new Opcion[]{new Opcion("El hombre llega a la luna"), new Opcion("Se abre la UBA"), new Opcion("Messi gana un mundial")}));
 
         Jugador j1 = new Jugador("Pepe");
         j1.agregarRespuesta(new Verdadero());
@@ -19,7 +19,7 @@ public class MessageTest {
         jugadores.agregarJugador(j1);
 
         // Act
-        Puntajes puntajes = verdaderoFalso.calcularPuntaje(jugadores);
+        Puntajes puntajes = preguntaOC.calcularPuntaje(jugadores);
         jugadores.asignarPuntajes(puntajes);
 
         //Assert Check implementacion antes de correrlo
