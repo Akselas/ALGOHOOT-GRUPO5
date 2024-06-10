@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
-public class PreguntaVista extends Application {
+public class PreguntaVFVista extends Application {
     @Override
     public void start(Stage stage) {
         Label enunciadoLabel = new Label();
