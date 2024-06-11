@@ -6,9 +6,8 @@ import java.util.List;
 public class Pregunta {
     private String textoPregunta;
     private HashMap<String, Boolean> opciones;
-    private Modalidad modalidad;
 
-    public Pregunta(String texto, HashMap<String, Boolean> opciones, Modalidad modalidad) {
+    public Pregunta(String texto, HashMap<String, Boolean> opciones) {
         this.textoPregunta = texto;
         this.opciones = opciones;
         //this.modalidad = modalidad;

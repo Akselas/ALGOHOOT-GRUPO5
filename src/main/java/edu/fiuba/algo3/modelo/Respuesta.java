@@ -6,4 +6,5 @@ public class Respuesta {
     public Boolean esIgual(Respuesta otraRespuesta){
         return this.getClass() == otraRespuesta.getClass();
     }
+    //public Boolean (Respuesta otraRespuesta);
 }
