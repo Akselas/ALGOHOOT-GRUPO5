@@ -20,4 +20,20 @@ public class Puntaje {
     public void modificar(int modificador){
         this.punto = this.punto * modificador;
     }
+
+    public void sumar(){
+        this.punto += 1;
+    }
+
+    public void sumar(int suma){
+        this.punto += suma;
+    }
+
+    public void restar(){
+        this.punto -= 1;
+    }
+
+    public void restar(int resta){
+        this.punto -= resta;
+    }
 }

@@ -1,14 +1,34 @@
 package edu.fiuba.algo3.modelo;
 
-public class RespuestaOC implements Respuesta{
-    private Opcion[] respuesta;
-    public RespuestaOC(Opcion[] respuesta){
-        this.respuesta = respuesta;
+import java.util.ArrayList;
+
+public class RespuestaOC extends Respuesta{
+    private ArrayList<Opcion> respuesta;
+
+    public RespuestaOC() {
+        this.respuesta = new ArrayList<>();
     }
-    public Integer largo(){return respuesta.length;}
+
+    public void agregar(Opcion opcion){
+        this.respuesta.add(opcion);
+    }
+
+    public Integer largo(){
+        return this.respuesta.size();
+    }
 
     public Opcion obtenerOpcion(Integer i){
-        return respuesta[i];
+        return this.respuesta.get(i);
     }
+
+    public Boolean esIgual(RespuestaOC otraRespuesta){//Aca deberia comparar los de su tipo
+        for (int i = 0; i < this.largo(); i++) {
+            if(!otraRespuesta.obtenerOpcion(i).esIgual(this.respuesta.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }

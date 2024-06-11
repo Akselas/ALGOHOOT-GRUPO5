@@ -9,15 +9,19 @@ public class Jugador {
         this.nombre = nombre;
         this.puntaje = 0;
     }
+
     public void agregarRespuesta(Respuesta respuesta){
         this.respuesta = respuesta;
     }
+
     public Respuesta responder(){
         return this.respuesta;
     }
+
     public String obtenerNombre(){
         return this.nombre;
     }
+
     public void sumarPuntaje(Puntaje puntaje) {
         this.puntaje += puntaje.devolverPunto();
     }
@@ -25,4 +29,5 @@ public class Jugador {
     public int obtenerPuntaje() {
         return this.puntaje;
     }
+
 }
