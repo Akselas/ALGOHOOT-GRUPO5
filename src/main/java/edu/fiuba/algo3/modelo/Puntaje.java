@@ -26,13 +26,6 @@ public class Puntaje {
         this.punto += suma;
     }
 
-    public void sumar(){
-        this.punto += 1;
-    }
-
-    public void sumar(int suma){
-        this.punto += suma;
-    }
 
     public void restar(){
         this.punto -= 1;
@@ -42,11 +35,6 @@ public class Puntaje {
         this.punto -= resta;
     }
 
-    public void restar(){
-        this.punto -= 1;
-    }
 
-    public void restar(int resta){
-        this.punto -= resta;
-    }
+
 }
