@@ -12,27 +12,18 @@ public class MessageTest {
 
         RespuestaOC respuestaCorrecta = new RespuestaOC();
 
-        Opcion opcion1 = new Opcion("El hombre llegó la luna");
-        Opcion opcion2 = new Opcion("Abrió la UBA");
-        Opcion opcion3 = new Opcion("Messi ganó un mundial");
-
-        respuestaCorrecta.agregar(opcion1);
-        respuestaCorrecta.agregar(opcion2);
-        respuestaCorrecta.agregar(opcion3);
+        respuestaCorrecta.agregar(new Opcion("El hombre llegó la luna"));
+        respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
+        respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
 
         PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", respuestaCorrecta);
-
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaOC respuestaJugador = new RespuestaOC();
 
-        Opcion opcionJugador1 = new Opcion("El hombre llegó la luna");
-        Opcion opcionJugador2 = new Opcion("Abrió la UBA");
-        Opcion opcionJugador3 = new Opcion("Messi ganó un mundial");
-
-        respuestaJugador.agregar(opcionJugador1);
-        respuestaJugador.agregar(opcionJugador2);
-        respuestaJugador.agregar(opcionJugador3);
+        respuestaJugador.agregar(new Opcion("El hombre llegó la luna"));
+        respuestaJugador.agregar(new Opcion("Abrió la UBA"));
+        respuestaJugador.agregar(new Opcion("Messi ganó un mundial"));
 
         Jugadores jugadores = new Jugadores();
         jugadores.agregarJugador(j1);
@@ -52,26 +43,18 @@ public class MessageTest {
 
         RespuestaOC respuestaCorrecta = new RespuestaOC();
 
-        Opcion opcion1 = new Opcion("El hombre llegó la luna");
-        Opcion opcion2 = new Opcion("Abrió la UBA");
-        Opcion opcion3 = new Opcion("Messi ganó un mundial");
-
-        respuestaCorrecta.agregar(opcion1);
-        respuestaCorrecta.agregar(opcion2);
-        respuestaCorrecta.agregar(opcion3);
+        respuestaCorrecta.agregar(new Opcion("El hombre llegó la luna"));
+        respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
+        respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
 
         PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaOC respuestaJugador = new RespuestaOC();
 
-        Opcion opcionJugador2 = new Opcion("El hombre llegó la luna");
-        Opcion opcionJugador1 = new Opcion("Abrió la UBA");
-        Opcion opcionJugador3 = new Opcion("Messi ganó un mundial");
-
-        respuestaJugador.agregar(opcionJugador1);
-        respuestaJugador.agregar(opcionJugador2);
-        respuestaJugador.agregar(opcionJugador3);
+        respuestaJugador.agregar(new Opcion("Abrió la UBA"));
+        respuestaJugador.agregar(new Opcion("El hombre llegó la luna"));
+        respuestaJugador.agregar(new Opcion("Messi ganó un mundial"));
 
         // Act
         Puntaje puntaje = preguntaOC.calcularPuntaje(respuestaJugador);
@@ -81,5 +64,74 @@ public class MessageTest {
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
     }
 
+    @Test
+    public void testPreguntaMCParcialRecibeRespuestasCorrectasYAsignaPuntaje() {
+        //Arrange
+        int puntajeEsperado1 = 1;
+
+        RespuestaMC respuestaCorrecta = new RespuestaMC();
+
+        respuestaCorrecta.agregarOpcionSeleccionada(new Opcion("Elefante"));
+        respuestaCorrecta.agregarOpcionNoSeleccionada(new Opcion("Tiburon"));
+        respuestaCorrecta.agregarOpcionNoSeleccionada(new Opcion("Pato"));
+
+        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", respuestaCorrecta);
+
+        Jugador j1 = new Jugador("Pepe");
+        RespuestaMC respuestaJugador = new RespuestaMC();
+
+        respuestaJugador.agregarOpcionSeleccionada(new Opcion("Elefante"));
+        respuestaJugador.agregarOpcionNoSeleccionada(new Opcion("Tiburon"));
+        respuestaJugador.agregarOpcionNoSeleccionada(new Opcion("Pato"));
+
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(j1);
+
+        // Act
+        Puntaje puntaje = preguntaMC.calcularPuntaje(respuestaJugador);
+        j1.sumarPuntaje(puntaje);
+
+        //Assert Check implementacion antes de correrlo
+        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+    }
+
+    @Test
+    public void testPreguntaMCParcialRecibeRespuestasIncorrectasYAsignaPuntaje() {
+        //Arrange
+        int puntajeEsperado1 = 0;
+
+        RespuestaMC respuestaCorrecta = new RespuestaMC();
+
+        Opcion opcion1 = new Opcion("Elefante");
+        Opcion opcion2 = new Opcion("Tiburon");
+        Opcion opcion3 = new Opcion("Pato");
+
+        respuestaCorrecta.agregarOpcionSeleccionada(opcion1);
+        respuestaCorrecta.agregarOpcionNoSeleccionada(opcion2);
+        respuestaCorrecta.agregarOpcionNoSeleccionada(opcion3);
+
+        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", respuestaCorrecta);
+
+        Jugador j1 = new Jugador("Pepe");
+        RespuestaMC respuestaJugador = new RespuestaMC();
+
+        Opcion opcionJugador1 = new Opcion("Elefante");
+        Opcion opcionJugador2 = new Opcion("Tiburon");
+        Opcion opcionJugador3 = new Opcion("Pato");
+
+        respuestaJugador.agregarOpcionSeleccionada(opcionJugador1);
+        respuestaJugador.agregarOpcionSeleccionada(opcionJugador2);
+        respuestaJugador.agregarOpcionNoSeleccionada(opcionJugador3);
+
+        Jugadores jugadores = new Jugadores();
+        jugadores.agregarJugador(j1);
+
+        // Act
+        Puntaje puntaje = preguntaMC.calcularPuntaje(respuestaJugador);
+        j1.sumarPuntaje(puntaje);
+
+        //Assert Check implementacion antes de correrlo
+        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+    }
 
 }
