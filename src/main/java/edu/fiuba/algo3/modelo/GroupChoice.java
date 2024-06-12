@@ -8,13 +8,11 @@ public class GroupChoice {
         this.correcta = correcta;
     }
 
-    public Puntajes calcularPuntaje(Jugadores jugadores){
-        Puntajes puntajes = new Puntajes();
-        for(Jugador jugador : jugadores.devolverJugadores()){
-            Puntaje p = new Puntaje();
-            //this.modalidad.modalizar(p, jugador.responder().esIgual(correcta));
-            puntajes.agregar(jugador, p);
+    public Puntaje calcularPuntaje(RespuestaGC respuestaJugador){
+        Puntaje puntaje = new Puntaje();
+        if(this.correcta.esIgual(respuestaJugador)) {
+            puntaje.sumar();
         }
-        return puntajes;
+        return puntaje;
     }
 }

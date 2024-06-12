@@ -1,13 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
 public class Jugador {
-    private int puntaje; //usar clase puntaje para guardar el atributo
+    private Puntaje puntaje; //usar clase puntaje para guardar el atributo
     final String nombre;
     private Respuesta respuesta;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
-        this.puntaje = 0;
+        this.puntaje = new Puntaje();
     }
 
     public void agregarRespuesta(Respuesta respuesta){
@@ -23,11 +23,11 @@ public class Jugador {
     }
 
     public void sumarPuntaje(Puntaje puntaje) {
-        this.puntaje += puntaje.devolverPunto();
+        this.puntaje.sumar(puntaje);
     }
 
     public int obtenerPuntaje() {
-        return this.puntaje;
+        return this.puntaje.devolverPunto();
     }
 
 }

@@ -12,7 +12,7 @@ public class PreguntaOC {
     public Puntaje calcularPuntaje(RespuestaOC respuestaJugador){
         Puntaje puntaje = new Puntaje();
         if(respuestaJugador.esIgual(this.correcta)) {
-            puntaje.sumar();
+            puntaje.sumar();//return new Puntaje(1)
         }
         return puntaje;
     }

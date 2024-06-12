@@ -10,17 +10,21 @@ public class VFTest {
 
     @Test
     public void test01UnaPreguntaVFRecibeUnaListaDeRespuestasYAsignaCorrectamenteElPuntaje() {
-        /*VerdadFalso p = VerdadFalse("Pregunta?", new Verdadero("opt1"), new Falso("opt2"));
 
-        Puntaje x = p.respuesta( new Respuesta("opt2"));
-        */
         //Arrange
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
 
-        RespuestaVF correcta = new RespuestaVF();
+        RespuestaVF correcta = new RespuestaVF();//Estado inconsistente no debería haber una respuesta sin opcion
         correcta.agregarOpcion(new Opcion("V"));
         PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", correcta);
+
+        /*
+        RespuestaVF correcta = new RespuestaVF();//Estado inconsistente no debería haber una respuesta sin opcion
+        correcta.agregarOpcion(new Opcion("V"));
+        RespuestaVF incorrecta = new RespuestaVF(new Opcion("F"));
+        */
+        //PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", correcta, );
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaVF r1 = new RespuestaVF();
@@ -31,10 +35,6 @@ public class VFTest {
         RespuestaVF r2 = new RespuestaVF();
         r2.agregarOpcion(new Opcion("V"));
         j2.agregarRespuesta(r2);
-
-        Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(j1);
-        jugadores.agregarJugador(j2);
 
         // Act
         j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
@@ -64,10 +64,6 @@ public class VFTest {
         r2.agregarOpcion(new Opcion("F"));
         j2.agregarRespuesta(r2);
 
-        Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(j1);
-        jugadores.agregarJugador(j2);
-
         //Act
         j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
         j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
@@ -77,32 +73,35 @@ public class VFTest {
         assertEquals(puntajeEsperad2, j2.obtenerPuntaje());
 
     }
-    /*
+
     @Test
     public void test03UnaPreguntaDeVFConPenalidadAsignaCorrectamenteElPuntajeAQuienesAcertaron() {
 
         //Arrange
         int puntajeEsperado1 = 1;
         int puntajeEsperado2 = 1;
-        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Penalidad());
 
-        Jugador j1 = new Jugador("Pablo");
-        j1.agregarRespuesta(new Verdadero());
-        Jugador j2 = new Jugador("Maria");
-        j2.agregarRespuesta(new Verdadero());
+        RespuestaVF correcta = new RespuestaVF();
+        correcta.agregarOpcion(new Opcion("V"));
+        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", correcta);
 
-        Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(j1);
-        jugadores.agregarJugador(j2);
+        Jugador j1 = new Jugador("Pepe");
+        RespuestaVF r1 = new RespuestaVF();
+        r1.agregarOpcion(new Opcion("V"));
+        j1.agregarRespuesta(r1);
+
+        Jugador j2 = new Jugador("Sandra");
+        RespuestaVF r2 = new RespuestaVF();
+        r2.agregarOpcion(new Opcion("V"));
+        j2.agregarRespuesta(r2);
 
         // Act
-        Puntajes puntajes = preguntaVF.calcularPuntaje(jugadores);
-        jugadores.asignarPuntajes(puntajes);
+        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
+        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
 
-        // Assert
+        //Assert Check implementacion antes de correrlo
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
         assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
-
     }
 
     @Test
@@ -112,27 +111,30 @@ public class VFTest {
         int puntajeEsperado1 = -1;
         int puntajeEsperado2 = -1;
 
-        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", new Verdadero(), new Penalidad());
+        RespuestaVF correcta = new RespuestaVF();
+        correcta.agregarOpcion(new Opcion("V"));
+        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", correcta);
 
-        Jugador j1 = new Jugador("Pablo");
-        j1.agregarRespuesta(new Falso());
-        Jugador j2 = new Jugador("Maria");
-        j2.agregarRespuesta(new Falso());
+        Jugador j1 = new Jugador("Pepe");
+        RespuestaVF r1 = new RespuestaVF();
+        r1.agregarOpcion(new Opcion("F"));
 
-        Jugadores jugadores = new Jugadores();
-        jugadores.agregarJugador(j1);
-        jugadores.agregarJugador(j2);
+
+        Jugador j2 = new Jugador("Sandra");
+        RespuestaVF r2 = new RespuestaVF();
+        r2.agregarOpcion(new Opcion("F"));
+
 
         // Act
-        Puntaje puntaje = preguntaVF.calcularPuntaje(new Respuesta());
-        jugadores.asignarPuntajes(puntajes);
+        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));//preguntavf.responder()
+        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
 
-        // Assert
+        //Assert Check implementacion antes de correrlo
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
         assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
 
     }
-    */
+
 }
 
 
