@@ -1,19 +1,16 @@
 package edu.fiuba.algo3.modelo;
 
-import java.util.Objects;
-
 public class Puntaje {
     private int punto;
 
     public Puntaje(){
         this.punto = 0;
     }
-
-    public void comparar(Respuesta unaResp, Respuesta otraResp){
-        this.punto = unaResp.esIgual(otraResp) ? 1:0;
+    public Puntaje(int valor){
+        this.punto = valor;
     }
 
-    public int devolverPunto(){
+    public int obtenerPuntuacion(){
         return this.punto;
     }
 
@@ -26,12 +23,7 @@ public class Puntaje {
         this.punto += suma;
     }
     public void sumar(Puntaje puntaje){
-        this.punto += puntaje.devolverPunto();
-    }
-
-
-    public void restar(){
-        this.punto -= 1;
+        this.punto += puntaje.obtenerPuntuacion();
     }
 
     public void restar(int resta){

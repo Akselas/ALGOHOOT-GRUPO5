@@ -14,9 +14,6 @@ public class Jugador {
         this.respuesta = respuesta;
     }
 
-    public Respuesta responder(){
-        return this.respuesta;
-    }
 
     public String obtenerNombre(){
         return this.nombre;
@@ -27,7 +24,7 @@ public class Jugador {
     }
 
     public int obtenerPuntaje() {
-        return this.puntaje.devolverPunto();
+        return this.puntaje.obtenerPuntuacion();
     }
 
 }

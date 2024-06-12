@@ -9,16 +9,8 @@ public class Jugadores {
         this.jugadores = new ArrayList<>();
     }
 
-
     public void agregarJugador(Jugador jugador){
         this.jugadores.add(jugador);
     }
-    public void asignarPuntajes(Puntajes puntajes){
-        for(Jugador jugador: jugadores){
-            jugador.sumarPuntaje(puntajes.obtenerPuntaje(jugador));
-        }
-    }
-    public ArrayList<Jugador> devolverJugadores(){
-        return this.jugadores;
-    }
+
 }

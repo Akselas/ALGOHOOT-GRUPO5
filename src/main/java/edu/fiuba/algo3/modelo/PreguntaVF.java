@@ -8,11 +8,10 @@ public class PreguntaVF {
         this.texto = texto;
         this.correcta = correcta;
     }
-    public Puntaje calcularPuntajeDe(RespuestaVF otra){//Recibe jugador para no tener que castear el tipo de respuesta
-        Puntaje p = new Puntaje();
-        if(this.correcta.esIgual(otra)){
-            p.sumar();
+    public Puntaje calcularPuntajeDe(RespuestaVF otra){
+        if(otra.esIgual(this.correcta)) {
+            return new Puntaje(1);
         }
-        return p;
+        return new Puntaje(0);
     }
 }

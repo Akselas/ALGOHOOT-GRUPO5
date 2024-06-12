@@ -4,11 +4,11 @@ public class RespuestaGC extends Respuesta {
     private Grupo grupo1;
     private Grupo grupo2;
 
-    public RespuestaGC(Grupo grupo1, Grupo grupo2){
+    public RespuestaGC(Grupo grupo1, Grupo grupo2){ //Crear metodo agregar Grupo / agregar opcion.
         this.grupo1 = grupo1;
         this.grupo2 = grupo2;
     }
-    public Boolean esIgual(RespuestaGC otraRespuesta){//Aca deberia comparar los de su tipo
+    public Boolean esIgual(RespuestaGC otraRespuesta){
         //Devuelve true si el jugador acerto, y devuelve false si no acerto
         return (this.grupo1.esIgual(otraRespuesta.obtenerGrupo1()) && this.grupo2.esIgual(otraRespuesta.obtenerGrupo2()));
     }

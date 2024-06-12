@@ -4,9 +4,6 @@ public class RespuestaVF extends Respuesta {
 
         private Opcion elegida;
 
-        public RespuestaVF(){
-
-        }
         public void agregarOpcion(Opcion opcion){
             this.elegida = opcion;
         }

@@ -1,18 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-public class GroupChoice {
+public class PreguntaGC {
     private String texto;
     private RespuestaGC correcta;
-    public GroupChoice(String texto, RespuestaGC correcta){
+    public PreguntaGC(String texto, RespuestaGC correcta){
         this.texto = texto;
         this.correcta = correcta;
     }
 
     public Puntaje calcularPuntaje(RespuestaGC respuestaJugador){
-        Puntaje puntaje = new Puntaje();
+
         if(this.correcta.esIgual(respuestaJugador)) {
-            puntaje.sumar();
+            return new Puntaje(1);
         }
-        return puntaje;
+        return new Puntaje(0);
     }
 }

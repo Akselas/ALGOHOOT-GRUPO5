@@ -21,7 +21,7 @@ public class RespuestaOC extends Respuesta{
         return this.respuesta.get(i);
     }
 
-    public Boolean esIgual(RespuestaOC otraRespuesta){//Aca deberia comparar los de su tipo
+    public Boolean esIgual(RespuestaOC otraRespuesta){
         for (int i = 0; i < this.largo(); i++) {
             if(!otraRespuesta.obtenerOpcion(i).esIgual(this.respuesta.get(i))){
                 return false;

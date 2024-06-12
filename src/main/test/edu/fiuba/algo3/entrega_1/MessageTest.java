@@ -21,7 +21,7 @@ public class MessageTest {
         verduras.agregar(new Opcion("zanahoria"));
         RespuestaGC correcta = new RespuestaGC(frutas, verduras);
 
-        GroupChoice groupChoice = new GroupChoice("Grupo A: Frutas, Grupo B: Verduras", correcta);
+        PreguntaGC preguntaGC = new PreguntaGC("Grupo A: Frutas, Grupo B: Verduras", correcta);
         Jugador j1 = new Jugador("Pepe");
 
         Grupo r1_g1 = new Grupo();
@@ -39,7 +39,7 @@ public class MessageTest {
 
         //Act
 
-        Puntaje puntaje = groupChoice.calcularPuntaje(r1);
+        Puntaje puntaje = preguntaGC.calcularPuntaje(r1);
         j1.sumarPuntaje(puntaje);
 
         //Assert

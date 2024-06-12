@@ -10,10 +10,10 @@ public class PreguntaMC {
     }
 
     public Puntaje calcularPuntaje(RespuestaMC respuestaJugador){
-        Puntaje p = new Puntaje(); //Puntaje lo creo aca asi cada clase de pregunta crea su propio tipo de puntaje.
+
         if (respuestaJugador.esIgual(this.correcta)) {
-            p.sumar();
+            return new Puntaje(1);
         }
-        return p;
+        return new Puntaje(0);
     }
 }

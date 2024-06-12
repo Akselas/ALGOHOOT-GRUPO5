@@ -10,10 +10,10 @@ public class PreguntaOC {
     }
 
     public Puntaje calcularPuntaje(RespuestaOC respuestaJugador){
-        Puntaje puntaje = new Puntaje();
+
         if(respuestaJugador.esIgual(this.correcta)) {
-            puntaje.sumar();//return new Puntaje(1)
+            return new Puntaje(1);
         }
-        return puntaje;
+        return new Puntaje(0);
     }
 }

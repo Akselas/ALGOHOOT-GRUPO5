@@ -10,12 +10,10 @@ public class PreguntaVFPenalidad {
     }
 
     public Puntaje calcularPuntajeDe(RespuestaVF otra){//Recibe jugador para no tener que castear el tipo de respuesta
-        Puntaje p = new Puntaje();
         if(this.correcta.esIgual(otra)){
-            p.sumar();//return new Puntaje(1);
-        } else{
-            p.restar(); //return new Puntaje(-1);
+            return new Puntaje(1);
         }
-        return p;
+        return new Puntaje(-1);
+
     }
 }
