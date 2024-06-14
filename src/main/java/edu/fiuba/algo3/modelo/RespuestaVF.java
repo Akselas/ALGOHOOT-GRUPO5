@@ -13,4 +13,9 @@ public class RespuestaVF extends Respuesta {
         public Opcion obtenerOpcion(){
             return this.elegida;
         }
+
+    @Override
+    public Boolean esIgual(Respuesta jugador) {
+        return null;
+    }
 }

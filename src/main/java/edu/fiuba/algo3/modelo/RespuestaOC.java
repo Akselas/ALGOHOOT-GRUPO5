@@ -21,7 +21,14 @@ public class RespuestaOC extends Respuesta{
         return this.respuesta.get(i);
     }
 
-    public Boolean esIgual(RespuestaOC otraRespuesta){
+    @Override
+    public Boolean esIgual(Respuesta jugador) {
+        RespuestaOC otraRespuesta = (RespuestaOC) jugador;
+
+        if ( otraRespuesta == null) {
+            return false;
+        }
+
         for (int i = 0; i < this.largo(); i++) {
             if(!otraRespuesta.obtenerOpcion(i).esIgual(this.respuesta.get(i))){
                 return false;
@@ -29,6 +36,4 @@ public class RespuestaOC extends Respuesta{
         }
         return true;
     }
-
-
 }

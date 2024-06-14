@@ -8,15 +8,18 @@ public class RespuestaGC extends Respuesta {
         this.grupo1 = grupo1;
         this.grupo2 = grupo2;
     }
-    public Boolean esIgual(RespuestaGC otraRespuesta){
-        //Devuelve true si el jugador acerto, y devuelve false si no acerto
-        return (this.grupo1.esIgual(otraRespuesta.obtenerGrupo1()) && this.grupo2.esIgual(otraRespuesta.obtenerGrupo2()));
-    }
-    public Grupo obtenerGrupo1(){
-        return grupo1;
-    }
-    public Grupo obtenerGrupo2(){
-        return grupo2;
-    }
 
+    @Override
+    public Boolean esIgual(Respuesta jugador) {
+        RespuestaGC otraRespuesta = (RespuestaGC) jugador;
+
+        if ( otraRespuesta == null ) {
+            return false;
+        }
+
+        return (
+            this.grupo1.esIgual(otraRespuesta.grupo1) &&
+            this.grupo2.esIgual(otraRespuesta.grupo2)
+        );
+    }
 }
