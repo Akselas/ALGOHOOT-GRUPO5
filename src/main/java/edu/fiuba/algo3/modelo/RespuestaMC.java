@@ -34,7 +34,14 @@ public class RespuestaMC extends Respuesta {
         return false;
     }
 
-    public Boolean esIgual(RespuestaMC otraRespuesta) {
+    @Override
+    public Boolean esIgual(Respuesta jugador) {
+        RespuestaMC otraRespuesta = (RespuestaMC) jugador;
+
+        if ( otraRespuesta == null ) {
+            return false;
+        }
+
         for(Opcion opcion : this.opcionesSeleccionadas) {
             if (!otraRespuesta.contieneOpcionSeleccionada(opcion)) {
                 return false;
