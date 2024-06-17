@@ -19,4 +19,18 @@ public class RespuestaGC extends Respuesta {
         return grupo2;
     }
 
+    @Override
+    public Boolean esIgual(Respuesta respuestaJugador) {
+        RespuestaGC respuesta = (RespuestaGC) respuestaJugador;
+
+        if ( respuesta == null ) {
+            return false;
+        }
+
+        return (
+            this.grupo1.esIgual(respuesta.grupo1) &&
+            this.grupo2.esIgual(respuesta.grupo2)
+        );
+    }
+
 }

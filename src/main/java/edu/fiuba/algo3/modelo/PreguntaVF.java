@@ -1,17 +1,12 @@
 package edu.fiuba.algo3.modelo;
 
 public class PreguntaVF {
-    private String texto;
-    private RespuestaVF correcta;
+    private final PreguntaCerrada pc;
 
     public PreguntaVF(String texto, RespuestaVF correcta){
-        this.texto = texto;
-        this.correcta = correcta;
+        this.pc = new PreguntaCerrada(texto, correcta);
     }
-    public Puntaje calcularPuntajeDe(RespuestaVF otra){
-        if(otra.esIgual(this.correcta)) {
-            return new Puntaje(1);
-        }
-        return new Puntaje(0);
+    public Puntaje calcularPuntajeDe(RespuestaVF respuestaJugador){
+        return this.pc.calcularPuntaje(respuestaJugador);
     }
 }

@@ -1,19 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
 public class PreguntaOC {
-    private String textoPregunta;
-    private RespuestaOC correcta;
+    private final PreguntaCerrada pc;
 
-    public PreguntaOC(String texto, RespuestaOC respuesta) {
-        this.textoPregunta = texto;
-        this.correcta = respuesta;
+    public PreguntaOC(String texto, RespuestaOC correcta) {
+        this.pc = new PreguntaCerrada(texto, correcta);
     }
 
     public Puntaje calcularPuntaje(RespuestaOC respuestaJugador){
-
-        if(respuestaJugador.esIgual(this.correcta)) {
-            return new Puntaje(1);
-        }
-        return new Puntaje(0);
+        return this.pc.calcularPuntaje(respuestaJugador);
     }
 }

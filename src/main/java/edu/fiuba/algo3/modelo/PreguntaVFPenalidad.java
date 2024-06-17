@@ -1,19 +1,17 @@
 package edu.fiuba.algo3.modelo;
 
 public class PreguntaVFPenalidad {
-    private String texto;
-    private RespuestaVF correcta;
+    private final PreguntaCerrada pc;
 
     public PreguntaVFPenalidad(String texto, RespuestaVF correcta){
-        this.texto = texto;
-        this.correcta = correcta;
+        this.pc = new PreguntaCerrada(texto, correcta);
     }
 
-    public Puntaje calcularPuntajeDe(RespuestaVF otra){//Recibe jugador para no tener que castear el tipo de respuesta
-        if(this.correcta.esIgual(otra)){
-            return new Puntaje(1);
-        }
-        return new Puntaje(-1);
+    public Puntaje calcularPuntajeDe(RespuestaVF respuestaJugador){//Recibe jugador para no tener que castear el tipo de respuesta
+        Puntaje puntaje = this.pc.calcularPuntaje(respuestaJugador);
 
+        if (puntaje.obtenerPuntuacion() == 0) puntaje.restar(1);
+
+        return puntaje;
     }
 }
