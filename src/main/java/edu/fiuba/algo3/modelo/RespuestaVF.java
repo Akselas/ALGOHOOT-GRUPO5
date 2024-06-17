@@ -14,7 +14,10 @@ public class RespuestaVF extends Respuesta {
 
     @Override
     public Boolean esIgual(Respuesta jugador) {
-        return null;
+        //return null;
+        RespuestaVF otraRespuesta = (RespuestaVF) jugador;
+        if (otraRespuesta == null) return false;
+        return (this.obtenerOpcion().esIgual(otraRespuesta.obtenerOpcion()));
     }
 
     public Opcion obtenerOpcion(){
