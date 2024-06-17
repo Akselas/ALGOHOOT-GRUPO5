@@ -30,6 +30,4 @@ public class Puntaje {
         this.punto -= resta;
     }
 
-
-
 }

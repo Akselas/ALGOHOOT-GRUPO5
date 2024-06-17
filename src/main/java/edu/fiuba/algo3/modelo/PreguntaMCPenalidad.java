@@ -1,18 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
-public class PreguntaMCPenalidad {
-    private String textoPregunta;
-    private RespuestaMC correcta;
+public class PreguntaMCPenalidad extends Pregunta {
 
     public PreguntaMCPenalidad(String texto, RespuestaMC respuesta) {
-        this.textoPregunta = texto;
-        this.correcta = respuesta;
+        super(texto, respuesta);
     }
 
-    public Puntaje calcularPuntaje(RespuestaMC respuestaJugador){
-        Puntaje p = new Puntaje(); //Puntaje lo creo aca asi cada clase de pregunta crea su propio tipo de puntaje.
-        p.sumar(this.correcta.cantidadOpcionesIguales(respuestaJugador));
-        p.restar(this.correcta.cantidadOpcionesDesiguales(respuestaJugador));
+    @Override
+    public Puntaje calcularPuntaje(Respuesta respuestaJugador){
+        RespuestaMC respuesta = (RespuestaMC) respuestaJugador; // se podria validar que respuesta no sea null
+        RespuestaMC respuestaCorrecta = (RespuestaMC) this.correcta;
+
+        Puntaje p = new Puntaje();
+        p.sumar(respuesta.cantidadOpcionesIguales(respuestaCorrecta));
+        p.restar(respuesta.cantidadOpcionesDesiguales(respuestaCorrecta));
 
         return p;
     }

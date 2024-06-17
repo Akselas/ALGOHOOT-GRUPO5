@@ -1,13 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
-public class PreguntaMC {
-    private final PreguntaCerrada pc;
-
+public class PreguntaMC extends Pregunta{
     public PreguntaMC(String texto, RespuestaMC correcta) {
-        this.pc = new PreguntaCerrada(texto, correcta);
-    }
-
-    public Puntaje calcularPuntaje(RespuestaMC respuestaJugador){
-        return this.pc.calcularPuntaje(respuestaJugador);
+        super(texto, correcta);
     }
 }

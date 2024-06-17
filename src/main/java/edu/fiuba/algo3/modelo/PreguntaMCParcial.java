@@ -1,18 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
-public class PreguntaMCParcial {
-    private String textoPregunta;
-    private RespuestaMC correcta;
+public class PreguntaMCParcial extends Pregunta {
 
-    public PreguntaMCParcial(String texto, RespuestaMC respuesta) {
-        this.textoPregunta = texto;
-        this.correcta = respuesta;
+    public PreguntaMCParcial(String texto, RespuestaMC correcta) {
+        super(texto, correcta);
     }
 
-    public Puntaje calcularPuntaje(RespuestaMC respuestaJugador){
+    @Override
+    public Puntaje calcularPuntaje(Respuesta respuestaJugador){
+        RespuestaMC respuesta = (RespuestaMC) respuestaJugador; // se podria validar que respuesta no sea null
+        RespuestaMC respuestaCorrecta = (RespuestaMC) this.correcta;
+
         Puntaje p = new Puntaje(); //Puntaje lo creo aca asi cada clase de pregunta crea su propio tipo de puntaje
-        if (!this.correcta.noSeleccionadasSeleccionadas(respuestaJugador)) {
-            p.sumar(respuestaJugador.cantidadOpcionesSeleccionadas());
+        if (!respuesta.noSeleccionadasSeleccionadas(respuestaCorrecta)) {
+            p.sumar(respuesta.cantidadOpcionesSeleccionadas());
         }
 
         return p;

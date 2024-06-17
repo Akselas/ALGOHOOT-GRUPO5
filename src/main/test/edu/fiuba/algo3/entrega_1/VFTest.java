@@ -37,8 +37,8 @@ public class VFTest {
         j2.agregarRespuesta(r2);
 
         // Act
-        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
-        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
+        j1.sumarPuntaje(preguntaVF.calcularPuntaje(r1));
+        j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
@@ -65,8 +65,8 @@ public class VFTest {
         j2.agregarRespuesta(r2);
 
         //Act
-        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
-        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
+        j1.sumarPuntaje(preguntaVF.calcularPuntaje(r1));
+        j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         // Assert
         assertEquals(puntajeEsperad1, j1.obtenerPuntaje());
@@ -96,8 +96,8 @@ public class VFTest {
         j2.agregarRespuesta(r2);
 
         // Act
-        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));
-        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
+        j1.sumarPuntaje(preguntaVF.calcularPuntaje(r1));
+        j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
@@ -126,8 +126,8 @@ public class VFTest {
 
 
         // Act
-        j1.sumarPuntaje(preguntaVF.calcularPuntajeDe(r1));//preguntavf.responder()
-        j2.sumarPuntaje(preguntaVF.calcularPuntajeDe(r2));
+        j1.sumarPuntaje(preguntaVF.calcularPuntaje(r1));//preguntavf.responder()
+        j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
         assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
