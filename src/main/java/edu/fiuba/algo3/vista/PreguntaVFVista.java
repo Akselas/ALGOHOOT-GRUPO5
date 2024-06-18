@@ -22,7 +22,6 @@ public class PreguntaVFVista extends Application {
     @Override
     public void start(Stage stage) {
         Label enunciadoLabel = new Label("¿El tomate es una fruta?");
-        //enunciadoLabel.setText("¿El tomate es una fruta?");
 
         Button BotonResponder = new Button("Responder");
 
@@ -30,12 +29,10 @@ public class PreguntaVFVista extends Application {
 
         RadioButton opcion1 = new RadioButton("verdadero");
         opcion1.setUserData(new Opcion("V"));
-
         opcion1.setToggleGroup(group);
 
         RadioButton opcion2 = new RadioButton("falso");
         opcion2.setUserData(new Opcion("F"));
-
         opcion2.setToggleGroup(group);
 
         Button Boton1 = new Button("Duplicador");
@@ -52,50 +49,28 @@ public class PreguntaVFVista extends Application {
 
         HBox opciones = new HBox(20, opcion1, opcion2);
 
-        VBox layout = new VBox(20, enunciadoLabel, opciones);
+        VBox layout = new VBox(20, enunciadoLabel, opciones);//tiene las opciones y la pregunta
+        layout.setAlignment(Pos.CENTER);
 
         VBox poderes = new VBox(20, Boton1, Boton2, Boton3, Boton4);
         poderes.setPadding(new Insets(5, 0 , 0 , 0));
 
+        HBox sublayout = new HBox(20, layout, poderes);//tiene la pregunta y los poderes.
+        sublayout.setMaxWidth(Double.MAX_VALUE);
+
         poderes.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
-        HBox layout1 = new HBox(20, layout, poderes);
-        layout1.setMaxWidth(Double.MAX_VALUE);
-        layout1.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        sublayout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         opciones.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         layout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
 
-
-
-
-
-
-        //layout.add(enunciadoLabel, 6, 5, 25, 2);
-        //layout.add(BotonResponder, 9, 20, 4, 1);
-
-        //layout.add(opcion1, 6, 15); // Col: 5, Fila:10
-        //layout.add(opcion2, 10, 15); // Col 10, Fila 10
-        //layout.setAlignment(Pos.CENTER);
-
-        VBox principal = new VBox(layout1, BotonResponder);
+        VBox principal = new VBox(sublayout, BotonResponder);
+        principal.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         principal.setSpacing(10);
         principal.setPadding(new Insets(10));
         principal.setAlignment(Pos.CENTER);
 
-
-
-        //layout.setAlignment(Pos.CENTER);//posicionar lodo en el centro
-       /* layout.setHgap(10); // Espaciado horizontal entre nodos
-        layout.setVgap(10); // Espaciado vertical entre nodos
-*/
-        //StackPane.setMargin(layout, new Insets(5));
-
-
-
-
-
-        //layout.setGridLinesVisible(true);//para poder ver las celdas
-        Scene scene = new Scene(principal, 600, 400);
+        Scene scene = new Scene(principal, 350, 400);
 
         stage.setTitle("Verdadero o Falso");
         stage.setScene(scene);
@@ -108,3 +83,23 @@ public class PreguntaVFVista extends Application {
 }
 
 
+//layout.setAlignment(Pos.CENTER);//posicionar lodo en el centro
+       /* layout.setHgap(10); // Espaciado horizontal entre nodos
+        layout.setVgap(10); // Espaciado vertical entre nodos
+*/
+//StackPane.setMargin(layout, new Insets(5));
+
+
+
+
+
+//layout.setGridLinesVisible(true);//para poder ver las celdas
+
+
+
+//layout.add(enunciadoLabel, 6, 5, 25, 2);
+//layout.add(BotonResponder, 9, 20, 4, 1);
+
+//layout.add(opcion1, 6, 15); // Col: 5, Fila:10
+//layout.add(opcion2, 10, 15); // Col 10, Fila 10
+//layout.setAlignment(Pos.CENTER);
