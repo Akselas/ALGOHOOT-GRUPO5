@@ -5,10 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,6 +22,7 @@ public class PreguntaMCVista extends Application {
         Button BotonResponder = new Button("Responder");
 
 
+
         CheckBox opcion1 = new CheckBox("un numero par");
         opcion1.setUserData(new Opcion("un numero par"));
 
@@ -38,14 +36,31 @@ public class PreguntaMCVista extends Application {
         opcion4.setUserData(new Opcion("todas las anteriores"));
 
 
-        Button Boton1 = new Button("Duplicador");
+        ToggleGroup grupoPoderes = new ToggleGroup();
+
+        ToggleButton Boton1 = new ToggleButton("Duplicador");
         Boton1.setMaxWidth(Double.MAX_VALUE);
-        Button Boton2 = new Button("Triplicador");
+        Boton1.setToggleGroup(grupoPoderes);
+
+        ToggleButton Boton2 = new ToggleButton("Triplicador");
         Boton2.setMaxWidth(Double.MAX_VALUE);
-        Button Boton3 = new Button("Exclusividad");
+        Boton2.setToggleGroup(grupoPoderes);
+
+        ToggleButton Boton3 = new ToggleButton("Exclusividad");
         Boton3.setMaxWidth(Double.MAX_VALUE);
-        Button Boton4 = new Button("Anulador");
+        Boton3.setToggleGroup(grupoPoderes);
+
+
+        ToggleButton Boton4 = new ToggleButton("Anulador");
         Boton4.setMaxWidth(Double.MAX_VALUE);
+        Boton4.setToggleGroup(grupoPoderes);
+
+        //
+        Label cantidadDuplicadores = new Label("1");
+        Label cantidadTriplicadores = new Label("1");
+        Label cantidadExclusividad = new Label("2");
+        Label cantidadAnulador = new Label("1");
+
 
         ControladorMC controlador = new ControladorMC(opcion1, opcion2, opcion3, opcion4, new Jugador("Axel"));
         BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
@@ -56,13 +71,19 @@ public class PreguntaMCVista extends Application {
 
         VBox layout = new VBox(15, enunciadoLabel, opciones1, opciones2);//tiene las opciones y la pregunta
         layout.setAlignment(Pos.CENTER);
+        layout.setMinWidth(260);
         layout.setPadding(new Insets(5, 5 , 5 , 5));
 
         VBox poderes = new VBox(20, Boton1, Boton2, Boton3, Boton4);
         poderes.setPadding(new Insets(5, 5 , 5 , 5));
 
-        HBox sublayout = new HBox(20, layout, poderes);//tiene la pregunta y los poderes.
+        VBox cantidadPoderes = new VBox(20, cantidadDuplicadores, cantidadTriplicadores, cantidadExclusividad, cantidadAnulador);
+        cantidadPoderes.setPadding(new Insets(10, 15 , 0 , 0));
+        cantidadPoderes.setSpacing(29);
+
+        HBox sublayout = new HBox(20, layout, poderes, cantidadPoderes);//tiene la pregunta y los poderes.
         sublayout.setMaxWidth(Double.MAX_VALUE);
+        sublayout.setPadding(new Insets(10, 10 , 10 , 10));
 
         poderes.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         sublayout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");

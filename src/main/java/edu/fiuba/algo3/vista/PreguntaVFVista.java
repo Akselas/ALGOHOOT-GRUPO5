@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ToggleButton;
 
 
 public class PreguntaVFVista extends Application {
@@ -25,24 +26,42 @@ public class PreguntaVFVista extends Application {
 
         Button BotonResponder = new Button("Responder");
 
-        ToggleGroup group = new ToggleGroup();
+        ToggleGroup grupoOpciones = new ToggleGroup();
+        ToggleGroup grupoPoderes = new ToggleGroup();
 
+        //botones de opciones
         RadioButton opcion1 = new RadioButton("verdadero");
         opcion1.setUserData(new Opcion("V"));
-        opcion1.setToggleGroup(group);
+        opcion1.setToggleGroup(grupoOpciones);
 
         RadioButton opcion2 = new RadioButton("falso");
         opcion2.setUserData(new Opcion("F"));
-        opcion2.setToggleGroup(group);
+        opcion2.setToggleGroup(grupoOpciones);
 
-        Button Boton1 = new Button("Duplicador");
-        Boton1.setMaxWidth(Double.MAX_VALUE);
-        Button Boton2 = new Button("Triplicador");
-        Boton2.setMaxWidth(Double.MAX_VALUE);
-        Button Boton3 = new Button("Exclusividad");
-        Boton3.setMaxWidth(Double.MAX_VALUE);
-        Button Boton4 = new Button("Anulador");
-        Boton4.setMaxWidth(Double.MAX_VALUE);
+
+//botones de poderes
+        ToggleButton botonDuplicador = new ToggleButton("Duplicador");
+        botonDuplicador.setMaxWidth(Double.MAX_VALUE);
+        botonDuplicador.setToggleGroup(grupoPoderes);
+
+        ToggleButton botonTriplicador = new ToggleButton("Triplicador");
+        botonTriplicador.setMaxWidth(Double.MAX_VALUE);
+        botonTriplicador.setToggleGroup(grupoPoderes);
+
+        ToggleButton botonExclusividad = new ToggleButton("Exclusividad");
+        botonExclusividad.setMaxWidth(Double.MAX_VALUE);
+        botonExclusividad.setToggleGroup(grupoPoderes);
+
+        ToggleButton botonAnulador = new ToggleButton("Anulador");
+        botonAnulador.setMaxWidth(Double.MAX_VALUE);
+        botonAnulador.setToggleGroup(grupoPoderes);
+
+        //
+        Label cantidadDuplicadores = new Label("1");
+        Label cantidadTriplicadores = new Label("1");
+        Label cantidadExclusividad = new Label("2");
+        Label cantidadAnulador = new Label("1");
+
 
         ControladorVF controlador = new ControladorVF(opcion1, opcion2, new Jugador("Axel"));
         BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
@@ -51,12 +70,19 @@ public class PreguntaVFVista extends Application {
 
         VBox layout = new VBox(20, enunciadoLabel, opciones);//tiene las opciones y la pregunta
         layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(5, 5 , 5 , 5));
+        layout.setMinWidth(150);
 
-        VBox poderes = new VBox(20, Boton1, Boton2, Boton3, Boton4);
-        poderes.setPadding(new Insets(5, 0 , 0 , 0));
+        VBox poderes = new VBox(20, botonDuplicador, botonTriplicador, botonExclusividad, botonAnulador);
+        poderes.setPadding(new Insets(5, 5 , 5 , 5));
 
-        HBox sublayout = new HBox(20, layout, poderes);//tiene la pregunta y los poderes.
+        VBox cantidadPoderes = new VBox(20, cantidadDuplicadores, cantidadTriplicadores, cantidadExclusividad, cantidadAnulador);
+        cantidadPoderes.setPadding(new Insets(10, 15 , 0 , 0));
+        cantidadPoderes.setSpacing(29);
+
+        HBox sublayout = new HBox(20, layout, poderes, cantidadPoderes);//tiene la pregunta y los poderes.
         sublayout.setMaxWidth(Double.MAX_VALUE);
+        sublayout.setPadding(new Insets(10, 10 , 10 , 10));
 
         poderes.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         sublayout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
@@ -70,7 +96,7 @@ public class PreguntaVFVista extends Application {
         principal.setPadding(new Insets(10));
         principal.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(principal, 350, 400);
+        Scene scene = new Scene(principal); //350, 400);
 
         stage.setTitle("Verdadero o Falso");
         stage.setScene(scene);
@@ -81,6 +107,17 @@ public class PreguntaVFVista extends Application {
         launch(args);
     }
 }
+
+
+/*
+        Button botonDuplicador = new Button("Duplicador");
+        botonDuplicador.setMaxWidth(Double.MAX_VALUE);
+        Button botonTriplicador = new Button("Triplicador");
+        botonTriplicador.setMaxWidth(Double.MAX_VALUE);
+        Button boton3 = new Button("Exclusividad");
+        botonExclusividad.setMaxWidth(Double.MAX_VALUE);
+        Button botonAnulador = new Button("Anulador");
+        botonAnulador.setMaxWidth(Double.MAX_VALUE);*/
 
 
 //layout.setAlignment(Pos.CENTER);//posicionar lodo en el centro
