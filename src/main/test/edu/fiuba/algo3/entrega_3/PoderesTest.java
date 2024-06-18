@@ -65,15 +65,15 @@ public class PoderesTest {
         Jugador j1 = new Jugador("maria");
         Puntaje puntaje1 = new Puntaje(1);
         Anulador anulador = new Anulador();
-        List<Puntaje> puntajes;
+        ArrayList<Puntaje> puntajes = new ArrayList<>();
 
         //Act
         puntajes.add(puntaje1);
         anulador.aplicar(puntajes);
         j1.sumarPuntaje(puntaje1);
 
-        
-
+        //assert
+        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
     }
 
     @Test
