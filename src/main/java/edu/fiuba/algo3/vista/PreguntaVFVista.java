@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
-
+import edu.fiuba.algo3.controlador.*;
+import edu.fiuba.algo3.modelo.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
@@ -8,8 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,7 +16,6 @@ import javafx.scene.layout.VBox;
 
 public class PreguntaVFVista extends Application {
 
-   // public void posicionarNodo( )
 
 
 
@@ -31,59 +29,73 @@ public class PreguntaVFVista extends Application {
         ToggleGroup group = new ToggleGroup();
 
         RadioButton opcion1 = new RadioButton("verdadero");
+        opcion1.setUserData(new Opcion("V"));
+
         opcion1.setToggleGroup(group);
 
         RadioButton opcion2 = new RadioButton("falso");
+        opcion2.setUserData(new Opcion("F"));
+
         opcion2.setToggleGroup(group);
 
-        GridPane layout = new GridPane();
+        Button Boton1 = new Button("Duplicador");
+        Boton1.setMaxWidth(Double.MAX_VALUE);
+        Button Boton2 = new Button("Triplicador");
+        Boton2.setMaxWidth(Double.MAX_VALUE);
+        Button Boton3 = new Button("Exclusividad");
+        Boton3.setMaxWidth(Double.MAX_VALUE);
+        Button Boton4 = new Button("Anulador");
+        Boton4.setMaxWidth(Double.MAX_VALUE);
 
-        layout.setConstraints(enunciadoLabel, 6, 5, 25, 2 );
+        ControladorVF controlador = new ControladorVF(opcion1, opcion2, new Jugador("Axel"));
+        BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
+
+        HBox opciones = new HBox(20, opcion1, opcion2);
+
+        VBox layout = new VBox(20, enunciadoLabel, opciones);
+
+        VBox poderes = new VBox(20, Boton1, Boton2, Boton3, Boton4);
+        poderes.setPadding(new Insets(5, 0 , 0 , 0));
+
+        poderes.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        HBox layout1 = new HBox(20, layout, poderes);
+        layout1.setMaxWidth(Double.MAX_VALUE);
+        layout1.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        opciones.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        layout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
 
 
 
-        /*layout.add(enunciadoLabel, 6, 5, 25, 2);
-        layout.add(BotonResponder, 9, 20, 4, 1);
 
-        layout.add(opcion1, 6, 15); // Col: 5, Fila:10
-        layout.add(opcion2, 10, 15); // Col 10, Fila 10*/
+
+
+        //layout.add(enunciadoLabel, 6, 5, 25, 2);
+        //layout.add(BotonResponder, 9, 20, 4, 1);
+
+        //layout.add(opcion1, 6, 15); // Col: 5, Fila:10
+        //layout.add(opcion2, 10, 15); // Col 10, Fila 10
+        //layout.setAlignment(Pos.CENTER);
+
+        VBox principal = new VBox(layout1, BotonResponder);
+        principal.setSpacing(10);
+        principal.setPadding(new Insets(10));
+        principal.setAlignment(Pos.CENTER);
+
 
 
         //layout.setAlignment(Pos.CENTER);//posicionar lodo en el centro
-        layout.setHgap(10); // Espaciado horizontal entre nodos
+       /* layout.setHgap(10); // Espaciado horizontal entre nodos
         layout.setVgap(10); // Espaciado vertical entre nodos
-
-        StackPane.setMargin(layout, new Insets(5));
-
-        //////////////////////////////////////////////
-
-       /* // Crear VBox para los botones de poderes
-        VBox poderesBox = new VBox(10); // Espaciado vertical entre los botones
-        poderesBox.setTranslateX(200); // Ajustar la posición horizontal de VBox
-        poderesBox.setTranslateY(50);  // Ajustar la posición vertical de VBox
-
-        // Botón y etiqueta para el multiplicador
-        Button botonMultiplicador = new Button("Multiplicador");
-        Label labelMultiplicador = new Label("3"); // Número de multiplicadores disponibles
-        HBox multiplicadorBox = new HBox(5, botonMultiplicador, labelMultiplicador);
-
-        // Botón y etiqueta para el anulador
-        Button botonAnulador = new Button("Anulador");
-        Label labelAnulador = new Label("2"); // Número de anuladores disponibles
-        HBox anuladorBox = new HBox(5, botonAnulador, labelAnulador);
-
-        // Agregar HBox al VBox
-        poderesBox.getChildren().addAll(multiplicadorBox, anuladorBox);
-
-        // Agregar VBox al GridPane
-        layout.add(poderesBox, 9, 5); // Colocar VBox en la columna 15 y fila 5
-        //////////////////
-
 */
+        //StackPane.setMargin(layout, new Insets(5));
 
-        layout.setGridLinesVisible(true);//para poder ver las celdas
-        Scene scene = new Scene(layout, 600, 200);
+
+
+
+
+        //layout.setGridLinesVisible(true);//para poder ver las celdas
+        Scene scene = new Scene(principal, 600, 400);
 
         stage.setTitle("Verdadero o Falso");
         stage.setScene(scene);
