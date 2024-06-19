@@ -65,10 +65,10 @@ public class PoderesTest {
         Jugador j1 = new Jugador("maria");
         Puntaje puntaje1 = new Puntaje(1);
         Anulador anulador = new Anulador();
-        ArrayList<Puntaje> puntajes = new ArrayList<>();
+        Puntajes puntajes = new Puntajes();
 
         //Act
-        puntajes.add(puntaje1);
+        puntajes.agregarPuntaje(puntaje1);
         anulador.aplicar(puntajes);
         j1.sumarPuntaje(puntaje1);
 
@@ -80,13 +80,12 @@ public class PoderesTest {
     public void test05JugadorUsaExclusividadYRecibeElDobleDePuntosAlContestarCorrectamente() {
         //Arrange
         int puntajeEsperado = 2;
-        //Ronda r1 = new Ronda();
         Exclusividad exclusividad = new Exclusividad();
         Jugador j1 = new Jugador("Juani");
         Puntaje puntaje = new Puntaje(1);
+        Puntajes puntajes = new Puntajes();
 
-        ArrayList<Puntaje> puntajes = new ArrayList<>();
-        puntajes.add(puntaje);
+        puntajes.agregarPuntaje(puntaje);
 
         //Act
         exclusividad.aplicar(puntajes);

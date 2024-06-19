@@ -30,4 +30,8 @@ public class Puntaje {
         this.punto -= resta;
     }
 
+    public void multiplicar(int multiplicador) {
+        punto = punto * multiplicador;
+    }
+
 }
