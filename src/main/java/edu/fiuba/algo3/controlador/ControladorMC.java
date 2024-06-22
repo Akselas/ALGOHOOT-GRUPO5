@@ -26,6 +26,8 @@ public class ControladorMC {
         Opcion opcionTres = (Opcion) opcion3.getUserData();
         Opcion opcionCuatro = (Opcion) opcion4.getUserData();
 
+
+        //Aca debería estar la logica de PreguntaMC
         if (opcion1.isSelected() && opcion3.isSelected() && opcion.esIgual(new Opcion("un numero par")) && opcionTres.esIgual(new Opcion("4")) && !opcion2.isSelected() && !opcion4.isSelected()){
             showScoreAlert(1);
         }
@@ -33,6 +35,7 @@ public class ControladorMC {
             showScoreAlert(0);
         }
     }
+
     private void showScoreAlert(int puntaje ) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Puntaje del Jugador");

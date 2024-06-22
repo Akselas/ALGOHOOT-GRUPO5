@@ -17,13 +17,12 @@ public class PreguntaMCVista extends Application {
 
 
 
-        Label enunciadoLabel = new Label("¿Cuanto es 2+2?");
+        Label enunciadoLabel = new Label("¿Cuanto es 2+2?"); //pregunta.obtenertexto()
 
         Button BotonResponder = new Button("Responder");
 
 
-
-        CheckBox opcion1 = new CheckBox("un numero par");
+        CheckBox opcion1 = new CheckBox("un numero par"); //pregunta.obtenerOpciones()
         opcion1.setUserData(new Opcion("un numero par"));
 
         CheckBox opcion2 = new CheckBox("un numero impar");
@@ -56,7 +55,7 @@ public class PreguntaMCVista extends Application {
         Boton4.setToggleGroup(grupoPoderes);
 
         //
-        Label cantidadDuplicadores = new Label("1");
+        Label cantidadDuplicadores = new Label("1"); //jugador.getCantDuplicador()
         Label cantidadTriplicadores = new Label("1");
         Label cantidadExclusividad = new Label("2");
         Label cantidadAnulador = new Label("1");

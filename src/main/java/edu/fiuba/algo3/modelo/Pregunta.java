@@ -15,4 +15,7 @@ public abstract class Pregunta {
         }
         return new Puntaje(0);
     }
+    public String obtenerTexto(){
+        return this.texto;
+    }
 }

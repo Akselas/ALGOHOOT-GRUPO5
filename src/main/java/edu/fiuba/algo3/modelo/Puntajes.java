@@ -21,6 +21,18 @@ public class Puntajes {
         }
         return cantidad;
     }
+    public Boolean haySoloUnaCorrecta(){
+        int cantidad = 0;
+        for (Puntaje p : puntajes) {
+            if (p.obtenerPuntuacion() > 0) {
+                cantidad++;
+            }
+            if (cantidad > 1) {
+                return false;
+            }
+        }
+        return cantidad == 1;
+    }
 
     public void duplicarPuntajes() {
         for (Puntaje p : puntajes) {

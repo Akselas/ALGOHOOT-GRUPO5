@@ -22,6 +22,8 @@ public class PreguntaVFVista extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        //BOTONES
         Label enunciadoLabel = new Label("¿El tomate es una fruta?");
 
         Button BotonResponder = new Button("Responder");
@@ -39,7 +41,7 @@ public class PreguntaVFVista extends Application {
         opcion2.setToggleGroup(grupoOpciones);
 
 
-//botones de poderes
+        //BOTONES DE PODERES
         ToggleButton botonDuplicador = new ToggleButton("Duplicador");
         botonDuplicador.setMaxWidth(Double.MAX_VALUE);
         botonDuplicador.setToggleGroup(grupoPoderes);
@@ -56,16 +58,17 @@ public class PreguntaVFVista extends Application {
         botonAnulador.setMaxWidth(Double.MAX_VALUE);
         botonAnulador.setToggleGroup(grupoPoderes);
 
-        //
+
         Label cantidadDuplicadores = new Label("1");
         Label cantidadTriplicadores = new Label("1");
         Label cantidadExclusividad = new Label("2");
         Label cantidadAnulador = new Label("1");
 
-
+        //CONTROLADOR
         ControladorVF controlador = new ControladorVF(opcion1, opcion2, new Jugador("Axel"));
         BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
 
+        //CONTENEDORES
         HBox opciones = new HBox(20, opcion1, opcion2);
 
         VBox layout = new VBox(20, enunciadoLabel, opciones);//tiene las opciones y la pregunta
@@ -84,6 +87,7 @@ public class PreguntaVFVista extends Application {
         sublayout.setMaxWidth(Double.MAX_VALUE);
         sublayout.setPadding(new Insets(10, 10 , 10 , 10));
 
+        //ESTILOS
         poderes.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         sublayout.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         opciones.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");

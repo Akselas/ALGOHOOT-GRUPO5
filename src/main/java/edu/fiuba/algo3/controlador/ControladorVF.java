@@ -16,6 +16,7 @@ public class ControladorVF {
         this.opcion2 = radioButton2;
         this.jugador = jugador;
     }
+    //Aca va la logica de PreguntaVF
     public void handleAcceptButtonAction(ActionEvent event) {
         Opcion opcion = (Opcion) opcion1.getUserData();
         Opcion opcionDos = (Opcion) opcion2.getUserData();
