@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class PreguntaVFPenalidad extends Pregunta {
 
-    public PreguntaVFPenalidad(String texto, RespuestaVF correcta){
-        super(texto, correcta);
+    public PreguntaVFPenalidad(String texto, Opciones opciones, RespuestaVF correcta){
+        super(texto, opciones, correcta);
     }
 
     @Override

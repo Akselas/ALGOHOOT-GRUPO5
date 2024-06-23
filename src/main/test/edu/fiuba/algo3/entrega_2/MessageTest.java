@@ -16,7 +16,7 @@ public class MessageTest {
         respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
         respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
 
-        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", respuestaCorrecta);
+        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaOC respuestaJugador = new RespuestaOC();
@@ -47,7 +47,7 @@ public class MessageTest {
         respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
         respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
 
-        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", respuestaCorrecta);
+        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaOC respuestaJugador = new RespuestaOC();
@@ -75,7 +75,7 @@ public class MessageTest {
         respuestaCorrecta.agregarOpcionNoSeleccionada(new Opcion("Tiburon"));
         respuestaCorrecta.agregarOpcionNoSeleccionada(new Opcion("Pato"));
 
-        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", respuestaCorrecta);
+        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();
@@ -110,7 +110,7 @@ public class MessageTest {
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion3);
 
-        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", respuestaCorrecta);
+        PreguntaMCParcial preguntaMC = new PreguntaMCParcial("Que animales son mamiferos?", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();

@@ -23,7 +23,7 @@ public class PreguntaMCTest {
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion3);
 
-        PreguntaMC preguntaMC = new PreguntaMC("Que animal es mamifero?", respuestaCorrecta);
+        PreguntaMC preguntaMC = new PreguntaMC("Que animal es mamifero?", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();

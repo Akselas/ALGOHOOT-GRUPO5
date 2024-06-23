@@ -21,7 +21,7 @@ public class MessageTest {
         verduras.agregar(new Opcion("zanahoria"));
         RespuestaGC correcta = new RespuestaGC(frutas, verduras);
 
-        PreguntaGC preguntaGC = new PreguntaGC("Grupo A: Frutas, Grupo B: Verduras", correcta);
+        PreguntaGC preguntaGC = new PreguntaGC("Grupo A: Frutas, Grupo B: Verduras", new Opciones(), correcta);
         Jugador j1 = new Jugador("Pepe");
 
         Grupo r1_g1 = new Grupo();

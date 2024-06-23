@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class PreguntaMCPenalidad extends Pregunta {
 
-    public PreguntaMCPenalidad(String texto, RespuestaMC respuesta) {
-        super(texto, respuesta);
+    public PreguntaMCPenalidad(String texto, Opciones opciones, RespuestaMC respuesta) {
+        super(texto, opciones, respuesta);
     }
 
     @Override

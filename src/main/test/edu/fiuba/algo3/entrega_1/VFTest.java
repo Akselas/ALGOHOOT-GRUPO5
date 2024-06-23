@@ -17,7 +17,7 @@ public class VFTest {
 
         RespuestaVF correcta = new RespuestaVF();//Estado inconsistente no debería haber una respuesta sin opcion
         correcta.agregarOpcion(new Opcion("V"));
-        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", correcta);
+        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", new Opciones(), correcta);
 
         /*
         RespuestaVF correcta = new RespuestaVF();//Estado inconsistente no debería haber una respuesta sin opcion
@@ -53,7 +53,7 @@ public class VFTest {
         int puntajeEsperad2 = 0;
         RespuestaVF correcta = new RespuestaVF();
         correcta.agregarOpcion(new Opcion("V"));
-        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", correcta);
+        PreguntaVF preguntaVF = new PreguntaVF("El tomate es una fruta?", new Opciones(), correcta);
         Jugador j1 = new Jugador("Pepe");
         RespuestaVF r1 = new RespuestaVF();
         r1.agregarOpcion(new Opcion("F"));
@@ -83,7 +83,7 @@ public class VFTest {
 
         RespuestaVF correcta = new RespuestaVF();
         correcta.agregarOpcion(new Opcion("V"));
-        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", correcta);
+        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", new Opciones(), correcta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaVF r1 = new RespuestaVF();
@@ -113,7 +113,7 @@ public class VFTest {
 
         RespuestaVF correcta = new RespuestaVF();
         correcta.agregarOpcion(new Opcion("V"));
-        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", correcta);
+        PreguntaVFPenalidad preguntaVF = new PreguntaVFPenalidad("El tomate es una fruta?", new Opciones(), correcta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaVF r1 = new RespuestaVF();

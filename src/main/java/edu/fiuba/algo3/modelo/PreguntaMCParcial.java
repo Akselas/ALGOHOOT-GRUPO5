@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class PreguntaMCParcial extends Pregunta {
 
-    public PreguntaMCParcial(String texto, RespuestaMC correcta) {
-        super(texto, correcta);
+    public PreguntaMCParcial(String texto, Opciones opciones, RespuestaMC correcta) {
+        super(texto, opciones, correcta);
     }
 
     @Override
