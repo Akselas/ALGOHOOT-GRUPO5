@@ -62,7 +62,7 @@ public class PreguntaMCTest {
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion3);
 
-        PreguntaMC preguntaMC = new PreguntaMC("Que animal es mamifero?", respuestaCorrecta);
+        PreguntaMC preguntaMC = new PreguntaMC("Que animal es mamifero?", new Opciones(),respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();
@@ -101,7 +101,7 @@ public class PreguntaMCTest {
         respuestaCorrecta.agregarOpcionSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionSeleccionada(opcion3);
 
-        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales no son mamiferos?", respuestaCorrecta);
+        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales no son mamiferos?", new Opciones() ,respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();
@@ -140,7 +140,7 @@ public class PreguntaMCTest {
         respuestaCorrecta.agregarOpcionSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionSeleccionada(opcion3);
 
-        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales no son mamiferos?", respuestaCorrecta);
+        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales no son mamiferos?", new Opciones(), respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();
@@ -179,7 +179,7 @@ public class PreguntaMCTest {
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion2);
         respuestaCorrecta.agregarOpcionNoSeleccionada(opcion3);
 
-        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales son mamiferos?", respuestaCorrecta);
+        PreguntaMCPenalidad preguntaMC = new PreguntaMCPenalidad("Que animales son mamiferos?", new Opciones() ,respuestaCorrecta);
 
         Jugador j1 = new Jugador("Pepe");
         RespuestaMC respuestaJugador = new RespuestaMC();

@@ -23,6 +23,13 @@ public class PreguntaVFVista extends Application {
     @Override
     public void start(Stage stage) {
 
+
+        String textoPregunta = "El tomate es una fruta?";
+        RespuestaVF correcta = new RespuestaVF();
+        correcta.agregarOpcion(new Opcion("V"));
+        PreguntaVF preguntaVF = new PreguntaVF(textoPregunta, new Opciones(), correcta);
+        Jugador j1 = new Jugador("Axel");
+        VistaVF vista = new VistaVF(preguntaVF);
         //BOTONES
         Label enunciadoLabel = new Label("¿El tomate es una fruta?");
 
@@ -65,7 +72,8 @@ public class PreguntaVFVista extends Application {
         Label cantidadAnulador = new Label("1");
 
         //CONTROLADOR
-        ControladorVF controlador = new ControladorVF(opcion1, opcion2, new Jugador("Axel"));
+
+        ControladorVF controlador = new ControladorVF(new VistaVF(preguntaVF), j1, preguntaVF, new VistaPrincipal() );
         BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
 
         //CONTENEDORES

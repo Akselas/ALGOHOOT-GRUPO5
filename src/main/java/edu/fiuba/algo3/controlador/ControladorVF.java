@@ -1,31 +1,38 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.VistaPrincipal;
+import edu.fiuba.algo3.vista.VistaVF;
 import javafx.event.ActionEvent;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Alert;
 
 
 public class ControladorVF {
 
-    private RadioButton opcion1;
-    private RadioButton opcion2;
+    private VistaVF vistaVF;
     private Jugador jugador;
-
-    public ControladorVF(RadioButton radioButton1, RadioButton radioButton2, Jugador jugador) {
-        this.opcion1 = radioButton1;
-        this.opcion2 = radioButton2;
+    private Pregunta pregunta;
+    private VistaPrincipal vistaPrincipal;
+    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, VistaPrincipal vistaPrincipal) {
+        this.vistaVF = vistaVF;
+        /*this.opcion1 = (Opcion) radioButton1.getUserData();
+        this.opcion2 = (Opcion) radioButton2.getUserData();*/
         this.jugador = jugador;
+        this.pregunta = pregunta;
     }
-    //Aca va la logica de PreguntaVF
     public void handleAcceptButtonAction(ActionEvent event) {
-        Opcion opcion = (Opcion) opcion1.getUserData();
-        Opcion opcionDos = (Opcion) opcion2.getUserData();
-        if (opcion1.isSelected() && opcion.esIgual(new Opcion("V"))) {
+
+
+        //pregunta.calcularPuntaje(respuesta);
+        //aca no sé si usar puntaje y asignarselo al jugador o esperar despues y usar el multiplicador
+
+        /* Logica de pregunta vf
+        if (boton1.isSelected() && opcion.esIgual(new Opcion("V"))) {
             showScoreAlert(1);
         }
-        else if(opcion2.isSelected() && opcionDos.esIgual(new Opcion("F"))){
+        else if(boton2.isSelected() && opcion2.esIgual(new Opcion("F"))){
             showScoreAlert(0);
         }
+        */
     }
     private void showScoreAlert(int puntaje ) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
