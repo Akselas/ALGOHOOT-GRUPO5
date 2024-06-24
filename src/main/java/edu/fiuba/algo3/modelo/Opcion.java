@@ -11,4 +11,5 @@ public class Opcion {
         return this.texto.equals(opcion.texto);
     }
 
+    public String obtenerTexto(){ return texto;}
 }
