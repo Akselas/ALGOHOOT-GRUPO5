@@ -9,22 +9,18 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.input.DragEvent;
-import java.util.ArrayList;
+
 
 
 public class ControladorOC {
-    private ArrayList<Opcion> opciones;//despues modificar
     private PreguntaOC pregunta;
     private Jugador jugador;
     private PreguntaOCVista vista;
     private ListView<Opcion> opcionesListView;
-    private Poder poderSeleccionado;
-    private int cantDuplicador = 2;
-    //private int cantTriplicador;
 
 
-    public ControladorOC(ArrayList<Opcion> opciones, Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista) {//Pregunta preguntaOC
-        this.opciones = opciones;
+    public ControladorOC(Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista) {//Pregunta preguntaOC
+
         this.opcionesListView = new ListView<>();
         this.jugador = jugador;
         this.pregunta = pregunta;
@@ -47,29 +43,13 @@ public class ControladorOC {
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
             Puntaje puntaje = pregunta.calcularPuntaje(respuestaJugador);
-            conPoder(puntaje);
 
             jugador.sumarPuntaje(puntaje);
             System.out.println("Puntaje de " + jugador.obtenerNombre()+ " : " + jugador.obtenerPuntaje());
         });
 
-        vista.obtenerBotonDuplicador().setOnAction(event -> {
-            poderSeleccionado = (Duplicador) vista.obtenerBotonDuplicador().getUserData();
-            System.out.println("Poder seleccionado: Multiplicador");
-        });
     }
 
-    private void conPoder(Puntaje puntaje){
-        if (poderSeleccionado != null) {
-            if (poderSeleccionado.equals(new Duplicador())) {
-                Duplicador duplicador = new Duplicador();
-                duplicador.aplicar(puntaje);
-                cantDuplicador--;
-            }
-            vista.actualizarPoderes(cantDuplicador);//aca seria algo de jugador
-        }
-
-    }
 
 
     private ListCell<Opcion> crearCeldas(){//Aca modificamos las celdas para que se vean las opciones de forma string
@@ -133,7 +113,7 @@ public class ControladorOC {
     }
 
     private void crearYConfigurarCeldas() {
-        ObservableList<Opcion> opcionesObservable = FXCollections.observableArrayList(this.opciones);
+        ObservableList<Opcion> opcionesObservable = FXCollections.observableArrayList(pregunta.obtenerOpciones().devolverOpciones());
         opcionesListView.setItems(opcionesObservable);
         opcionesListView.setCellFactory(lv -> {
             ListCell<Opcion> cell = crearCeldas();

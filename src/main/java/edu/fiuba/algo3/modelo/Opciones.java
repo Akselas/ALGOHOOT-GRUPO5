@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,4 +22,5 @@ public class Opciones implements Iterable<Opcion> {
     public ArrayList<Opcion> devolverOpciones(){
         return opciones;
     }
+
 }

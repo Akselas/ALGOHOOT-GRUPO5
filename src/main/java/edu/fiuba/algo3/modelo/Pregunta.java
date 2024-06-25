@@ -25,4 +25,8 @@ public abstract class Pregunta {
     public Opciones obtenerOpciones() {
         return this.opciones;
     }
+
+    public Respuesta obtenerRespuesta() {
+        return this.correcta;
+    }
 }

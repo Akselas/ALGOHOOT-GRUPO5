@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista;
+/*package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.controlador.*;
 import javafx.application.Application;
@@ -51,4 +51,4 @@ public class Vistaa extends Application {
     public static void main(String[] args) {
         launch();
     }
-}
+}*/
