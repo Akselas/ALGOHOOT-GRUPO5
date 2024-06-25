@@ -1,46 +1,53 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
-import javafx.event.ActionEvent;
+import edu.fiuba.algo3.vista.VistaMC;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 
 public class ControladorMC {
 
-    private CheckBox opcion1;
-    private CheckBox opcion2;
-    private CheckBox opcion3;
-    private CheckBox opcion4;
     private Jugador jugador;
+    private Pregunta pregunta;
+    private VistaMC vista;
 
-    public ControladorMC(CheckBox radioButton1, CheckBox radioButton2, CheckBox radioButton3, CheckBox radioButton4, Jugador jugador) {
-        this.opcion1 = radioButton1;
-        this.opcion2 = radioButton2;
-        this.opcion3 = radioButton3;
-        this.opcion4 = radioButton4;
+    public ControladorMC(Jugador jugador, Pregunta pregunta, VistaMC vistaMC) {
         this.jugador = jugador;
+        this.pregunta = pregunta;
+        this.vista = vistaMC;
+        initialize();
     }
-    public void handleAcceptButtonAction(ActionEvent event) {
-        Opcion opcion = (Opcion) opcion1.getUserData();
-        Opcion opcionDos = (Opcion) opcion2.getUserData();
-        Opcion opcionTres = (Opcion) opcion3.getUserData();
-        Opcion opcionCuatro = (Opcion) opcion4.getUserData();
 
+    private void initialize() {
+        addEventHandlers();
+    }
 
-        //Aca debería estar la logica de PreguntaMC
-        if (opcion1.isSelected() && opcion3.isSelected() && opcion.esIgual(new Opcion("un numero par")) && opcionTres.esIgual(new Opcion("4")) && !opcion2.isSelected() && !opcion4.isSelected()){
-            showScoreAlert(1);
-        }
-        else{ //if(opcion2.isSelected() && opcion4.isSelected() && opcionDos.esIgual(new Opcion("un numero impar")) && opcionCuatro.esIgual(new Opcion("todas las anteriores"))){
-            showScoreAlert(0);
-        }
+    private void addEventHandlers() {
+        vista.getBotonResponder().setOnAction(event-> {
+            RespuestaMC respuestaJugador = new RespuestaMC();
+
+            for(CheckBox checkBox : vista.getBotones().getOpciones()) {
+                if (checkBox.isSelected()) {
+                    respuestaJugador.agregarOpcionSeleccionada((Opcion) checkBox.getUserData());
+                } else {
+                    respuestaJugador.agregarOpcionNoSeleccionada((Opcion) checkBox.getUserData());
+                }
+            }
+
+            Puntaje puntaje = pregunta.calcularPuntaje((Respuesta) respuestaJugador);
+
+            jugador.sumarPuntaje(puntaje);
+            showScoreAlert(puntaje.obtenerPuntuacion());
+        });
     }
 
     private void showScoreAlert(int puntaje ) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Puntaje del Jugador");
         alert.setHeaderText(null);
-        alert.setContentText("El puntaje del jugador " + jugador.obtenerNombre() + " es: " + puntaje);
+        alert.setContentText("El puntaje del jugador " + jugador.obtenerNombre() + " es: " + jugador.obtenerPuntaje());
 
         alert.showAndWait();
     }

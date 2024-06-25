@@ -18,4 +18,5 @@ public class Opciones implements Iterable<Opcion> {
     public Iterator<Opcion> iterator() {
         return opciones.iterator();
     }
+
 }
