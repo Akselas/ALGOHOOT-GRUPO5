@@ -22,15 +22,17 @@ public class VistaPrincipal extends Application {
     private Stage ventanaPrincipal;
     private Button responder;
     private VBox vistaPrincipal;
+    private PoderesVista poderesBox;
 
     @Override
     public void start(Stage stage) {
         this.ventanaPrincipal = stage;
-        ventanaPrincipal.setWidth(400);
-        ventanaPrincipal.setHeight(400);
+        ventanaPrincipal.setWidth(500);
+        ventanaPrincipal.setHeight(500);
         this.vistaPrincipal = establecerVistaPrincipal();
+        this.poderesBox = new PoderesVista();
         //mostrarVistaVF();
-        //mostrarVistaOC();
+        mostrarVistaOC();
         //mostrarVistaMC();
         //mostrarVistaGC();
     }
@@ -90,38 +92,26 @@ public class VistaPrincipal extends Application {
     }
 
     public void mostrarVistaOC(){
-        Opciones opciones = new Opciones();
-        opciones.agregarOpcion(new Opcion("Messi ganó un mundial"));
-        opciones.agregarOpcion(new Opcion("El hombre llegó la luna"));
-        opciones.agregarOpcion(new Opcion("Abrió la UBA"));
-
-        RespuestaOC respuestaCorrecta = new RespuestaOC();
-
-        respuestaCorrecta.agregar(new Opcion("El hombre llegó la luna"));
-        respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
-        respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
 
         responder = new Button("Responder");
 
-        PreguntaOC preguntaOC = new PreguntaOC("Ordenar cronologicamente:", opciones, respuestaCorrecta);
+        Parser creador = new Parser();
+        PreguntaOC preguntaOC = creador.devolverPreguntaOC();
+
         Jugador j1 = new Jugador("Pepe");
         PreguntaOCVista vistaPreguntaOC = new PreguntaOCVista(responder);
 
-        ControladorOC controlador = new ControladorOC(j1,preguntaOC, vistaPreguntaOC);
+        ControladorOC controlador = new ControladorOC(j1,preguntaOC, vistaPreguntaOC, poderesBox);
 
-        HBox ventanaPregunta = new HBox(20, vistaPreguntaOC.getLayout()/*, poderesBox*/);//tiene la pregunta y los poderes.
+        HBox ventanaPregunta = new HBox(20, vistaPreguntaOC.getLayout(), poderesBox.obtenerLayout());//tiene la pregunta y los poderes.
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10 , 10 , 10));
 
 
-        //poderesBox.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         vistaPrincipal.getChildren().addAll(ventanaPregunta, responder);
 
 
-
-        ventanaPrincipal.setWidth(400);
-        ventanaPrincipal.setHeight(400);
         Scene scene = new Scene(vistaPrincipal);
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("Ordered Choice");
