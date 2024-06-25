@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 public abstract class Pregunta {
     protected String texto;
     protected final Respuesta correcta;
-    private final Opciones opciones;
+    public final Opciones opciones;
 
     public Pregunta(String texto, Opciones opciones, Respuesta correcta) {
         this.texto = texto;

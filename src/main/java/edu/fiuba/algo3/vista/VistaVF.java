@@ -2,34 +2,32 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Opcion;
 import edu.fiuba.algo3.modelo.Pregunta;
+import edu.fiuba.algo3.modelo.PreguntaOC;
+import edu.fiuba.algo3.modelo.PreguntaVF;
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
-
+import edu.fiuba.algo3.modelo.*;
 
 public class VistaVF {
 
     private VBox layout;
-    private Pregunta pregunta;
-    private ToggleGroup grupoPoderes;
+    //private ToggleGroup grupoPoderes;
     private ToggleGroup grupoOpciones;
     private RadioButton boton1;
     private RadioButton boton2;
     private Button botonResponder;
+    private Label titulo;
 
+    public VistaVF(){
 
-    public VistaVF(Pregunta pregunta){
-        this.pregunta = pregunta;
 
         this.grupoOpciones = new ToggleGroup();
-
+        this.titulo = new Label();
         this.boton1 = new RadioButton("Verdadero");
         boton1.setUserData(new Opcion("V"));
         boton1.setToggleGroup(grupoOpciones);
@@ -43,9 +41,9 @@ public class VistaVF {
         setupLayout();
     }
     public void setupLayout(){
-        HBox opciones = new HBox(100, this.boton1, this.boton2);
+        HBox opciones = new HBox(100, this.boton1, this.boton2); //Botones estandar, siempre van a estar
 
-        VBox layoutPregunta = new VBox(100, new Label(this.pregunta.obtenerTexto()), opciones);
+        VBox layoutPregunta = new VBox(100,titulo, opciones);
         layoutPregunta.setAlignment(Pos.CENTER);
         layoutPregunta.setPadding(new Insets(5));
 
@@ -59,11 +57,16 @@ public class VistaVF {
     public VBox getLayout() {
         return this.layout;
     }
-    public Button getBotonResponder() {
+
+    public void mostrarPregunta(Pregunta pregunta, ListView<Opcion> opcionesListView) {
+        this.titulo.setText(pregunta.obtenerTexto());
+        //enunciadoLabel.setText(pregunta.obtenerTexto());
+        layout.getChildren().add(opcionesListView);
+    }
+    public Button obtenerBotonResponder(){
         return this.botonResponder;
     }
-
-    public ToggleGroup getGrupoOpciones() {
+    public ToggleGroup obtenerGrupoOpciones(){
         return this.grupoOpciones;
     }
 }

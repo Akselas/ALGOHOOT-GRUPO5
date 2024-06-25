@@ -29,7 +29,7 @@ public class PreguntaVFVista extends Application {
         correcta.agregarOpcion(new Opcion("V"));
         PreguntaVF preguntaVF = new PreguntaVF(textoPregunta, new Opciones(), correcta);
         Jugador j1 = new Jugador("Axel");
-        VistaVF vista = new VistaVF(preguntaVF);
+        VistaVF vista = new VistaVF();
         //BOTONES
         Label enunciadoLabel = new Label("¿El tomate es una fruta?");
 
@@ -73,7 +73,7 @@ public class PreguntaVFVista extends Application {
 
         //CONTROLADOR
 
-        ControladorVF controlador = new ControladorVF(new VistaVF(preguntaVF), j1, preguntaVF, new VistaPrincipal() );
+        ControladorVF controlador = new ControladorVF(new VistaVF(), j1, preguntaVF, new Opciones() );
         BotonResponder.setOnAction(controlador::handleAcceptButtonAction);
 
         //CONTENEDORES
