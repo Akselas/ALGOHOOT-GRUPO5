@@ -30,7 +30,7 @@ public class VistaPrincipal extends Application {
         ventanaPrincipal.setHeight(400);
         this.vistaPrincipal = establecerVistaPrincipal();
         //mostrarVistaVF();
-        //mostrarVistaOC();
+        mostrarVistaOC();
         //mostrarVistaMC();
         //mostrarVistaGC();
     }
