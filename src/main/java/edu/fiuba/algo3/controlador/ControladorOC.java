@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.PreguntaOCVista;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,10 +18,13 @@ public class ControladorOC {
     private Jugador jugador;
     private PreguntaOCVista vista;
     private ListView<Opcion> opcionesListView;
+    private PoderesVista poderesVista;
+    private Poder poderSeleccionado;
 
 
-    public ControladorOC(Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista) {//Pregunta preguntaOC
+    public ControladorOC(Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista, PoderesVista poderesVista) {//Pregunta preguntaOC
 
+        this.poderesVista = poderesVista;
         this.opcionesListView = new ListView<>();
         this.jugador = jugador;
         this.pregunta = pregunta;
@@ -36,6 +40,17 @@ public class ControladorOC {
 
 
     private void addEventHandlers() {
+
+        poderesVista.obtenerBotonDuplicador().setOnAction(event -> {
+            if(poderesVista.obtenerBotonDuplicador().isSelected()){
+                poderSeleccionado = (Duplicador) poderesVista.obtenerBotonDuplicador().getUserData();
+                System.out.println("Poder seleccionado: Multiplicador");
+            }else{
+                poderSeleccionado = null;
+                System.out.println("Poder deseleccionado: Duplicador");
+            }
+        });
+
         vista.obtenerBotonResponder().setOnAction(event -> {
             RespuestaOC respuestaJugador = new RespuestaOC();//creo la respuesta del jugador
             ObservableList<Opcion> items = opcionesListView.getItems();//cambio li ListView en una ObservableList porque sino no me deja hacer el ciclo for
@@ -43,6 +58,13 @@ public class ControladorOC {
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
             Puntaje puntaje = pregunta.calcularPuntaje(respuestaJugador);
+
+            if (poderSeleccionado != null) {
+                poderSeleccionado.aplicar(puntaje);
+                poderesVista.cantDuplicador--;
+                poderesVista.actualizarPoderes();
+                poderSeleccionado = null;
+            }
 
             jugador.sumarPuntaje(puntaje);
             System.out.println("Puntaje de " + jugador.obtenerNombre()+ " : " + jugador.obtenerPuntaje());
