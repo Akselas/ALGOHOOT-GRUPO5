@@ -19,4 +19,8 @@ public class Opciones implements Iterable<Opcion> {
         return opciones.iterator();
     }
 
+    public ArrayList<Opcion> devolverOpciones(){
+        return opciones;
+    }
+
 }
