@@ -37,6 +37,21 @@ public class VistaPrincipal extends Application {
         //mostrarVistaGC();
     }
 
+    public void mostrarVistaGC() { //debería ser mostrarVistaPregunta para encapsular
+        Parser creador = new Parser();
+        PreguntaGC preguntaGC = creador.devolverPreguntaGC();
+        Jugador jugador = new Jugador("Axel");
+        VistaGC vistaGC = new VistaGC();
+
+        //Controlador llama una funcion mostrarPregunta para setear la vista
+        ControladorGC controladorGC = new ControladorGC(vistaGC, jugador, preguntaGC);
+
+        Scene scene = new Scene(vistaGC.getLayout());
+        ventanaPrincipal.setScene(scene);
+        ventanaPrincipal.setTitle("AlgoHoot");
+        ventanaPrincipal.show();
+    }
+
     public void mostrarVistaVF() { //debería ser mostrarVistaPregunta para encapsular
         Parser creador = new Parser();
         PreguntaVF preguntaVF = creador.devolverPreguntaVF();

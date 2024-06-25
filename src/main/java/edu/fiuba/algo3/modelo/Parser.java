@@ -22,4 +22,27 @@ public class Parser {
         respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
         return new PreguntaOC("Ordenar cronologicamente:", opciones, respuestaCorrecta);
     }
+
+    public PreguntaGC devolverPreguntaGC(){
+        Grupo frutas = new Grupo();
+        frutas.agregar(new Opcion("tomate"));
+        frutas.agregar(new Opcion("mandarina"));
+        frutas.agregar(new Opcion("manzana"));
+
+        Grupo verduras = new Grupo();
+        verduras.agregar(new Opcion("cebolla"));
+        verduras.agregar(new Opcion("lechuga"));
+        verduras.agregar(new Opcion("zanahoria"));
+
+        Opciones opciones = new Opciones();
+        opciones.agregarOpcion(new Opcion("tomate"));
+        opciones.agregarOpcion(new Opcion("mandarina"));
+        opciones.agregarOpcion(new Opcion("manzana"));
+        opciones.agregarOpcion(new Opcion("cebolla"));
+        opciones.agregarOpcion(new Opcion("lechuga"));
+        opciones.agregarOpcion(new Opcion("zanahoria"));
+
+        RespuestaGC correcta = new RespuestaGC(frutas, verduras);
+        return new PreguntaGC("ordenar Frutas y Verduras", opciones, "Frutas", "Verduras", correcta);
+    }
 }
