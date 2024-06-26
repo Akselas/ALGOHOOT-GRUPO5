@@ -24,7 +24,7 @@ public class ControladorOC {
 
     public ControladorOC(Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista, PoderesVista poderesVista) {//Pregunta preguntaOC
 
-        this.poderesVista = poderesVista;
+        this.poderesVista = poderesVista; //Falta relacionar la cantidad de poderes disponibles con el jugador.
         this.opcionesListView = new ListView<>();
         this.jugador = jugador;
         this.pregunta = pregunta;
@@ -44,7 +44,7 @@ public class ControladorOC {
         poderesVista.obtenerBotonDuplicador().setOnAction(event -> {
             if(poderesVista.obtenerBotonDuplicador().isSelected()){
                 poderSeleccionado = (Duplicador) poderesVista.obtenerBotonDuplicador().getUserData();
-                System.out.println("Poder seleccionado: Multiplicador");
+                System.out.println("Poder seleccionado: Duplicador");
             }else{
                 poderSeleccionado = null;
                 System.out.println("Poder deseleccionado: Duplicador");

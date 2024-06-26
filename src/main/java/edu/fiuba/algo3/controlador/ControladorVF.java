@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaPrincipal;
 import edu.fiuba.algo3.vista.VistaVF;
 import javafx.collections.FXCollections;
@@ -19,30 +20,21 @@ public class ControladorVF {
     private Jugador jugador;
     private Pregunta pregunta;
     private VistaPrincipal vistaPrincipal;
+    private PoderesVista poderesBox;
+    private Poder poderSeleccionado;
 
-    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, Opciones options) {
+    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox) {
         this.vistaVF = vistaVF;
-        this.opciones = options;
-        this.opcionesVisibles = new ListView<>();//Considerar si la clase opciones puede hacerse cargo de esto
+        this.opciones = pregunta.obtenerOpciones();
         this.jugador = jugador;
         this.pregunta = pregunta;
+        this.poderesBox = poderesBox;
         initialize();
 
     }
     private void initialize() {
-        crearYConfigurarCeldas(); //esto setea opcionesListView
-        this.vistaVF.mostrarPregunta(this.pregunta, opcionesVisibles);
+        this.vistaVF.mostrarPregunta(this.pregunta, this.opciones);
         establecerManejoDeEventos();
-    }
-    private void crearYConfigurarCeldas() { //Refactor: deberia ser una clase aparte
-
-        ObservableList<Opcion> opcionesObservable = FXCollections.observableArrayList(this.opciones.devolverOpciones());
-        opcionesVisibles.setItems(opcionesObservable);
-        opcionesVisibles.setCellFactory(lv -> {
-            ListCell<Opcion> cell = crearCeldas();
-            return cell;
-
-        });
     }
 
     private void establecerManejoDeEventos() {
@@ -59,6 +51,14 @@ public class ControladorVF {
                 respuestaJugador.agregarOpcion((Opcion) botonSeleccionado.getUserData());
 
                 Puntaje puntaje = this.pregunta.calcularPuntaje(respuestaJugador);
+                //EBERIA SER RESPOSABILIDAD DE JUGADOR
+                if (poderSeleccionado != null) {
+                    poderSeleccionado.aplicar(puntaje);
+                    poderesBox.cantDuplicador--;
+                    poderesBox.actualizarPoderes();
+                    poderSeleccionado = null;
+                }
+
                 jugador.sumarPuntaje(puntaje);
                 System.out.println("Puntaje de " + jugador.obtenerNombre() + " : " + jugador.obtenerPuntaje());
 
@@ -66,44 +66,16 @@ public class ControladorVF {
                 System.out.println("Por favor selecciona una opción.");
             }
             });
-    }
 
-    public void handleAcceptButtonAction(ActionEvent event) {
-
-
-        //pregunta.calcularPuntaje(respuesta);
-        //aca no sé si usar puntaje y asignarselo al jugador o esperar despues y usar el multiplicador
-
-        /* Logica de pregunta vf
-        if (boton1.isSelected() && opcion.esIgual(new Opcion("V"))) {
-            showScoreAlert(1);
-        }
-        else if(boton2.isSelected() && opcion2.esIgual(new Opcion("F"))){
-            showScoreAlert(0);
-        }
-        */
-    }
-    private void showScoreAlert(int puntaje ) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Puntaje del Jugador");
-        alert.setHeaderText(null);
-        alert.setContentText("El puntaje del jugador " + jugador.obtenerNombre() + " es: " + puntaje);
-
-        alert.showAndWait();
-    }
-
-    private ListCell<Opcion> crearCeldas(){//Aca modificamos las celdas para que se vean las opciones de forma string
-        return new ListCell<Opcion>() {
-            @Override
-            protected void updateItem(Opcion item, boolean empty) {
-                super.updateItem(item, empty);
-                if(empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                }else{
-                    setText(item.obtenerTexto());
-                }
+        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
+            if(poderesBox.obtenerBotonDuplicador().isSelected()){
+                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
+                System.out.println("Poder seleccionado: Duplicador");
+            }else{
+                poderSeleccionado = null;
+                System.out.println("Poder deseleccionado: Duplicador");
             }
-        };
+        });
     }
+
 }

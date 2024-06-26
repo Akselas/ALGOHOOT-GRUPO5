@@ -23,8 +23,9 @@ public class VistaMC {
     private OpcionesControlador botones;
     private Button botonResponder;
 
-    public VistaMC(Pregunta pregunta){
+    public VistaMC(Pregunta pregunta, Button responder){
         this.pregunta = pregunta;
+        this.botonResponder = responder;
 
         this.botones = new OpcionesControlador();
 
@@ -48,6 +49,7 @@ public class VistaMC {
         VBox layoutPregunta = new VBox(100, new Label(this.pregunta.obtenerTexto()), opciones1, opciones2);
         layoutPregunta.setAlignment(Pos.CENTER);
         layoutPregunta.setPadding(new Insets(5));
+        layoutPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
         VBox principal = new VBox(layoutPregunta, this.botonResponder);
         principal.setSpacing(10);

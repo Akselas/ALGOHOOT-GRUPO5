@@ -16,7 +16,6 @@ import edu.fiuba.algo3.modelo.*;
 public class VistaVF {
 
     private VBox layout;
-    //private ToggleGroup grupoPoderes;
     private ToggleGroup grupoOpciones;
     private RadioButton boton1;
     private RadioButton boton2;
@@ -46,6 +45,7 @@ public class VistaVF {
         VBox layoutPregunta = new VBox(100,titulo, opciones);
         layoutPregunta.setAlignment(Pos.CENTER);
         layoutPregunta.setPadding(new Insets(5));
+        layoutPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
         VBox principal = new VBox(layoutPregunta, this.botonResponder);
         principal.setSpacing(10);
@@ -58,10 +58,8 @@ public class VistaVF {
         return this.layout;
     }
 
-    public void mostrarPregunta(Pregunta pregunta, ListView<Opcion> opcionesListView) {
+    public void mostrarPregunta(Pregunta pregunta, Opciones ops) {
         this.titulo.setText(pregunta.obtenerTexto());
-        //enunciadoLabel.setText(pregunta.obtenerTexto());
-        layout.getChildren().add(opcionesListView);
     }
     public Button obtenerBotonResponder(){
         return this.botonResponder;

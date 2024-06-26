@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.controlador;
 
 import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaGC;
 import edu.fiuba.algo3.vista.VistaPrincipal;
 import javafx.event.ActionEvent;
@@ -27,13 +28,16 @@ public class ControladorGC {
     private Jugador jugador;
     private Pregunta pregunta;
     private VistaPrincipal vistaPrincipal;
+    private PoderesVista poderesBox;
+    private  Poder poderSeleccionado;
 
-    public ControladorGC(VistaGC vistaGC, Jugador jugador, Pregunta pregunta) {
+    public ControladorGC(VistaGC vistaGC, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox) {
         this.vistaGC = vistaGC;
         this.opciones = pregunta.obtenerOpciones();
         this.opcionesView = new VBox();//Considerar si la clase opciones puede hacerse cargo de esto
         this.jugador = jugador;
         this.pregunta = pregunta;
+        this.poderesBox = poderesBox;
         initialize();
     }
 
@@ -79,8 +83,8 @@ public class ControladorGC {
             // reviso si todas las opciones fueron asignadas
             VBox opcionesGrupoDefault = this.vistaGC.obtenerGrupoDefault();
 
-            if (opcionesGrupoDefault.getChildren().isEmpty()) {
-                System.out.println("Por favoc agrupe todas las opciones");
+            if (!opcionesGrupoDefault.getChildren().isEmpty()) {
+                System.out.println("Por favor agrupe todas las opciones");
                 return;
             }
 
@@ -110,9 +114,24 @@ public class ControladorGC {
             RespuestaGC respuestaJugador = new RespuestaGC(respuestaGrupo1, respuestaGrupo2);
 
             Puntaje puntaje = this.pregunta.calcularPuntaje(respuestaJugador);
+            if (poderSeleccionado != null) {
+                poderSeleccionado.aplicar(puntaje);
+                poderesBox.cantDuplicador--;
+                poderesBox.actualizarPoderes();
+                poderSeleccionado = null;
+            }
             jugador.sumarPuntaje(puntaje);
             System.out.println("Puntaje de " + jugador.obtenerNombre() + " : " + jugador.obtenerPuntaje());
 
+        });
+        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
+            if(poderesBox.obtenerBotonDuplicador().isSelected()){
+                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
+                System.out.println("Poder seleccionado: Duplicador");
+            }else{
+                poderSeleccionado = null;
+                System.out.println("Poder deseleccionado: Duplicador");
+            }
         });
     }
 

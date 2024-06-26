@@ -17,8 +17,8 @@ public class Parser {
 
         RespuestaOC respuestaCorrecta = new RespuestaOC();
 
-        respuestaCorrecta.agregar(new Opcion("El hombre llegó la luna"));
         respuestaCorrecta.agregar(new Opcion("Abrió la UBA"));
+        respuestaCorrecta.agregar(new Opcion("El hombre llegó la luna"));
         respuestaCorrecta.agregar(new Opcion("Messi ganó un mundial"));
         return new PreguntaOC("Ordenar cronologicamente:", opciones, respuestaCorrecta);
     }
@@ -45,4 +45,8 @@ public class Parser {
         RespuestaGC correcta = new RespuestaGC(frutas, verduras);
         return new PreguntaGC("ordenar Frutas y Verduras", opciones, "Frutas", "Verduras", correcta);
     }
+
+
+
+
 }

@@ -89,7 +89,7 @@ public class VistaGC {
         PreguntaGC preguntaGC = (PreguntaGC) pregunta;
 
         this.nombreGrupo1.setText(preguntaGC.obtenerNombreGrupo1());
-        this.nombreGrupo2.setText(preguntaGC.obtenerNombreGrupo1());
+        this.nombreGrupo2.setText(preguntaGC.obtenerNombreGrupo2());
 
         enableDrop(this.grupo1, this.grupo2, this.grupoDefault);
         enableDrop(this.grupo2, this.grupo1, this.grupoDefault);

@@ -23,45 +23,55 @@ public class VistaPrincipal extends Application {
     private Button responder;
     private VBox vistaPrincipal;
     private PoderesVista poderesBox;
+    private Parser creador;
 
     @Override
     public void start(Stage stage) {
         this.ventanaPrincipal = stage;
+        responder = new Button("Responder");
         ventanaPrincipal.setWidth(500);
         ventanaPrincipal.setHeight(500);
         this.vistaPrincipal = establecerVistaPrincipal();
         this.poderesBox = new PoderesVista();
+        this.creador = new Parser();
+
         //mostrarVistaVF();
-        mostrarVistaOC();
-        //mostrarVistaMC();
+        //mostrarVistaOC();
+        mostrarVistaMC();
         //mostrarVistaGC();
     }
 
     public void mostrarVistaGC() { //debería ser mostrarVistaPregunta para encapsular
-        Parser creador = new Parser();
         PreguntaGC preguntaGC = creador.devolverPreguntaGC();
         Jugador jugador = new Jugador("Axel");
         VistaGC vistaGC = new VistaGC();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
-        ControladorGC controladorGC = new ControladorGC(vistaGC, jugador, preguntaGC);
+        ControladorGC controladorGC = new ControladorGC(vistaGC, jugador, preguntaGC, poderesBox);
+        HBox ventanaPregunta = new HBox(20, vistaGC.getLayout(), poderesBox.obtenerLayout());//tiene la pregunta y los poderes.
+        ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
+        ventanaPregunta.setPadding(new Insets(10, 10 , 10 , 10));
+        ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
-        Scene scene = new Scene(vistaGC.getLayout());
+        Scene scene = new Scene(ventanaPregunta);
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
     }
 
     public void mostrarVistaVF() { //debería ser mostrarVistaPregunta para encapsular
-        Parser creador = new Parser();
         PreguntaVF preguntaVF = creador.devolverPreguntaVF();
         Jugador jugador = new Jugador("Axel");
         VistaVF vistaVF = new VistaVF();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
-        ControladorVF controladorVF = new ControladorVF(vistaVF, jugador, preguntaVF, preguntaVF.obtenerOpciones());
+        ControladorVF controladorVF = new ControladorVF(vistaVF, jugador, preguntaVF, poderesBox);
+        HBox ventanaPregunta = new HBox(20, vistaVF.getLayout(), poderesBox.obtenerLayout());//tiene la pregunta y los poderes.
+        ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
+        ventanaPregunta.setPadding(new Insets(10, 10 , 10 , 10));
+        ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
 
-        Scene scene = new Scene(vistaVF.getLayout());
+        Scene scene = new Scene(ventanaPregunta);
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
@@ -97,10 +107,15 @@ public class VistaPrincipal extends Application {
         PreguntaMC preguntaMC = new PreguntaMC("Cuanto es 2+2?", opciones, correcta);
         Jugador jugador = new Jugador("Axel");
 
-        VistaMC vistaMC = new VistaMC(preguntaMC);
-        ControladorMC controlador = new ControladorMC(jugador, preguntaMC, vistaMC);
+        VistaMC vistaMC = new VistaMC(preguntaMC, responder);
+        ControladorMC controlador = new ControladorMC(jugador, preguntaMC, vistaMC, poderesBox);
 
-        Scene scene = new Scene(vistaMC.getLayout());
+        HBox ventanaPregunta = new HBox(20, vistaMC.getLayout(), poderesBox.obtenerLayout());//tiene la pregunta y los poderes.
+        ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
+        ventanaPregunta.setPadding(new Insets(10, 10 , 10 , 10));
+        ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+
+        Scene scene = new Scene(ventanaPregunta);
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
@@ -108,9 +123,7 @@ public class VistaPrincipal extends Application {
 
     public void mostrarVistaOC(){
 
-        responder = new Button("Responder");
-
-        Parser creador = new Parser();
+        //return new VistaX().show()
         PreguntaOC preguntaOC = creador.devolverPreguntaOC();
 
         Jugador j1 = new Jugador("Pepe");
