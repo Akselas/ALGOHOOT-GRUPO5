@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Pregunta;
 import edu.fiuba.algo3.modelo.PreguntaGC;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -15,9 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class VistaGC {
-    private VBox layout;
-    //private ToggleGroup grupoPoderes;
+public class VistaGC extends VistaPregunta{
     private VBox grupo1;
     private VBox grupo2;
     private VBox grupo1Box;
@@ -25,11 +24,8 @@ public class VistaGC {
     private Label nombreGrupo1;
     private Label nombreGrupo2;
     private VBox grupoDefault;
-    private Button botonResponder;
-    private Label titulo;
 
     public VistaGC(){
-        this.titulo = new Label();
         this.grupoDefault = new VBox(10);
         this.grupo1 = new VBox(10);
         this.grupo2 = new VBox(10);
@@ -37,7 +33,6 @@ public class VistaGC {
         this.grupo2Box = new VBox(5);
         this.nombreGrupo1 = new Label();
         this.nombreGrupo2 = new Label();
-        this.botonResponder = new Button("Responder");
 
         setupLayout();
     }
@@ -45,40 +40,33 @@ public class VistaGC {
     public void setupLayout(){
         this.grupo1.setStyle("-fx-border-color: black; -fx-padding: 10;");
         this.grupo1.setPrefSize(150, 200);
-        this.grupo1Box.getChildren().add(nombreGrupo1);
-        this.grupo1Box.getChildren().add(grupo1);
+        this.grupo1Box.getChildren().addAll(nombreGrupo1, grupo1);
 
         this.grupo2.setStyle("-fx-border-color: black; -fx-padding: 10;");
         this.grupo2.setPrefSize(150, 200);
-        this.grupo2Box.getChildren().add(nombreGrupo2);
-        this.grupo2Box.getChildren().add(grupo2);
+        this.grupo2Box.getChildren().addAll(nombreGrupo2,grupo2);
 
         HBox groupos = new HBox(20, this.grupo1Box, this.grupo2Box);
 
-        VBox layoutPregunta = new VBox(25, this.titulo, this.grupoDefault, groupos);
-        layoutPregunta.setAlignment(Pos.CENTER);
-        layoutPregunta.setPadding(new Insets(5));
-
-        VBox principal = new VBox(layoutPregunta, this.botonResponder);
-        principal.setSpacing(10);
-        principal.setPadding(new Insets(10));
-        principal.setAlignment(Pos.CENTER);
-
-        this.layout = principal;
+        this.getChildren().addAll(this.grupoDefault, groupos);
+        this.setSpacing(10);
+        this.setPadding(new Insets(10));
+        this.setAlignment(Pos.CENTER);
     }
 
-    public VBox getLayout() {
-        return this.layout;
+    @Override
+    public void mostrarPregunta(Pregunta pregunta) {
+        this.enunciadoLabel.setText(pregunta.obtenerTexto());
     }
 
-    public void mostrarPregunta(Pregunta pregunta, VBox opcionesView) {
-        this.titulo.setText(pregunta.obtenerTexto());
-        //enunciadoLabel.setText(pregunta.obtenerTexto());
-        layout.getChildren().add(opcionesView);
+    public void mostrarNombresDeGrupos(Pregunta pregunta){
+        PreguntaGC preguntaGC = (PreguntaGC) pregunta;
+        this.nombreGrupo1.setText(preguntaGC.obtenerNombreGrupo1());
+        this.nombreGrupo2.setText(preguntaGC.obtenerNombreGrupo2());
     }
 
-    public void mostrarOpciones(Pregunta pregunta) {
-        Opciones opciones = pregunta.obtenerOpciones();
+    @Override
+    public void mostrarOpciones(Opciones opciones) {
 
         for (Opcion o : opciones) {
             Text option = new Text(o.obtenerTexto());
@@ -86,18 +74,10 @@ public class VistaGC {
             this.grupoDefault.getChildren().add(option);
         }
 
-        PreguntaGC preguntaGC = (PreguntaGC) pregunta;
-
-        this.nombreGrupo1.setText(preguntaGC.obtenerNombreGrupo1());
-        this.nombreGrupo2.setText(preguntaGC.obtenerNombreGrupo2());
-
         enableDrop(this.grupo1, this.grupo2, this.grupoDefault);
         enableDrop(this.grupo2, this.grupo1, this.grupoDefault);
     }
 
-    public Button obtenerBotonResponder(){
-        return this.botonResponder;
-    }
 
     public VBox obtenerGrupo1Opciones(){
         return this.grupo1;
@@ -134,27 +114,38 @@ public class VistaGC {
             boolean success = false;
             if (db.hasString()) {
                 String draggedText = db.getString();
-
-                otherPane1.getChildren().removeIf(node -> {
+                boolean esta = false;
+                for (Node node : targetPane.getChildren()) {
                     if (node instanceof Text) {
                         Text text = (Text) node;
-                        return text.getText().equals(draggedText);
+                        if (text.getText().equals(draggedText)) {
+                            esta = true;
+                            break;
+                        }
                     }
-                    return false;
-                });
+                }
+                if (!esta) {//aca lo hace porque no esta
+                    otherPane1.getChildren().removeIf(node -> {
+                        if (node instanceof Text) {
+                            Text text = (Text) node;
+                            return text.getText().equals(draggedText);
+                        }
+                        return false;
+                    });
 
-                otherPane2.getChildren().removeIf(node -> {
-                    if (node instanceof Text) {
-                        Text text = (Text) node;
-                        return text.getText().equals(draggedText);
-                    }
-                    return false;
-                });
+                    otherPane2.getChildren().removeIf(node -> {
+                        if (node instanceof Text) {
+                            Text text = (Text) node;
+                            return text.getText().equals(draggedText);
+                        }
+                        return false;
+                    });
 
-                Text text = new Text(draggedText);
-                enableDrag(text);
-                targetPane.getChildren().add(text);
-                success = true;
+                    Text text = new Text(draggedText);
+                    enableDrag(text);
+                    targetPane.getChildren().add(text);
+                    success = true;
+                }
             }
             event.setDropCompleted(success);
             event.consume();

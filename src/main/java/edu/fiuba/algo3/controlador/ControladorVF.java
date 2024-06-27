@@ -1,44 +1,38 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.PoderesVista;
-import edu.fiuba.algo3.vista.VistaPrincipal;
 import edu.fiuba.algo3.vista.VistaVF;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import edu.fiuba.algo3.modelo.*;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 
-public class ControladorVF {
 
-    private Opciones opciones;
-    private ListView<Opcion> opcionesVisibles;
+public class ControladorVF implements ControladorPregunta{
+
     private VistaVF vistaVF;
     private Jugador jugador;
     private Pregunta pregunta;
-    private VistaPrincipal vistaPrincipal;
     private PoderesVista poderesBox;
-    private Poder poderSeleccionado;
+    private Poder poderSeleccionado;//esto se va en un refactor
+    private Button responder;
 
-    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox) {
+    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox, Button responder){
         this.vistaVF = vistaVF;
-        this.opciones = pregunta.obtenerOpciones();
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.poderesBox = poderesBox;
+        this.responder = responder;
         initialize();
 
     }
-    private void initialize() {
-        this.vistaVF.mostrarPregunta(this.pregunta, this.opciones);
+    @Override
+    public void initialize(){//no me deja ponerlo en privado
+        this.vistaVF.mostrarPregunta(this.pregunta);
+        this.vistaVF.mostrarOpciones(pregunta.obtenerOpciones());
         establecerManejoDeEventos();
     }
 
-    private void establecerManejoDeEventos() {
-        this.vistaVF.obtenerBotonResponder().setOnAction(event -> {
+    @Override
+    public void establecerManejoDeEventos() {
+        this.responder.setOnAction(event -> {
             //Cuando se presiona el boton responder entonces:
             //Creo la respuesta del jugador
             RespuestaVF respuestaJugador = new RespuestaVF();

@@ -1,12 +1,13 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.vista.PreguntaOCVista;
-
 public class Parser {
     public PreguntaVF devolverPreguntaVF(){
         RespuestaVF correcta = new RespuestaVF();
-        correcta.agregarOpcion(new Opcion("V"));
-        return new PreguntaVF("El tomate es una fruta?", new Opciones(), correcta);
+        Opciones opciones = new Opciones();
+        opciones.agregarOpcion(new Opcion("Falso"));
+        opciones.agregarOpcion(new Opcion("Verdadero"));
+        correcta.agregarOpcion(new Opcion("Verdadero"));
+        return new PreguntaVF("El tomate es una fruta?", opciones, correcta);
     }
 
     public PreguntaOC devolverPreguntaOC(){
@@ -46,6 +47,27 @@ public class Parser {
         return new PreguntaGC("ordenar Frutas y Verduras", opciones, "Frutas", "Verduras", correcta);
     }
 
+    public PreguntaMC devolverPreguntaMC(){
+        RespuestaMC correcta = new RespuestaMC();
+
+        Opcion opcion1 = new Opcion("4");
+        Opcion opcion2 = new Opcion("Un numero par");
+        Opcion opcion3 = new Opcion("2");
+        Opcion opcion4 = new Opcion("Un numero impar");
+
+        correcta.agregarOpcionSeleccionada(opcion1);
+        correcta.agregarOpcionSeleccionada(opcion2);
+        correcta.agregarOpcionNoSeleccionada(opcion3);
+        correcta.agregarOpcionNoSeleccionada(opcion4);
+
+        Opciones opciones = new Opciones();
+        opciones.agregarOpcion(opcion1);
+        opciones.agregarOpcion(opcion2);
+        opciones.agregarOpcion(opcion3);
+        opciones.agregarOpcion(opcion4);
+
+        return new PreguntaMC("Cuanto es 2+2?", opciones, correcta);
+    }
 
 
 

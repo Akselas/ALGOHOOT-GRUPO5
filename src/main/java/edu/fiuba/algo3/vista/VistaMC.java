@@ -1,71 +1,36 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Opcion;
-import edu.fiuba.algo3.modelo.OpcionesControlador;
-import edu.fiuba.algo3.modelo.Pregunta;
-import javafx.application.Application;
+import edu.fiuba.algo3.modelo.Opciones;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import javafx.geometry.Insets;
-
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 
-public class VistaMC {
+public class VistaMC extends VistaPregunta{
+    private List<CheckBox> botones;
 
-    private VBox layout;
-    private Pregunta pregunta;
-    private ToggleGroup grupoPoderes;
-    private OpcionesControlador botones;
-    private Button botonResponder;
+    public VistaMC(){
+        super();
+        this.botones = new ArrayList<>();
+        //10 10 10 10
 
-    public VistaMC(Pregunta pregunta, Button responder){
-        this.pregunta = pregunta;
-        this.botonResponder = responder;
-
-        this.botones = new OpcionesControlador();
-
-        Iterator<Opcion> opcion = pregunta.obtenerOpciones().iterator();
-
-        while(opcion.hasNext()){
-            Opcion opcionAux = opcion.next();
-            CheckBox boton = new CheckBox(opcionAux.obtenerTexto());
-            boton.setUserData(new Opcion(opcionAux.obtenerTexto()));
-            this.botones.agregarOpcion(boton);
+    }
+    @Override
+    public void mostrarOpciones(Opciones ops) {
+        VBox opciones = new VBox(20);
+        opciones.setPadding(new Insets(10, 10, 10, 10));
+        opciones.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        for(Opcion opcion: ops.devolverOpciones()){
+            CheckBox boton = new CheckBox(opcion.obtenerTexto());
+            boton.setUserData(opcion);
+            botones.add(boton);
+            opciones.getChildren().add(boton);
         }
+        this.getChildren().add(opciones);
 
-        this.botonResponder = new Button("Responder"); //Capaz el boton responder debería estar afuera
-
-        setupLayout();
     }
-    public void setupLayout(){
-        HBox opciones1 = new HBox(100, this.botones.getOpcion(0), this.botones.getOpcion(1));
-        HBox opciones2 = new HBox(100, this.botones.getOpcion(2), this.botones.getOpcion(3));
-
-        VBox layoutPregunta = new VBox(100, new Label(this.pregunta.obtenerTexto()), opciones1, opciones2);
-        layoutPregunta.setAlignment(Pos.CENTER);
-        layoutPregunta.setPadding(new Insets(5));
-        layoutPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
-
-        VBox principal = new VBox(layoutPregunta, this.botonResponder);
-        principal.setSpacing(10);
-        principal.setPadding(new Insets(10));
-        principal.setAlignment(Pos.CENTER);
-
-        this.layout = principal;
-    }
-    public VBox getLayout() {
-        return this.layout;
-    }
-    public Button getBotonResponder() {
-        return this.botonResponder;
-    }
-
-    public OpcionesControlador getBotones() {
-        return this.botones;
-    }
+    public List<CheckBox> obtenerBotones(){return this.botones;}
 }

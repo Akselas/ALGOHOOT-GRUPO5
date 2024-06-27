@@ -1,11 +1,11 @@
 package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.PoderesVista;
-import edu.fiuba.algo3.vista.PreguntaOCVista;
+import edu.fiuba.algo3.vista.VistaOC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -13,37 +13,37 @@ import javafx.scene.input.DragEvent;
 
 
 
-public class ControladorOC {
+public class ControladorOC implements ControladorPregunta{
     private PreguntaOC pregunta;
     private Jugador jugador;
-    private PreguntaOCVista vista;
-    private ListView<Opcion> opcionesListView;
-    private PoderesVista poderesVista;
+    private VistaOC vista;
+    private PoderesVista poderesBox;
     private Poder poderSeleccionado;
+    private Button responder;
 
 
-    public ControladorOC(Jugador jugador, PreguntaOC pregunta, PreguntaOCVista vista, PoderesVista poderesVista) {//Pregunta preguntaOC
-
-        this.poderesVista = poderesVista; //Falta relacionar la cantidad de poderes disponibles con el jugador.
-        this.opcionesListView = new ListView<>();
+    public ControladorOC(Jugador jugador, PreguntaOC pregunta, VistaOC vista, PoderesVista poderesVista, Button responder) {
+        this.poderesBox = poderesVista; //Falta relacionar la cantidad de poderes disponibles con el jugador.
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.vista = vista;
+        this.responder = responder;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    public void initialize() {
         crearYConfigurarCeldas();
-        vista.mostrarPregunta(pregunta, opcionesListView);
-        addEventHandlers();
+        vista.mostrarPregunta(pregunta);
+        vista.mostrarOpciones(pregunta.obtenerOpciones());
+        establecerManejoDeEventos();
     }
 
-
-    private void addEventHandlers() {
-
-        poderesVista.obtenerBotonDuplicador().setOnAction(event -> {
-            if(poderesVista.obtenerBotonDuplicador().isSelected()){
-                poderSeleccionado = (Duplicador) poderesVista.obtenerBotonDuplicador().getUserData();
+    @Override
+    public void establecerManejoDeEventos() {
+        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
+            if(poderesBox.obtenerBotonDuplicador().isSelected()){
+                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
                 System.out.println("Poder seleccionado: Duplicador");
             }else{
                 poderSeleccionado = null;
@@ -51,9 +51,9 @@ public class ControladorOC {
             }
         });
 
-        vista.obtenerBotonResponder().setOnAction(event -> {
+        responder.setOnAction(event -> {
             RespuestaOC respuestaJugador = new RespuestaOC();//creo la respuesta del jugador
-            ObservableList<Opcion> items = opcionesListView.getItems();//cambio li ListView en una ObservableList porque sino no me deja hacer el ciclo for
+            ObservableList<Opcion> items = vista.obtenerOpcionesListView().getItems();//cambio li ListView en una ObservableList porque sino no me deja hacer el ciclo for
             for(Opcion opcionDeRespuesta : items){
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
@@ -61,8 +61,8 @@ public class ControladorOC {
 
             if (poderSeleccionado != null) {
                 poderSeleccionado.aplicar(puntaje);
-                poderesVista.cantDuplicador--;
-                poderesVista.actualizarPoderes();
+                poderesBox.cantDuplicador--;
+                poderesBox.actualizarPoderes();
                 poderSeleccionado = null;
             }
 
@@ -120,7 +120,7 @@ public class ControladorOC {
                 int draggedIdx = Integer.parseInt(db.getString());
                 int thisIdx = cell.getIndex();
 
-                ObservableList<Opcion> items = opcionesListView.getItems();
+                ObservableList<Opcion> items = vista.obtenerOpcionesListView().getItems();
                 Opcion temp = items.get(draggedIdx);
                 items.set(draggedIdx, items.get(thisIdx));
                 items.set(thisIdx, temp);
@@ -136,8 +136,8 @@ public class ControladorOC {
 
     private void crearYConfigurarCeldas() {
         ObservableList<Opcion> opcionesObservable = FXCollections.observableArrayList(pregunta.obtenerOpciones().devolverOpciones());
-        opcionesListView.setItems(opcionesObservable);
-        opcionesListView.setCellFactory(lv -> {
+        vista.obtenerOpcionesListView().setItems(opcionesObservable);
+        vista.obtenerOpcionesListView().setCellFactory(lv -> {
             ListCell<Opcion> cell = crearCeldas();
             configurarArrastreYSoltar(cell);
             return cell;
