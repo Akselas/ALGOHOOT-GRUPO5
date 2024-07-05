@@ -33,21 +33,25 @@ public class PoderesVista {
         duplicador.setMaxWidth(Double.MAX_VALUE);
         duplicador.setToggleGroup(grupoPoderes);
         duplicador.setUserData(new Duplicador());
-
+        duplicador.getStyleClass().add("power-button");
 
         triplicador = new ToggleButton("Triplicador (" + cantTriplicador + ")");
         triplicador.setMaxWidth(Double.MAX_VALUE);
         triplicador.setToggleGroup(grupoPoderes);
+        triplicador.getStyleClass().add("power-button");
 
 
         exclusividad = new ToggleButton("Exclusividad (" + cantidadExclusividad + ")");
         exclusividad.setMaxWidth(Double.MAX_VALUE);
         exclusividad.setToggleGroup(grupoPoderes);
+        exclusividad.getStyleClass().add("power-button");
+
 
 
         anulador = new ToggleButton("Anulador (" + cantAnulador + ")");
         anulador.setMaxWidth(Double.MAX_VALUE);
         anulador.setToggleGroup(grupoPoderes);
+        anulador.getStyleClass().add("power-button");
 
 
         poderesVista = new VBox(20, duplicador, triplicador, exclusividad, anulador);
@@ -55,6 +59,7 @@ public class PoderesVista {
         poderesVista.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         poderesVista.setPadding(new Insets(10, 10, 10, 10));
         poderesVista.setAlignment(Pos.CENTER);
+        poderesVista.getStyleClass().add("powers-container");
     }
 
     public VBox obtenerLayout() {

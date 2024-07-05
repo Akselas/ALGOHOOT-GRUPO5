@@ -22,6 +22,7 @@ public class VistaPrincipal extends Application {
     public void start(Stage stage) {
         this.ventanaPrincipal = stage;
         responder = new Button("Responder");
+        this.responder.getStyleClass().add("answer-button");
         ventanaPrincipal.setWidth(500);
         ventanaPrincipal.setHeight(500);
         this.vistaPrincipal = establecerVistaPrincipal();
@@ -29,9 +30,9 @@ public class VistaPrincipal extends Application {
         this.creador = new Parser();
 
         //mostrarVistaVF();
-        //mostrarVistaOC();
+        mostrarVistaOC();
         //mostrarVistaMC();
-        mostrarVistaGC();
+        //mostrarVistaGC();
 
     }
 
@@ -79,12 +80,14 @@ public class VistaPrincipal extends Application {
         HBox ventanaPregunta = new HBox(20, vistaPregunta, poderesBox.obtenerLayout());
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
-        ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        //ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        ventanaPregunta.getStyleClass().add("question-area");
 
         vistaPrincipal.getChildren().clear();
         vistaPrincipal.getChildren().addAll(ventanaPregunta, responder);
 
         Scene scene = new Scene(vistaPrincipal);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
@@ -92,7 +95,7 @@ public class VistaPrincipal extends Application {
 
     public VBox establecerVistaPrincipal(){
         VBox vista = new VBox();
-        vista.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        vista.setId("container");
         vista.setSpacing(10);
         vista.setPadding(new Insets(10));
         vista.setAlignment(Pos.CENTER);
