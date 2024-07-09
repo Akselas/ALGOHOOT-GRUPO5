@@ -17,9 +17,11 @@ public class PoderesTest {
         Duplicador duplicador = new Duplicador();
         Jugador j1 = new Jugador("Juani");
         Puntaje puntaje = new Puntaje(1);
+        Puntajes puntajes = new Puntajes();
+        puntajes.agregarPuntaje(puntaje);
 
         //Act
-        duplicador.aplicar(puntaje);
+        duplicador.aplicarUnico(puntaje);
         j1.sumarPuntaje(puntaje);
 
         //assert
@@ -35,7 +37,7 @@ public class PoderesTest {
         Puntaje puntaje = new Puntaje(0);
 
         //Act
-        duplicador.aplicar(puntaje);
+        duplicador.aplicarUnico(puntaje);
         j1.sumarPuntaje(puntaje);
 
         //assert
@@ -52,7 +54,7 @@ public class PoderesTest {
         Puntaje puntaje = new Puntaje(1);
 
         //Act
-        triplicador.aplicar(puntaje);
+        triplicador.aplicarUnico(puntaje);
         j1.sumarPuntaje(puntaje);
 
         //assert
@@ -88,8 +90,8 @@ public class PoderesTest {
         puntajes.agregarPuntaje(puntaje);
 
         //Act
-        exclusividad.aplicar(puntajes);
-        j1.sumarPuntaje(puntaje);
+        exclusividad.aplicar(puntajes);//aca modifica el puntaje de un solo puntaje porque solo agrega uno
+        j1.sumarPuntaje(puntaje);//entonces aca obviamente va a agregar el puntaje al unico juga
 
         //assert
         assertEquals(puntajeEsperado, j1.obtenerPuntaje());

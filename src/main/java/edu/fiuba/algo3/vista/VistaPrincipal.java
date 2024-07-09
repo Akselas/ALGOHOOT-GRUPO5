@@ -25,20 +25,21 @@ public class VistaPrincipal extends Application {
         ventanaPrincipal.setWidth(500);
         ventanaPrincipal.setHeight(500);
         this.vistaPrincipal = establecerVistaPrincipal();
-        this.poderesBox = new PoderesVista();
+        Jugador jugador = new Jugador("Axel");
+        this.poderesBox = new PoderesVista(jugador);
         this.creador = new Parser();
 
-        //mostrarVistaVF();
-        //mostrarVistaOC();
-        //mostrarVistaMC();
-        mostrarVistaGC();
+        //mostrarVistaVF(jugador);
+        //mostrarVistaOC(jugador);
+        //mostrarVistaMC(jugador);
+        //mostrarVistaGC(jugador);
 
     }
 
 
-    public void mostrarVistaGC() { //debería ser mostrarVistaPregunta para encapsular
+    public void mostrarVistaGC(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
         PreguntaGC preguntaGC = creador.devolverPreguntaGC();
-        Jugador jugador = new Jugador("Axel");
+        poderesBox.agregarBotones(preguntaGC);
         VistaGC vistaGC = new VistaGC();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
@@ -46,9 +47,9 @@ public class VistaPrincipal extends Application {
         proyectarVista(vistaGC);
     }
 
-    public void mostrarVistaVF() { //debería ser mostrarVistaPregunta para encapsular
+    public void mostrarVistaVF(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
         PreguntaVF preguntaVF = creador.devolverPreguntaVF();
-        Jugador jugador = new Jugador("Axel");
+        poderesBox.agregarBotones(preguntaVF);
         VistaVF vistaVF = new VistaVF();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
@@ -56,27 +57,27 @@ public class VistaPrincipal extends Application {
         proyectarVista(vistaVF);
     }
 
-    public void mostrarVistaMC() {
+    public void mostrarVistaMC(Jugador jugador) {
 
         PreguntaMC preguntaMC = creador.devolverPreguntaMC();
-        Jugador jugador = new Jugador("Axel");
+        poderesBox.agregarBotones(preguntaMC);
 
         VistaMC vistaMC = new VistaMC();
         ControladorMC controlador = new ControladorMC(jugador, preguntaMC, vistaMC, poderesBox, responder);
         proyectarVista(vistaMC);
     }
 
-    public void mostrarVistaOC(){
+    public void mostrarVistaOC(Jugador jugador){
         //return new VistaX().show()
         PreguntaOC preguntaOC = creador.devolverPreguntaOC();
-        Jugador j1 = new Jugador("Pepe");
+        poderesBox.agregarBotones(preguntaOC);
         VistaOC vistaOC = new VistaOC();
-        ControladorOC controlador = new ControladorOC(j1,preguntaOC, vistaOC, poderesBox, responder);
+        ControladorOC controlador = new ControladorOC(jugador,preguntaOC, vistaOC, poderesBox, responder);
         proyectarVista(vistaOC);
     }
 
     private void proyectarVista(VistaPregunta vistaPregunta) {
-        HBox ventanaPregunta = new HBox(20, vistaPregunta, poderesBox.obtenerLayout());
+        HBox ventanaPregunta = new HBox(20, vistaPregunta, poderesBox);
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
         ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");

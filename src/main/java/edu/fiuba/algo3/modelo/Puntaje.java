@@ -24,6 +24,7 @@ public class Puntaje {
 
     public void sumar(Puntaje puntaje){
         this.punto += puntaje.obtenerPuntuacion();
+
     }
 
     public void restar(int resta){

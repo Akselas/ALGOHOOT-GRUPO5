@@ -13,7 +13,6 @@ public class ControladorMC implements ControladorPregunta{
     private Pregunta pregunta;
     private VistaMC vista;
     private PoderesVista poderesBox;
-    private Poder poderSeleccionado;
     private Button responder;
 
     public ControladorMC(Jugador jugador, Pregunta pregunta, VistaMC vistaMC, PoderesVista poderesBox, Button responder) {
@@ -45,26 +44,21 @@ public class ControladorMC implements ControladorPregunta{
                 }
             }
 
-            Puntaje puntaje = pregunta.calcularPuntaje((Respuesta) respuestaJugador);
+            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
+            jugador.cargarPuntajeRonda(puntajeRonda);
 
-            if (poderSeleccionado != null) {
-                poderSeleccionado.aplicar(puntaje);
-                poderesBox.cantDuplicador--;
+            Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
+            if(poderSeleccionado instanceof PoderIndividual){
+                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
+                poder.aplicarUnico(puntajeRonda);
                 poderesBox.actualizarPoderes();
-                poderSeleccionado = null;
-            }
-
-            jugador.sumarPuntaje(puntaje);
-            showScoreAlert(puntaje.obtenerPuntuacion());
-        });
-        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
-            if(poderesBox.obtenerBotonDuplicador().isSelected()){
-                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
-                System.out.println("Poder seleccionado: Duplicador");
             }else{
-                poderSeleccionado = null;
-                System.out.println("Poder deseleccionado: Duplicador");
+                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
+                //listaPoderesGrupales.agregar(poder);
+
             }
+            jugador.sumarPuntaje(puntajeRonda);
+            showScoreAlert(puntajeRonda.obtenerPuntuacion());
         });
     }
 

@@ -11,7 +11,6 @@ public class ControladorVF implements ControladorPregunta{
     private Jugador jugador;
     private Pregunta pregunta;
     private PoderesVista poderesBox;
-    private Poder poderSeleccionado;//esto se va en un refactor
     private Button responder;
 
     public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox, Button responder){
@@ -44,32 +43,27 @@ public class ControladorVF implements ControladorPregunta{
                 //Obtengo el valor del boton seleccionado, que es de la clase Opcion
                 respuestaJugador.agregarOpcion((Opcion) botonSeleccionado.getUserData());
 
-                Puntaje puntaje = this.pregunta.calcularPuntaje(respuestaJugador);
-                //EBERIA SER RESPOSABILIDAD DE JUGADOR
-                if (poderSeleccionado != null) {
-                    poderSeleccionado.aplicar(puntaje);
-                    poderesBox.cantDuplicador--;
+                Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
+                jugador.cargarPuntajeRonda(puntajeRonda);
+
+                Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
+                if(poderSeleccionado instanceof PoderIndividual){
+                    PoderIndividual poder = (PoderIndividual) poderSeleccionado;
+                    poder.aplicarUnico(puntajeRonda);
                     poderesBox.actualizarPoderes();
-                    poderSeleccionado = null;
+                }else{
+                    PoderGrupal poder = (PoderGrupal) poderSeleccionado;
+                    //listaPoderesGrupales.agregar(poder);
+
                 }
 
-                jugador.sumarPuntaje(puntaje);
+                jugador.sumarPuntaje(puntajeRonda);
                 System.out.println("Puntaje de " + jugador.obtenerNombre() + " : " + jugador.obtenerPuntaje());
 
             }else {
                 System.out.println("Por favor selecciona una opción.");
             }
             });
-
-        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
-            if(poderesBox.obtenerBotonDuplicador().isSelected()){
-                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
-                System.out.println("Poder seleccionado: Duplicador");
-            }else{
-                poderSeleccionado = null;
-                System.out.println("Poder deseleccionado: Duplicador");
-            }
-        });
     }
 
 }

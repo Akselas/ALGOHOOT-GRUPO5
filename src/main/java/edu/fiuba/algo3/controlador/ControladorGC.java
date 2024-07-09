@@ -9,13 +9,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
 
-public class ControladorGC {
+public class ControladorGC implements ControladorPregunta{
     private VistaGC vistaGC;
     private Jugador jugador;
     private Pregunta pregunta;
     private VistaPrincipal vistaPrincipal;
     private PoderesVista poderesBox;
-    private  Poder poderSeleccionado;
     private Button responder;
 
     public ControladorGC(VistaGC vistaGC, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox, Button responder) {
@@ -27,7 +26,8 @@ public class ControladorGC {
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    public void initialize() {
         this.vistaGC.mostrarOpciones(this.pregunta.obtenerOpciones()); //esto setea opcionesListView
         this.vistaGC.mostrarPregunta(this.pregunta);
         this.vistaGC.mostrarNombresDeGrupos(this.pregunta);
@@ -35,7 +35,8 @@ public class ControladorGC {
     }
 
 
-    private void establecerManejoDeEventos() {
+    @Override
+    public void establecerManejoDeEventos() {
         this.responder.setOnAction(event -> {
             //Cuando se presiona el boton responder entonces:
 
@@ -72,29 +73,25 @@ public class ControladorGC {
 
             RespuestaGC respuestaJugador = new RespuestaGC(respuestaGrupo1, respuestaGrupo2);
 
-            Puntaje puntaje = this.pregunta.calcularPuntaje(respuestaJugador);
+            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
+            jugador.cargarPuntajeRonda(puntajeRonda);
 
-
-            if (poderSeleccionado != null) {
-                poderSeleccionado.aplicar(puntaje);
-                poderesBox.cantDuplicador--;
+            Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
+            if(poderSeleccionado instanceof PoderIndividual){
+                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
+                poder.aplicarUnico(puntajeRonda);
                 poderesBox.actualizarPoderes();
-                poderSeleccionado = null;
+            }else{
+                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
+                //listaPoderesGrupales.agregar(poder);
+
             }
 
 
-            jugador.sumarPuntaje(puntaje);
+
+            jugador.sumarPuntaje(puntajeRonda);
             System.out.println("Puntaje de " + jugador.obtenerNombre() + " : " + jugador.obtenerPuntaje());
 
-        });
-        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
-            if(poderesBox.obtenerBotonDuplicador().isSelected()){
-                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
-                System.out.println("Poder seleccionado: Duplicador");
-            }else{
-                poderSeleccionado = null;
-                System.out.println("Poder deseleccionado: Duplicador");
-            }
         });
     }
 }

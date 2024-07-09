@@ -18,7 +18,6 @@ public class ControladorOC implements ControladorPregunta{
     private Jugador jugador;
     private VistaOC vista;
     private PoderesVista poderesBox;
-    private Poder poderSeleccionado;
     private Button responder;
 
 
@@ -41,15 +40,6 @@ public class ControladorOC implements ControladorPregunta{
 
     @Override
     public void establecerManejoDeEventos() {
-        poderesBox.obtenerBotonDuplicador().setOnAction(event -> {
-            if(poderesBox.obtenerBotonDuplicador().isSelected()){
-                poderSeleccionado = (Duplicador) poderesBox.obtenerBotonDuplicador().getUserData();
-                System.out.println("Poder seleccionado: Duplicador");
-            }else{
-                poderSeleccionado = null;
-                System.out.println("Poder deseleccionado: Duplicador");
-            }
-        });
 
         responder.setOnAction(event -> {
             RespuestaOC respuestaJugador = new RespuestaOC();//creo la respuesta del jugador
@@ -57,16 +47,21 @@ public class ControladorOC implements ControladorPregunta{
             for(Opcion opcionDeRespuesta : items){
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
-            Puntaje puntaje = pregunta.calcularPuntaje(respuestaJugador);
+            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
+            jugador.cargarPuntajeRonda(puntajeRonda);
 
-            if (poderSeleccionado != null) {
-                poderSeleccionado.aplicar(puntaje);
-                poderesBox.cantDuplicador--;
+            Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
+            if(poderSeleccionado instanceof PoderIndividual){
+                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
+                poder.aplicarUnico(puntajeRonda);
                 poderesBox.actualizarPoderes();
-                poderSeleccionado = null;
+            }else{
+                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
+                //listaPoderesGrupales.agregar(poder);
+
             }
 
-            jugador.sumarPuntaje(puntaje);
+            jugador.sumarPuntaje(puntajeRonda);
             System.out.println("Puntaje de " + jugador.obtenerNombre()+ " : " + jugador.obtenerPuntaje());
         });
 

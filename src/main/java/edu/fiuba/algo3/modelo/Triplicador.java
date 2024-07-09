@@ -1,8 +1,18 @@
 package edu.fiuba.algo3.modelo;
 
-public class Triplicador implements Poder {
+public class Triplicador extends Poder implements PoderIndividual{
+    public Triplicador(){
+        this.nombre = "Triplicador";
+        this.cantidad = 2;
+    }
 
-    public void aplicar(Puntaje puntaje){
+
+    public void aplicarUnico(Puntaje puntaje){
         puntaje.multiplicar(3);
+    }
+
+    @Override
+    public boolean habilitarPoder(Pregunta pregunta){
+        return pregunta instanceof PreguntaMCPenalidad || pregunta instanceof PreguntaVFPenalidad;
     }
 }
