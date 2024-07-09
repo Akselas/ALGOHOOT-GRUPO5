@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.modelo.*;
 
+import java.io.IOException;
+
 
 public class VistaPrincipal extends Application {
     private Stage ventanaPrincipal;
@@ -19,8 +21,11 @@ public class VistaPrincipal extends Application {
     private Parser creador;
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
+        FaseInicial faseInicial = new FaseInicial(stage);
+        faseInicial.mostrarFase();
+
         responder = new Button("Responder");
         this.responder.getStyleClass().add("answer-button");
         ventanaPrincipal.setWidth(500);
@@ -28,9 +33,10 @@ public class VistaPrincipal extends Application {
         this.vistaPrincipal = establecerVistaPrincipal();
         this.poderesBox = new PoderesVista();
         this.creador = new Parser();
-
+        creador.leer("src/main/resources/ParserTestFile.json");
+        //creador.devolverPrimeraPregunta();
         //mostrarVistaVF();
-        mostrarVistaOC();
+        //mostrarVistaOC();
         //mostrarVistaMC();
         //mostrarVistaGC();
 
@@ -48,7 +54,7 @@ public class VistaPrincipal extends Application {
     }
 
     public void mostrarVistaVF() { //debería ser mostrarVistaPregunta para encapsular
-        PreguntaVF preguntaVF = creador.devolverPreguntaVF();
+        PreguntaVF preguntaVF = (PreguntaVF) creador.devolverPreguntaVF();
         Jugador jugador = new Jugador("Axel");
         VistaVF vistaVF = new VistaVF();
 

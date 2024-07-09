@@ -1,0 +1,12 @@
+[
+{
+  "ID": 3,
+  "Tema": "CIENCIAS",
+  "Tipo": "Verdadero Falso",
+  "Pregunta": "El punto de ebullición del agua a 3300m del mar es 100 grados centígrados",
+  "Respuesta": "2",
+  "Opcion 1": "Verdadero",
+  "Opcion 2": "Falso",
+  "Texto respuesta": "En la altura, la temperatura de ebullición es menor por la mayor presión atmosférica"
+}
+]
