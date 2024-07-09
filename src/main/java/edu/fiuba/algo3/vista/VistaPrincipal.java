@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.modelo.*;
 
+import java.io.IOException;
+
 
 public class VistaPrincipal extends Application {
     private Stage ventanaPrincipal;
@@ -19,16 +21,21 @@ public class VistaPrincipal extends Application {
     private Parser creador;
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
+        FaseInicial faseInicial = new FaseInicial(stage);
+        faseInicial.mostrarFase();
+
         responder = new Button("Responder");
+        this.responder.getStyleClass().add("answer-button");
         ventanaPrincipal.setWidth(500);
         ventanaPrincipal.setHeight(500);
         this.vistaPrincipal = establecerVistaPrincipal();
         Jugador jugador = new Jugador("Axel");
         this.poderesBox = new PoderesVista(jugador);
         this.creador = new Parser();
-
+        creador.leer("src/main/resources/ParserTestFile.json");
+        //creador.devolverPrimeraPregunta();
         //mostrarVistaVF(jugador);
         //mostrarVistaOC(jugador);
         //mostrarVistaMC(jugador);
@@ -80,12 +87,14 @@ public class VistaPrincipal extends Application {
         HBox ventanaPregunta = new HBox(20, vistaPregunta, poderesBox);
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
-        ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        //ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        ventanaPregunta.getStyleClass().add("question-area");
 
         vistaPrincipal.getChildren().clear();
         vistaPrincipal.getChildren().addAll(ventanaPregunta, responder);
 
         Scene scene = new Scene(vistaPrincipal);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
@@ -93,7 +102,7 @@ public class VistaPrincipal extends Application {
 
     public VBox establecerVistaPrincipal(){
         VBox vista = new VBox();
-        vista.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+        vista.setId("container");
         vista.setSpacing(10);
         vista.setPadding(new Insets(10));
         vista.setAlignment(Pos.CENTER);

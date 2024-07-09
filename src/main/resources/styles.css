@@ -1,0 +1,93 @@
+/* Estilos para el contenedor principal */
+#container {
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+    -fx-background-color: #34495e; /* Color de fondo del contenedor */
+    -fx-border-color: #2c3e50; /* Color del borde */
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+/* Estilo para el título */
+.title-text {
+    -fx-font-size: 28px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: #f39c12; /* Color del texto para títulos */
+}
+
+/* Estilo para el área de pregunta */
+.question-area {
+    -fx-padding: 20px;
+    -fx-background-color: #ecf0f1; /* Color de fondo claro */
+    -fx-border-color: #bdc3c7; /* Color del borde */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
+}
+
+/* Estilo para los botones de respuestas */
+.answer-button {
+    -fx-background-color: #3498db; /* Color de fondo azul */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 16px;
+    -fx-pref-width: 220px;
+    -fx-pref-height: 50px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+/* Estilo para el contenedor de la sección de poderes */
+.powers-container {
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+    -fx-background-color: #34495e; /* Color de fondo del contenedor */
+    -fx-border-color: #2c3e50; /* Color del borde */
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+/* Estilo para los botones de poder */
+.power-button {
+    -fx-background-color: #b54709; /* Color de fondo naranja */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 14px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 80px;
+    -fx-border-radius: 60px; /* Hacer el botón redondeado */
+    -fx-background-radius: 60px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+.power-button:focused{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+/* Media query para pantallas pequeñas */
+@media screen and (max-width: 600px) {
+    /* Reducir el tamaño de los botones de respuestas */
+    .answer-button {
+        -fx-font-size: 14px;
+        -fx-pref-width: 160px;
+        -fx-pref-height: 40px;
+    }
+
+    /* Reducir el tamaño del contenedor de poderes */
+    .powers-container {
+        -fx-padding: 10px;
+        -fx-spacing: 10px;
+    }
+
+    /* Reducir el tamaño de los botones de poder */
+    .power-button {
+        -fx-font-size: 12px;
+        -fx-pref-width: 100px;
+        -fx-pref-height: 100px;
+    }
+}
