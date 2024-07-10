@@ -27,8 +27,9 @@ public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
-        FaseInicial faseInicial = new FaseInicial(stage);
-        faseInicial.mostrarFase();
+        //FaseHandler manejadorDeFases = new FaseManejador(ventanaPrincipal);
+        //FaseInicial faseInicial = new FaseInicial(stage);
+        //faseInicial.mostrarFase();
 
        /* List<Jugador> jugadores= new ArrayList<>();
         jugadores.add(new Jugador("Denu"));
