@@ -27,7 +27,7 @@ public class IntegracionTest {
         j1.sumarPuntaje(preguntaVF.calcularPuntaje(resp));
 
         //Assert
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
 
     }
 }

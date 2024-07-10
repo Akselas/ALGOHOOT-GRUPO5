@@ -58,7 +58,7 @@ public class ControladorVF implements ControladorPregunta{
                 }
 
                 jugador.sumarPuntaje(puntajeRonda);
-                System.out.println("Puntaje de " + jugador.obtenerNombre() + " : " + jugador.obtenerPuntaje());
+                System.out.println("Puntaje de " + jugador.getNombre() + " : " + jugador.getPuntaje());
 
             }else {
                 System.out.println("Por favor selecciona una opción.");

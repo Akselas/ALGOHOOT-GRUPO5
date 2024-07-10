@@ -33,7 +33,7 @@ public class MessageTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -61,7 +61,7 @@ public class MessageTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -92,7 +92,7 @@ public class MessageTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class MessageTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
 }
