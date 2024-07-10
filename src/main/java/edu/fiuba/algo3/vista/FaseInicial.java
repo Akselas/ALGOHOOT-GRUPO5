@@ -17,6 +17,7 @@ public class FaseInicial {
     Stage stagePrincipal;
     AtributosIniciales atributos;
 
+
     public FaseInicial(Stage stage){
         stagePrincipal = stage;
         atributos = new AtributosIniciales();
@@ -24,32 +25,36 @@ public class FaseInicial {
         layout.setAlignment(Pos.CENTER);
         layout.setId("VistaInicial");
         Scene scene = new Scene(layout, 300, 200);
-        scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());////////
 
         // Comienza con la selección del número de jugadores
         TextField numJugadoresField = new TextField();
         numJugadoresField.setPromptText("Selecciona el número de jugadores:");
-        numJugadoresField.getStyleClass().add("campo-texto");
         Button nextButton = new Button("Siguiente");
-        nextButton.getStyleClass().add("boton");
         nextButton.setOnAction(e -> {
             //Guardo en atributos el numero de jugadores.
             atributos.guardarNumJugadores(Integer.parseInt(numJugadoresField.getText()));
             showPlayerNamesPhase();
         });
 
-        String imagePath = getClass().getResource("/imagen2.png").toExternalForm(); // Ajusta la ruta a tu imagen
+
+        ImageView imageView = this.setPantallaInicial();
+        layout.getChildren().addAll(imageView, numJugadoresField, nextButton);
+
+        stagePrincipal.setScene(scene);
+    }
+
+    private ImageView setPantallaInicial(){
+        String imagePath = getClass().getResource("/imagen2.png").toExternalForm(); ////////////// Ajusta la ruta a tu imagen
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(300);
         imageView.setFitHeight(250);
         imageView.setPreserveRatio(true);
         imageView.setTranslateY(-30);
-
-        layout.getChildren().addAll(imageView, numJugadoresField, nextButton);
-
-        stagePrincipal.setScene(scene);
+        return imageView;
     }
+
 
     private void showPlayerNamesPhase() {
         VBox layout = new VBox();
@@ -62,16 +67,13 @@ public class FaseInicial {
         // Pedir nombres de los jugadores
         for (int i = 0; i < atributos.obtenerNumJugadores(); i++) {
             Label label = new Label("Jugador " + (i+1) + ":");
-            label.getStyleClass().add("titulo");
             TextField nameField = new TextField();
             nameField.setPromptText("Ingrese el nombre del jugador " + (i+1) + ":");
-            nameField.getStyleClass().add("campo-texto");
             jugadoresLista.add(nameField);
             layout.getChildren().addAll(label, nameField);
         }
 
         Button nextButton = new Button("Siguiente");
-        nextButton.getStyleClass().add("boton");
         nextButton.setOnAction(e -> {
             atributos.guardarNombres(jugadoresLista);
             showGameConditionsPhase();
@@ -92,18 +94,14 @@ public class FaseInicial {
 
         // Establecer las condiciones del juego
         Label label1 = new Label("Cantidad de preguntas:");
-        label1.getStyleClass().add("titulo");
         TextField preguntasField = new TextField();
         preguntasField.setPromptText("Ingrese la cantidad de preguntas:");
-        preguntasField.getStyleClass().add("campo-texto");
         Label label2 = new Label("Puntaje para ganar:");
-        label2.getStyleClass().add("titulo");
         TextField puntajeField = new TextField();
         puntajeField.setPromptText("Ingrese puntaje para ganar:");
-        puntajeField.getStyleClass().add("campo-texto");
+
 
         Button startGameButton = new Button("Iniciar Juego");
-        startGameButton.getStyleClass().add("boton");
         startGameButton.setOnAction(e ->{
             atributos.guardarNumPreguntas(Integer.parseInt(preguntasField.getText()));
             atributos.setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
