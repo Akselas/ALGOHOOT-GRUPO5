@@ -23,8 +23,9 @@ public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
-        FaseInicial faseInicial = new FaseInicial(stage);
-        faseInicial.mostrarFase();
+        //FaseHandler manejadorDeFases = new FaseManejador(ventanaPrincipal);
+        //FaseInicial faseInicial = new FaseInicial(stage);
+        //faseInicial.mostrarFase();
 
         responder = new Button("Responder");
         this.responder.getStyleClass().add("answer-button");

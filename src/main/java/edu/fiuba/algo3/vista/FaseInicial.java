@@ -10,13 +10,16 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaseInicial {
-    Stage stagePrincipal;
-    AtributosIniciales atributos;
+public class FaseInicial implements Fase{
+    Stage ventanaPrincipal;
+    FaseManejador manejador;
 
-    public FaseInicial(Stage stage){
-        stagePrincipal = stage;
-        atributos = new AtributosIniciales();
+    public FaseInicial(Stage stage, FaseManejador manejador){
+        this.ventanaPrincipal = stage;
+        this.manejador = manejador;
+        iniciar();
+    }
+    public void iniciar(){
         VBox layout = new VBox();
         Scene scene = new Scene(layout, 300, 200);
 
@@ -26,21 +29,20 @@ public class FaseInicial {
         Button nextButton = new Button("Siguiente");
         nextButton.setOnAction(e -> {
             //Guardo en atributos el numero de jugadores.
-            atributos.guardarNumJugadores(Integer.parseInt(numJugadoresField.getText()));
-            showPlayerNamesPhase();
+            manejador.obtenerAtributos().guardarNumJugadores(Integer.parseInt(numJugadoresField.getText()));
+            pedirNombresDeJugadores();
         });
 
         layout.getChildren().addAll(label, numJugadoresField, nextButton);
         //scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-        stagePrincipal.setScene(scene);
+        ventanaPrincipal.setScene(scene);
     }
-
-    private void showPlayerNamesPhase() {
+    private void pedirNombresDeJugadores() {
         VBox layout = new VBox();
         Scene scene = new Scene(layout, 300, 200);
         List<TextField> jugadoresLista = new ArrayList<>();
         // Pedir nombres de los jugadores
-        for (int i = 0; i < atributos.obtenerNumJugadores(); i++) {
+        for (int i = 0; i < manejador.obtenerAtributos().obtenerNumJugadores(); i++) {
             Label label = new Label("Nombre del jugador " + (i+1) + ":");
             TextField nameField = new TextField();
             jugadoresLista.add(nameField);
@@ -49,44 +51,45 @@ public class FaseInicial {
 
         Button nextButton = new Button("Siguiente");
         nextButton.setOnAction(e -> {
-            atributos.guardarNombres(jugadoresLista);
-            showGameConditionsPhase();
+            manejador.obtenerAtributos().guardarNombres(jugadoresLista);
+            pedirCondicionesDeFin();
         });
 
         layout.getChildren().add(nextButton);
 
-        stagePrincipal.setScene(scene);
+        ventanaPrincipal.setScene(scene);
     }
 
-    private void showGameConditionsPhase() {
+    private void pedirCondicionesDeFin() {
         VBox layout = new VBox();
         Scene scene = new Scene(layout, 300, 200);
 
         // Establecer las condiciones del juego
-        Label label1 = new Label("Cantidad de preguntas:");
+        Label label1 = new Label("Cantidad de preguntas del juego:");
         TextField preguntasField = new TextField();
         Label label2 = new Label("Puntaje para ganar:");
         TextField puntajeField = new TextField();
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
-            atributos.guardarNumPreguntas(Integer.parseInt(preguntasField.getText()));
-            atributos.setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
+            manejador.obtenerAtributos().guardarNumPreguntas(Integer.parseInt(preguntasField.getText()));
+            manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 
-            startGame();
+            fasePromover();//Aca capaz solo hacer fasePromover();
 
         });
 
         layout.getChildren().addAll(label1, preguntasField, label2, puntajeField, startGameButton);
 
-        stagePrincipal.setScene(scene);
+        ventanaPrincipal.setScene(scene);
     }
 
-    private void startGame() {
-        // Aquí puedes iniciar la fase intermedia del juego
-        System.out.println("Iniciando el juego con " + atributos.getNumPreguntas() + " preguntas y " + atributos.getPuntajeParaGanar() + " puntos para ganar.");
+    public void fasePromover(){
+        System.out.println("Iniciando el juego con " + manejador.obtenerAtributos().getNumPreguntas() + " preguntas y " + manejador.obtenerAtributos().getPuntajeParaGanar() + " puntos para ganar.");
+        manejador.cambiarFase(new FaseIntermedia(this.ventanaPrincipal, this.manejador));
     }
     public void mostrarFase(){
-        stagePrincipal.show();
+        ventanaPrincipal.show();
     }
 }
+
