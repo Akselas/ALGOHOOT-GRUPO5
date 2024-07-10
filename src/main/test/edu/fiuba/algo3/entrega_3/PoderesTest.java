@@ -3,8 +3,6 @@ package edu.fiuba.algo3.entrega_3;
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PoderesTest {
@@ -25,7 +23,7 @@ public class PoderesTest {
         j1.sumarPuntaje(puntaje);
 
         //assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
     }
     @Test
     public void test02JugadorUsaDuplicadorYNoDuplicaSuPuntajePorQueRespondeMal() {
@@ -41,7 +39,7 @@ public class PoderesTest {
         j1.sumarPuntaje(puntaje);
 
         //assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
 
     }
     @Test
@@ -58,7 +56,7 @@ public class PoderesTest {
         j1.sumarPuntaje(puntaje);
 
         //assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
         }
     @Test
     public void test03JugadorUsaAnuladorYNingunoDeLosJugadoresObtienePuntos(){
@@ -75,7 +73,7 @@ public class PoderesTest {
         j1.sumarPuntaje(puntaje1);
 
         //assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
     }
 
     @Test
@@ -94,7 +92,7 @@ public class PoderesTest {
         j1.sumarPuntaje(puntaje);//entonces aca obviamente va a agregar el puntaje al unico juga
 
         //assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
     }
     /*
         public class Jugador{

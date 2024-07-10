@@ -1,10 +1,13 @@
 package edu.fiuba.algo3.vista;
 
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -21,7 +24,10 @@ public class FaseInicial implements Fase{
     }
     public void iniciar(){
         VBox layout = new VBox();
+        layout.setAlignment(Pos.CENTER);
+        layout.setId("VistaInicial");
         Scene scene = new Scene(layout, 300, 200);
+        scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
 
         // Comienza con la selección del número de jugadores
         Label label = new Label("Selecciona el número de jugadores:");

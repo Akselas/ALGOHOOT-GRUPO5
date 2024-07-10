@@ -3,8 +3,6 @@ package edu.fiuba.algo3.entrega_1;
 import edu.fiuba.algo3.modelo.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PreguntaMCTest {
@@ -44,7 +42,7 @@ public class PreguntaMCTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -83,7 +81,7 @@ public class PreguntaMCTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -122,7 +120,7 @@ public class PreguntaMCTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -161,7 +159,7 @@ public class PreguntaMCTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
     @Test
@@ -200,7 +198,7 @@ public class PreguntaMCTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
     }
 
 }

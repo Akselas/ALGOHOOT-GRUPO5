@@ -41,8 +41,8 @@ public class VFTest {
         j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
-        assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
+        assertEquals(puntajeEsperado2, j2.getPuntaje());
     }
 
     @Test
@@ -69,8 +69,8 @@ public class VFTest {
         j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         // Assert
-        assertEquals(puntajeEsperad1, j1.obtenerPuntaje());
-        assertEquals(puntajeEsperad2, j2.obtenerPuntaje());
+        assertEquals(puntajeEsperad1, j1.getPuntaje());
+        assertEquals(puntajeEsperad2, j2.getPuntaje());
 
     }
 
@@ -100,8 +100,8 @@ public class VFTest {
         j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
-        assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
+        assertEquals(puntajeEsperado2, j2.getPuntaje());
     }
 
     @Test
@@ -130,8 +130,8 @@ public class VFTest {
         j2.sumarPuntaje(preguntaVF.calcularPuntaje(r2));
 
         //Assert Check implementacion antes de correrlo
-        assertEquals(puntajeEsperado1, j1.obtenerPuntaje());
-        assertEquals(puntajeEsperado2, j2.obtenerPuntaje());
+        assertEquals(puntajeEsperado1, j1.getPuntaje());
+        assertEquals(puntajeEsperado2, j2.getPuntaje());
 
     }
 

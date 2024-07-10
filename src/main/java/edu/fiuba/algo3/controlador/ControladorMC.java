@@ -66,7 +66,7 @@ public class ControladorMC implements ControladorPregunta{
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Puntaje del Jugador");
         alert.setHeaderText(null);
-        alert.setContentText("El puntaje del jugador " + jugador.obtenerNombre() + " es: " + jugador.obtenerPuntaje());
+        alert.setContentText("El puntaje del jugador " + jugador.getNombre() + " es: " + jugador.getPuntaje());
 
         alert.showAndWait();
     }

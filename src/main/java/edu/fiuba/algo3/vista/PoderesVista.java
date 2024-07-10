@@ -19,7 +19,7 @@ public PoderesVista(Jugador jugador){
     grupoPoderes = new ToggleGroup();
     this.jugador = jugador;
     this.setSpacing(40);
-    this.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
+    this.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
     this.setPadding(new Insets(10, 10, 10, 10));
     this.setAlignment(Pos.CENTER);
 }
@@ -49,6 +49,7 @@ private void cargarPoder(Poder poder){//se agregan los botones al layout, junto 
     boton.setMaxWidth(Double.MAX_VALUE);
     boton.setToggleGroup(grupoPoderes);
     boton.setUserData(poder);
+    boton.getStyleClass().add("boton-poder");
     boton.setOnAction(event -> {
         if(boton.isSelected()){
             poderSeleccionado = poder;

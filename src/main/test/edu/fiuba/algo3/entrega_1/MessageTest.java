@@ -43,7 +43,7 @@ public class MessageTest {
         j1.sumarPuntaje(puntaje);
 
         //Assert
-        assertEquals(puntajeEsperado, j1.obtenerPuntaje());
+        assertEquals(puntajeEsperado, j1.getPuntaje());
 
     }
 }

@@ -62,7 +62,7 @@ public class ControladorOC implements ControladorPregunta{
             }
 
             jugador.sumarPuntaje(puntajeRonda);
-            System.out.println("Puntaje de " + jugador.obtenerNombre()+ " : " + jugador.obtenerPuntaje());
+            System.out.println("Puntaje de " + jugador.getNombre()+ " : " + jugador.getPuntaje());
         });
 
     }

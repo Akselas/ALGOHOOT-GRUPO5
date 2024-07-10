@@ -6,4 +6,6 @@ module edu.fiuba.algo3 {
     //requires javafx.fxml;
     exports edu.fiuba.algo3.vista;
     exports edu.fiuba.algo3.controlador;
+
+    opens edu.fiuba.algo3.modelo to javafx.base;
 }

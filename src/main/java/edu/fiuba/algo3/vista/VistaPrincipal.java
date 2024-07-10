@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.vista;
 import edu.fiuba.algo3.controlador.*;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -11,6 +13,8 @@ import javafx.stage.Stage;
 import edu.fiuba.algo3.modelo.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class VistaPrincipal extends Application {
@@ -26,6 +30,22 @@ public class VistaPrincipal extends Application {
         //FaseHandler manejadorDeFases = new FaseManejador(ventanaPrincipal);
         //FaseInicial faseInicial = new FaseInicial(stage);
         //faseInicial.mostrarFase();
+
+       /* List<Jugador> jugadores= new ArrayList<>();
+        jugadores.add(new Jugador("Denu"));
+        jugadores.add(new Jugador("Juani"));
+        jugadores.add(new Jugador("Axel"));
+        VistaRonda tablaResultados = new VistaRonda(jugadores);;
+        //VBox vBox = new VBox();
+        //vBox.getChildren().add(tablaResultados);
+        Scene scene = new Scene(tablaResultados);
+        //scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
+        ventanaPrincipal.setScene(scene);
+        ventanaPrincipal.setTitle("AlgoHoot");
+        ventanaPrincipal.show();
+*/
+
+
 
         responder = new Button("Responder");
         this.responder.getStyleClass().add("answer-button");
@@ -89,13 +109,13 @@ public class VistaPrincipal extends Application {
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
         //ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
-        ventanaPregunta.getStyleClass().add("question-area");
+        ventanaPregunta.getStyleClass().add("pregunta");
 
         vistaPrincipal.getChildren().clear();
         vistaPrincipal.getChildren().addAll(ventanaPregunta, responder);
 
         Scene scene = new Scene(vistaPrincipal);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
@@ -103,7 +123,7 @@ public class VistaPrincipal extends Application {
 
     public VBox establecerVistaPrincipal(){
         VBox vista = new VBox();
-        vista.setId("container");
+        vista.setId("VistaPrincipal");
         vista.setSpacing(10);
         vista.setPadding(new Insets(10));
         vista.setAlignment(Pos.CENTER);

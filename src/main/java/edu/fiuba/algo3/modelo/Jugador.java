@@ -21,7 +21,7 @@ public class Jugador {
     }
 
 
-    public String obtenerNombre(){
+    public String getNombre(){
         return this.nombre;
     }
 
@@ -29,7 +29,7 @@ public class Jugador {
         this.puntaje.sumar(puntaje);
     }
 
-    public int obtenerPuntaje() {
+    public int getPuntaje() {
         return this.puntaje.obtenerPuntuacion();
     }
 
