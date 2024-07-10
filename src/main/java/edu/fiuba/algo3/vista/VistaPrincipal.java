@@ -23,8 +23,8 @@ public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
-        FaseInicial faseInicial = new FaseInicial(stage);
-        faseInicial.mostrarFase();
+        //FaseInicial faseInicial = new FaseInicial(stage);
+        //faseInicial.mostrarFase();
 
         responder = new Button("Responder");
         this.responder.getStyleClass().add("answer-button");
@@ -38,7 +38,7 @@ public class VistaPrincipal extends Application {
         //creador.devolverPrimeraPregunta();
         //mostrarVistaVF(jugador);
         //mostrarVistaOC(jugador);
-        //mostrarVistaMC(jugador);
+        mostrarVistaMC(jugador);
         //mostrarVistaGC(jugador);
 
     }
@@ -88,13 +88,13 @@ public class VistaPrincipal extends Application {
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
         //ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
-        ventanaPregunta.getStyleClass().add("question-area");
+        ventanaPregunta.getStyleClass().add("pregunta");
 
         vistaPrincipal.getChildren().clear();
         vistaPrincipal.getChildren().addAll(ventanaPregunta, responder);
 
         Scene scene = new Scene(vistaPrincipal);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
         ventanaPrincipal.setScene(scene);
         ventanaPrincipal.setTitle("AlgoHoot");
         ventanaPrincipal.show();
