@@ -102,7 +102,7 @@ public class VistaPrincipal extends Application {
 
     public VBox establecerVistaPrincipal(){
         VBox vista = new VBox();
-        vista.setId("container");
+        vista.setId("VistaPrincipal");
         vista.setSpacing(10);
         vista.setPadding(new Insets(10));
         vista.setAlignment(Pos.CENTER);

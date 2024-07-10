@@ -1,5 +1,5 @@
-/* Estilos para el contenedor principal */
-#container {
+/* Estilos para la vista principal */
+#VistaPrincipal {
     -fx-padding: 20px;
     -fx-spacing: 10px;
     -fx-alignment: center;
@@ -11,7 +11,7 @@
 }
 
 /* Estilo para el título */
-.title-text {
+.titulo-pregunta{
     -fx-font-size: 28px;
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
@@ -25,7 +25,7 @@
     -fx-border-color: #bdc3c7; /* Color del borde */
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
-    -fx-alignment: center;
+    /*-fx-alignment: center;*/
 }
 
 /* Estilo para los botones de respuestas */

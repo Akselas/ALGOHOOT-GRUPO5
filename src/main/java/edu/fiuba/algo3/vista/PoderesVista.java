@@ -49,6 +49,7 @@ private void cargarPoder(Poder poder){//se agregan los botones al layout, junto 
     boton.setMaxWidth(Double.MAX_VALUE);
     boton.setToggleGroup(grupoPoderes);
     boton.setUserData(poder);
+    boton.getStyleClass().add("power-button");
     boton.setOnAction(event -> {
         if(boton.isSelected()){
             poderSeleccionado = poder;

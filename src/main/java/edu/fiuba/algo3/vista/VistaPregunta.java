@@ -16,7 +16,7 @@ public abstract class VistaPregunta extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
         this.setPadding(new Insets(30, 10, 70, 10)); // arriba, der, abajo, izq
-        this.enunciadoLabel.getStyleClass().add("tittle-text");
+        this.enunciadoLabel.getStyleClass().add("titulo-pregunta");
         //this.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
     }
 

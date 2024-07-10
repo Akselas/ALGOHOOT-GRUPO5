@@ -15,7 +15,6 @@ public class VistaMC extends VistaPregunta{
     public VistaMC(){
         super();
         this.botones = new ArrayList<>();
-        //10 10 10 10
 
     }
     @Override
