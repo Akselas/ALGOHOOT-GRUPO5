@@ -1,44 +1,94 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Jugador;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.collections.ObservableList;
+import javafx.scene.text.Text;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import edu.fiuba.algo3.modelo.*;
+import javafx.stage.Stage;
 
 import java.util.List;
 
-public class VistaRonda extends VBox {
+public class VistaRonda {
+    Stage ventanaPrincipal;
+    List<Jugador> jugadores;
+    Poderes poderes;
 
-    public VistaRonda(List<Jugador> jugadores) {
-        Label titulo = new Label("Resultados de la Ronda");
-        Button boton = new Button("Siguiente");
-        TableView<Jugador> tablaPuntajes = this.agregarTablaPuntaje(jugadores);
-        HBox contenedor = new HBox(tablaPuntajes);
-        this.getChildren().addAll(titulo, contenedor, boton);
-        this.setAlignment(Pos.CENTER);
+    public VistaRonda(Stage ventanaPrincipal, List<Jugador> jugadores, Poderes poderes) {
+        this.ventanaPrincipal = ventanaPrincipal;
+        this.jugadores = jugadores;
+        this.poderes = poderes;
+        iniciar();
     }
 
-    private TableView<Jugador> agregarTablaPuntaje(List<Jugador> jugadores){
+    private void iniciar(){
+        Label titulo = new Label("Resultados de la Ronda");
+        Button boton = new Button("Siguiente");
+
+        TableView<Jugador> tablaPuntajes = this.crearTablaPuntaje();
+        Text textoExtra = this.crearTextoPoderes();
+
+        HBox contenedor = new HBox(tablaPuntajes, textoExtra);
+        contenedor.setAlignment(Pos.CENTER);
+        contenedor.setPadding(new Insets(10)); // Añade padding si deseas más espacio alrededor de los nodos
+
+        VBox.setMargin(titulo, new Insets(10, 0, 40, 0)); // Espacio alrededor del título
+        VBox.setMargin(contenedor, new Insets(0, 0, 20, 0)); // Espacio alrededor del contenedor
+        VBox.setMargin(boton, new Insets(40, 0, 0, 0));
+        HBox.setMargin(tablaPuntajes, new Insets(0, 20, 0, 0));
+
+        VBox vistaRonda = new VBox(titulo, contenedor, boton);
+        vistaRonda.setId("VistaRonda");
+        vistaRonda.setAlignment(Pos.CENTER);
+        vistaRonda.setSpacing(10);
+        vistaRonda.setPadding(new Insets(20));
+        Scene scene = new Scene(vistaRonda);
+        scene.getStylesheets().add(getClass().getResource("/FaseIntermedia.css").toExternalForm());
+        ventanaPrincipal.setScene(scene);
+        ventanaPrincipal.setTitle("AlgoHoot");
+    }
+
+    private TableView<Jugador> crearTablaPuntaje(){
         TableView<Jugador> tablaPuntajes = new TableView<>();
+        tablaPuntajes.setFixedCellSize(25); // Tamaño fijo de las celdas
+        tablaPuntajes.prefHeightProperty().bind(tablaPuntajes.fixedCellSizeProperty().multiply(jugadores.size()));
+
         TableColumn<Jugador, String> nombreColumn = new TableColumn<>("Nombre");
         nombreColumn.setCellValueFactory(new PropertyValueFactory<Jugador, String>("nombre"));
+        nombreColumn.setMaxWidth(150);
 
         TableColumn<Jugador, Integer> puntajeColumn = new TableColumn<>("Puntaje");
         puntajeColumn.setCellValueFactory(new PropertyValueFactory<Jugador, Integer>("puntaje"));
-
+        puntajeColumn.setMaxWidth(150);
 
 
         tablaPuntajes.getColumns().addAll(nombreColumn, puntajeColumn);
         tablaPuntajes.getItems().addAll(jugadores);
+
+        tablaPuntajes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//esto es para que solo esten las columnas necesarias, y no las vacias
+
         return tablaPuntajes;
+    }
+
+    private Text crearTextoPoderes(){
+        Text textoExtra = new Text("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
+        for(Poder poder : poderes.devolverPoderes()){//aca concidero que solo hay una sola instancia por cada tipo de poder.
+            textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
+        }
+        textoExtra.setWrappingWidth(150);
+        return textoExtra;
+    }
+
+    public void mostrarVistaRonda(){
+        ventanaPrincipal.show();
     }
 }
 

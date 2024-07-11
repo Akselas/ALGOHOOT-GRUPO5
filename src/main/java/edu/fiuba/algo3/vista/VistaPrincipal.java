@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.vista;
+
 import edu.fiuba.algo3.controlador.*;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.modelo.*;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,24 +29,20 @@ public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.ventanaPrincipal = stage;
-        FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal);
-        manejadorDeFases.iniciarFase();
+        //FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal);
+        //manejadorDeFases.iniciarFase();
 //        FaseInicial faseInicial = new FaseInicial(stage);
 //        faseInicial.mostrarFase();
 
-       /* List<Jugador> jugadores= new ArrayList<>();
+
+
+        Poderes poderes = new Poderes();
+        List<Jugador> jugadores= new ArrayList<>();
         jugadores.add(new Jugador("Denu"));
         jugadores.add(new Jugador("Juani"));
         jugadores.add(new Jugador("Axel"));
-        VistaRonda tablaResultados = new VistaRonda(jugadores);;
-        //VBox vBox = new VBox();
-        //vBox.getChildren().add(tablaResultados);
-        Scene scene = new Scene(tablaResultados);
-        //scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
-        ventanaPrincipal.setScene(scene);
-        ventanaPrincipal.setTitle("AlgoHoot");
-        ventanaPrincipal.show();
-*/
+        VistaRonda vistaRonda = new VistaRonda(stage,jugadores, poderes);;
+        vistaRonda.mostrarVistaRonda();
 
 
 

@@ -14,6 +14,7 @@ public class Jugador {
         this.puntaje = new Puntaje();
         this.puntajeRonda = new Puntaje();
         this.poderes = new Poderes();
+        agregarPoderesIniciales();
     }
 
     public void agregarRespuesta(Respuesta respuesta){
@@ -23,6 +24,13 @@ public class Jugador {
 
     public String getNombre(){
         return this.nombre;
+    }
+
+    private void agregarPoderesIniciales(){
+        poderes.agregarPoder(new Duplicador());
+        poderes.agregarPoder(new Triplicador());
+        poderes.agregarPoder(new Anulador());
+        poderes.agregarPoder(new Exclusividad());
     }
 
     public void sumarPuntaje(Puntaje puntaje) {

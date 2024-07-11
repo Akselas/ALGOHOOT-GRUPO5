@@ -18,13 +18,26 @@ public class Poderes{
         return poderes;
     }
 
-    /* private Poder buscarPoder(Poder poder){
-        for(Poder poderAux: poderes){
-            if(poderAux.getClass().equals(poder.getClass())){
+    public void agregarPoder(Poder poder){
+        poderes.add(poder);
+    }
+
+    /*private Poder buscarPoder(Poder poder) {
+        for (Poder poderAux : poderes) {
+            if (poderAux.getClass().equals(poder.getClass())) {
                 return poderAux;
             }
         }
         return null;
-    }*/
+
+    }  */
+    public boolean hayPoder(Poder poder){
+        for (Poder poderAux : poderes) {
+            if (poderAux.getClass().equals(poder.getClass())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

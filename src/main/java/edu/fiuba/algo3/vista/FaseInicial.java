@@ -61,40 +61,40 @@ public class FaseInicial implements Fase{
 
 
     private void pedirNombresDeJugadores() {
-//        ventanaPrincipal.setWidth(1000);
-//        ventanaPrincipal.setHeight(1000);
-        if(jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()){
-            VBox layout = new VBox();
-            layout.setAlignment(Pos.CENTER);
-            layout.setPrefWidth(600);  // Establecer un ancho prefijado
-            layout.setPrefHeight(400);
+        VBox layout = new VBox();
+        layout.setAlignment(Pos.CENTER);
+        layout.setPrefWidth(600);  // Establecer un ancho prefijado
+        layout.setPrefHeight(400);
 
-            Scene scene = new Scene(layout, 600, 400);
-            scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
-            layout.setId("VistaAjustesIniciales");
-            // Pedir nombres de los jugadores
-            Label label = new Label("Jugador " + (jugadorActual + 1) + ":");
-            TextField nameField = new TextField();
-            nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
-            layout.getChildren().addAll(label, nameField);
+        Scene scene = new Scene(layout, 600, 400);
+        scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
+        layout.setId("VistaAjustesIniciales");
 
-            Button nextButton = new Button("Siguiente");
-            nextButton.setOnAction(e -> {
-                manejador.obtenerAtributos().guardarNombre(nameField.getText());
-                jugadorActual++;
-                pedirNombresDeJugadores();
-            });
+        Label label = new Label("Jugador " + (jugadorActual + 1) + ":");
+        TextField nameField = new TextField();
+        nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
+        layout.getChildren().addAll(label, nameField);
 
-            layout.getChildren().add(nextButton);
+        Button nextButton = new Button("Siguiente");
+        nextButton.setOnAction(e -> {
+            manejador.obtenerAtributos().guardarNombre(nameField.getText());
+            jugadorActual++;
+            if (jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()) {
+                // Actualizar el layout para el próximo jugador
+                label.setText("Jugador " + (jugadorActual + 1) + ":");
+                nameField.clear();
+                nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
+            } else {
+                pedirCondicionesDeFin();
+            }
+        });
 
-            ventanaPrincipal.setScene(scene);
-            ventanaPrincipal.centerOnScreen();
-//            ventanaPrincipal.setWidth(605);
-//            ventanaPrincipal.setHeight(500);
-        } else {
-            pedirCondicionesDeFin();
-        }
+        layout.getChildren().add(nextButton);
 
+        ventanaPrincipal.setScene(scene);
+        ventanaPrincipal.centerOnScreen();
+        ventanaPrincipal.setHeight(400);
+        ventanaPrincipal.setWidth(601);
     }
 
 
@@ -126,6 +126,8 @@ public class FaseInicial implements Fase{
         layout.getChildren().addAll(label1, preguntasField, label2, puntajeField, startGameButton);
 
         ventanaPrincipal.setScene(scene);
+        ventanaPrincipal.setHeight(400);
+        ventanaPrincipal.setWidth(602);
     }
 
     public void fasePromover(){
