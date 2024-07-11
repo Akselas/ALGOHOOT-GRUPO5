@@ -22,7 +22,7 @@ public class FaseIntermedia implements Fase{
     }
 
     public void iniciar (){
-        // Crear n jugadores y guardarlos
+        // Crear n jugadores y guardarlos - Done en Fase Inicial
         // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
         // Crear tabla parcial de puntajes y asignarselos a los jugadores
         // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.

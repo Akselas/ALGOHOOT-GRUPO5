@@ -25,10 +25,17 @@ public class VistaPrincipal extends Application {
     private Parser creador;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         this.ventanaPrincipal = stage;
-        FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal);
-        manejadorDeFases.iniciarFase();
+        String ruta = "src/main/resources/ParserTestFile.json";
+
+        try {
+            FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal,ruta );
+            manejadorDeFases.iniciarFase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 //        FaseInicial faseInicial = new FaseInicial(stage);
 //        faseInicial.mostrarFase();
 
@@ -55,8 +62,6 @@ public class VistaPrincipal extends Application {
         this.vistaPrincipal = establecerVistaPrincipal();
         Jugador jugador = new Jugador("Axel");
         this.poderesBox = new PoderesVista(jugador);
-        this.creador = new Parser();
-        creador.leer("src/main/resources/ParserTestFile.json");
         //creador.devolverPrimeraPregunta();
         //mostrarVistaVF(jugador);
         //mostrarVistaOC(jugador);

@@ -10,19 +10,15 @@ public class ParserTest {
 
 
     @Test
-    public void test01ParserLeeUnArchivoYCreaUnaClasePregunta(){
+    public void test01ParserLeeUnArchivoYCreaUnaClasePregunta() throws IOException {
         //Arrange
-        Parser parchu = new Parser();
+
         String nombreFile = "src/main/resources/ParserTestFile.json";
+
         String esperado = "El punto de ebullición del agua a 3300m del mar es 100 grados centígrados";
 
         //Act
-        try {
-            parchu.leer(nombreFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        Parser parchu = new Parser(nombreFile);
         //Assert
         Pregunta preguntaObtenida = parchu.devolverPrimeraPregunta();
         String txtObtenido = preguntaObtenida.obtenerTexto();

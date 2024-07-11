@@ -80,7 +80,8 @@ public class FaseInicial implements Fase{
 
             Button nextButton = new Button("Siguiente");
             nextButton.setOnAction(e -> {
-                manejador.obtenerAtributos().guardarNombre(nameField.getText());
+                //Guarda el nombre en Atributos
+                manejador.obtenerAtributos().guardarJugador(nameField.getText());
                 jugadorActual++;
                 pedirNombresDeJugadores();
             });
@@ -116,7 +117,7 @@ public class FaseInicial implements Fase{
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
-            manejador.obtenerAtributos().guardarNumPreguntas(Integer.parseInt(preguntasField.getText()));
+            manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
             manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 
             fasePromover();//Aca capaz solo hacer fasePromover();
@@ -131,6 +132,7 @@ public class FaseInicial implements Fase{
     public void fasePromover(){
         System.out.println("Iniciando el juego con " + manejador.obtenerAtributos().getNumPreguntas() + " preguntas y " + manejador.obtenerAtributos().getPuntajeParaGanar() + " puntos para ganar.");
         manejador.cambiarFase(new FaseIntermedia(this.ventanaPrincipal, this.manejador));
+        manejador.iniciarFase();
     }
     public void mostrarFase(){
         ventanaPrincipal.show();
