@@ -32,18 +32,18 @@ TextField {
    -fx-border-style: solid;
 }
 
-.campo-texto:hover {
+TextField:hover {
     -fx-prompt-text-fill: #FFFFFF;
     -fx-border-color: #FFFFFF;
     /*-fx-border-color: #4D3540; */
 }
 
-.campo-texto:focused {
+TextField:focused {
     -fx-border-color: #FFFFFF;
     -fx-background-color: transparent;
 }
 
-.campo-texto:pressed {
+TextField:pressed {
     -fx-prompt-text-fill: #AAAAAA;
     -fx-border-color: #AAAAAA;
 }
@@ -64,10 +64,10 @@ Button {
     -fx-background-insets: 0;
 }
 
-.boton:hover {
+Button:hover {
     -fx-background-color: #8e44ad;
 }
 
-.boton:pressed {
+Button:pressed {
     -fx-background-color: #2c3e50;
 }

@@ -16,6 +16,7 @@ import java.util.List;
 public class FaseInicial implements Fase{
     Stage ventanaPrincipal;
     FaseManejador manejador;
+    int jugadorActual = 0;
 
     public FaseInicial(Stage stage, FaseManejador manejador){
         this.ventanaPrincipal = stage;
@@ -26,7 +27,7 @@ public class FaseInicial implements Fase{
         VBox layout = new VBox();
         layout.setAlignment(Pos.CENTER);
         layout.setId("VistaInicial");
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 600, 400);
         scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());////////
 
         // Comienza con la selección del número de jugadores
@@ -40,13 +41,14 @@ public class FaseInicial implements Fase{
         });
 
 
-        ImageView imageView = this.setPantallaInicial();
+        ImageView imageView = this.agregarImagen();
         layout.getChildren().addAll(imageView, numJugadoresField, nextButton);
 
         ventanaPrincipal.setScene(scene);
+        mostrarFase();
     }
 
-    private ImageView setPantallaInicial(){
+    private ImageView agregarImagen(){
         String imagePath = getClass().getResource("/imagen2.png").toExternalForm(); ////////////// Ajusta la ruta a tu imagen
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
@@ -58,36 +60,44 @@ public class FaseInicial implements Fase{
     }
 
 
-    private void showPlayerNamesPhase() {
-        layout.getChildren().addAll(label, numJugadoresField, nextButton);
-        //scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-        ventanaPrincipal.setScene(scene);
-    }
     private void pedirNombresDeJugadores() {
-        VBox layout = new VBox();
-        Scene scene = new Scene(layout, 300, 200);
-        List<TextField> jugadoresLista = new ArrayList<>();
-        // Pedir nombres de los jugadores
-        for (int i = 0; i < manejador.obtenerAtributos().obtenerNumJugadores(); i++) {
-            Label label = new Label("Nombre del jugador " + (i+1) + ":");
+//        ventanaPrincipal.setWidth(1000);
+//        ventanaPrincipal.setHeight(1000);
+        if(jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()){
+            VBox layout = new VBox();
+            layout.setAlignment(Pos.CENTER);
+            layout.setPrefWidth(600);  // Establecer un ancho prefijado
+            layout.setPrefHeight(400);
+
+            Scene scene = new Scene(layout, 600, 400);
+            scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
+            layout.setId("VistaAjustesIniciales");
+            // Pedir nombres de los jugadores
+            Label label = new Label("Jugador " + (jugadorActual + 1) + ":");
             TextField nameField = new TextField();
-            nameField.setPromptText("Ingrese el nombre del jugador " + (i+1) + ":");
-            jugadoresLista.add(nameField);
+            nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
             layout.getChildren().addAll(label, nameField);
+
+            Button nextButton = new Button("Siguiente");
+            nextButton.setOnAction(e -> {
+                manejador.obtenerAtributos().guardarNombre(nameField.getText());
+                jugadorActual++;
+                pedirNombresDeJugadores();
+            });
+
+            layout.getChildren().add(nextButton);
+
+            ventanaPrincipal.setScene(scene);
+            ventanaPrincipal.centerOnScreen();
+//            ventanaPrincipal.setWidth(605);
+//            ventanaPrincipal.setHeight(500);
+        } else {
+            pedirCondicionesDeFin();
         }
 
-        Button nextButton = new Button("Siguiente");
-        nextButton.setOnAction(e -> {
-            manejador.obtenerAtributos().guardarNombres(jugadoresLista);
-            pedirCondicionesDeFin();
-        });
-
-        layout.getChildren().add(nextButton);
-
-        ventanaPrincipal.setScene(scene);
-        ventanaPrincipal.setWidth(601);
-        ventanaPrincipal.setHeight(500);
     }
+
+
 
     private void pedirCondicionesDeFin() {
         VBox layout = new VBox();

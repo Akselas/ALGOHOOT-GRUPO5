@@ -23,10 +23,8 @@ public class AtributosIniciales {
         this.numJugadores = numJugadores;
     }
 
-    public void guardarNombres(List<TextField> jugadores){
-        for(int i=0; i<jugadores.size(); i++){
-            nombresJugadores.add(jugadores.get(i).getText());
-        }
+    public void guardarNombre(String nombre){
+        nombresJugadores.add(nombre);
     }
     public List<String> getNombres(){
         return nombresJugadores;
