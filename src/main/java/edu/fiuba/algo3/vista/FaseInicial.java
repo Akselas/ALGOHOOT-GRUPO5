@@ -61,40 +61,41 @@ public class FaseInicial implements Fase{
 
 
     private void pedirNombresDeJugadores() {
-        VBox layout = new VBox();
-        layout.setAlignment(Pos.CENTER);
-        layout.setPrefWidth(600);  // Establecer un ancho prefijado
-        layout.setPrefHeight(400);
+//        ventanaPrincipal.setWidth(1000);
+//        ventanaPrincipal.setHeight(1000);
+        if(jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()){
+            VBox layout = new VBox();
+            layout.setAlignment(Pos.CENTER);
+            layout.setPrefWidth(600);  // Establecer un ancho prefijado
+            layout.setPrefHeight(400);
 
-        Scene scene = new Scene(layout, 600, 400);
-        scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
-        layout.setId("VistaAjustesIniciales");
+            Scene scene = new Scene(layout, 600, 400);
+            scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
+            layout.setId("VistaAjustesIniciales");
+            // Pedir nombres de los jugadores
+            Label label = new Label("Jugador " + (jugadorActual + 1) + ":");
+            TextField nameField = new TextField();
+            nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
+            layout.getChildren().addAll(label, nameField);
 
-        Label label = new Label("Jugador " + (jugadorActual + 1) + ":");
-        TextField nameField = new TextField();
-        nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
-        layout.getChildren().addAll(label, nameField);
+            Button nextButton = new Button("Siguiente");
+            nextButton.setOnAction(e -> {
+                //Guarda el nombre en Atributos
+                manejador.obtenerAtributos().guardarJugador(nameField.getText());
+                jugadorActual++;
+                pedirNombresDeJugadores();
+            });
 
-        Button nextButton = new Button("Siguiente");
-        nextButton.setOnAction(e -> {
-            manejador.obtenerAtributos().guardarNombre(nameField.getText());
-            jugadorActual++;
-            if (jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()) {
-                // Actualizar el layout para el próximo jugador
-                label.setText("Jugador " + (jugadorActual + 1) + ":");
-                nameField.clear();
-                nameField.setPromptText("Ingrese el nombre del jugador " + (jugadorActual + 1) + ":");
-            } else {
-                pedirCondicionesDeFin();
-            }
-        });
+            layout.getChildren().add(nextButton);
 
-        layout.getChildren().add(nextButton);
+            ventanaPrincipal.setScene(scene);
+            ventanaPrincipal.centerOnScreen();
+//            ventanaPrincipal.setWidth(605);
+//            ventanaPrincipal.setHeight(500);
+        } else {
+            pedirCondicionesDeFin();
+        }
 
-        ventanaPrincipal.setScene(scene);
-        ventanaPrincipal.centerOnScreen();
-        ventanaPrincipal.setHeight(400);
-        ventanaPrincipal.setWidth(601);
     }
 
 
@@ -116,7 +117,7 @@ public class FaseInicial implements Fase{
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
-            manejador.obtenerAtributos().guardarNumPreguntas(Integer.parseInt(preguntasField.getText()));
+            manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
             manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 
             fasePromover();//Aca capaz solo hacer fasePromover();
@@ -126,13 +127,12 @@ public class FaseInicial implements Fase{
         layout.getChildren().addAll(label1, preguntasField, label2, puntajeField, startGameButton);
 
         ventanaPrincipal.setScene(scene);
-        ventanaPrincipal.setHeight(400);
-        ventanaPrincipal.setWidth(602);
     }
 
     public void fasePromover(){
         System.out.println("Iniciando el juego con " + manejador.obtenerAtributos().getNumPreguntas() + " preguntas y " + manejador.obtenerAtributos().getPuntajeParaGanar() + " puntos para ganar.");
         manejador.cambiarFase(new FaseIntermedia(this.ventanaPrincipal, this.manejador));
+        manejador.iniciarFase();
     }
     public void mostrarFase(){
         ventanaPrincipal.show();

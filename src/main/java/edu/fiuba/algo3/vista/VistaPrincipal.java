@@ -1,5 +1,4 @@
 package edu.fiuba.algo3.vista;
-
 import edu.fiuba.algo3.controlador.*;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -12,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.modelo.*;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,10 +25,17 @@ public class VistaPrincipal extends Application {
     private Parser creador;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         this.ventanaPrincipal = stage;
-        //FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal);
-        //manejadorDeFases.iniciarFase();
+        String ruta = "src/main/resources/ParserTestFile.json";
+
+        try {
+            FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal,ruta );
+            manejadorDeFases.iniciarFase();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 //        FaseInicial faseInicial = new FaseInicial(stage);
 //        faseInicial.mostrarFase();
 
@@ -53,8 +58,6 @@ public class VistaPrincipal extends Application {
         this.vistaPrincipal = establecerVistaPrincipal();
         Jugador jugador = new Jugador("Axel");
         this.poderesBox = new PoderesVista(jugador);
-        this.creador = new Parser();
-        creador.leer("src/main/resources/ParserTestFile.json");
         //creador.devolverPrimeraPregunta();
         //mostrarVistaVF(jugador);
         //mostrarVistaOC(jugador);

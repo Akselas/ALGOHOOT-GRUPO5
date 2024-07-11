@@ -6,21 +6,27 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Parser {
     List<Pregunta> preguntas;
 
-    public Parser(){
+    public Parser(String ruta) throws IOException {
         preguntas = new ArrayList<>();
+        this.leer(ruta);
     }
     //test
     public Pregunta devolverPrimeraPregunta(){
         return preguntas.get(0);
+    }
+    //Devuelve una cantidad random de preguntas
+    public List<Pregunta> devolverPreguntasRandom(int cantidad){
+        List<Pregunta> copiaPreguntas = new ArrayList<>(this.preguntas);
+        Collections.shuffle(copiaPreguntas);
+        //Haciendo min atajo la posibilidad de que se reduzca con un numero mayor a la cantidad de preguntas
+        List<Pregunta> preguntasReducida = copiaPreguntas.subList(0, Math.min(cantidad, copiaPreguntas.size()));
+        return preguntasReducida;
     }
     public void leer(String archivo) throws IOException {
         try (FileReader lector = new FileReader(archivo)) {
