@@ -11,6 +11,7 @@ public class AtributosIniciales {
     private int numPreguntas;
     private int puntajeParaGanar;
     private Jugadores jugadores;
+    private List<Pregunta> preguntas;
 
     public AtributosIniciales(){
         nombresJugadores = new ArrayList<>();
@@ -20,23 +21,26 @@ public class AtributosIniciales {
     public int obtenerNumJugadores() {
         return numJugadores;
     }
-
+    public void setCantidadDePreguntas(int cant){
+        numPreguntas = cant;
+    }
     public void guardarNumJugadores(int numJugadores) {
         this.numJugadores = numJugadores;
     }
 
-    public List<String> getNombres(){
-        return nombresJugadores;
-    }
     public void guardarJugador(String nombre){
         this.jugadores.agregarJugador(new Jugador(nombre));
     }
+    public boolean hayGanador(){
+        return jugadores.algunoSuperaPuntaje(puntajeParaGanar);
+    }
+
     public int getNumPreguntas() {
         return numPreguntas;
     }
 
-    public void guardarNumPreguntas(int numPreguntas) {
-        this.numPreguntas = numPreguntas;
+    public Jugadores getJugadores(){
+        return jugadores;
     }
 
     public int getPuntajeParaGanar() {
@@ -45,5 +49,12 @@ public class AtributosIniciales {
 
     public void setPuntajeParaGanar(int puntajeParaGanar) {
         this.puntajeParaGanar = puntajeParaGanar;
+    }
+
+    public void guardarPreguntas(List<Pregunta> preguntas){
+        this.preguntas = preguntas;
+    }
+    public Pregunta getPreguntaAleatoria(){
+        return this.preguntas.remove(0);
     }
 }

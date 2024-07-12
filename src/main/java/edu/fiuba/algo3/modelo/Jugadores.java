@@ -13,4 +13,21 @@ public class Jugadores {
         this.jugadores.add(jugador);
     }
 
+    public boolean algunoSuperaPuntaje(int numero){
+        for (Jugador j : jugadores){
+            if(j.getPuntaje() >= numero){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void actualizarPuntajes(){
+        for(Jugador jugador: jugadores){
+            jugador.actualizarPuntaje();
+        }
+    }
+    public ArrayList<Jugador> getJugadores(){
+        return jugadores;
+    }
 }

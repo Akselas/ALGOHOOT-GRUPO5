@@ -13,7 +13,6 @@ public class FaseManejador {
     AtributosIniciales atributos;
     Parser parser;
 
-
     public FaseManejador(Stage stage, String ruta) throws IOException {
         this.fondo = stage;
         this.atributos = new AtributosIniciales();
@@ -30,7 +29,8 @@ public class FaseManejador {
     public AtributosIniciales obtenerAtributos(){
         return atributos;
     }
-    public List<Pregunta> configurarCantidadPreguntas(int cantidad){
-        return parser.devolverPreguntasRandom(cantidad);
+    public void configurarCantidadPreguntas(int cantidad){
+        atributos.setCantidadDePreguntas(cantidad);
+        atributos.guardarPreguntas(parser.devolverPreguntasRandom(cantidad));
     }
 }

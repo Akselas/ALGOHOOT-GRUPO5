@@ -41,6 +41,8 @@ public class Jugador {
         return this.puntaje.obtenerPuntuacion();
     }
 
+    public Puntaje getPuntajeParcial(){ return this.puntajeRonda; }
+
     public ArrayList<Poder> obtenerPoderes(){
         return poderes.devolverPoderes();
     }
@@ -51,5 +53,6 @@ public class Jugador {
 
     public void actualizarPuntaje(){
         sumarPuntaje(puntajeRonda);
+        puntajeRonda.multiplicar(0);
     }
 }

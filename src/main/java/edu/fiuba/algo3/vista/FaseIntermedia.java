@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.*;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.controlador.*;
-
-import java.util.List;
 
 public class FaseIntermedia implements Fase{
     Parser lector;
@@ -22,33 +19,40 @@ public class FaseIntermedia implements Fase{
     }
 
     public void iniciar (){
-        // Crear n jugadores y guardarlos - Done en Fase Inicial
         // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
         // Crear tabla parcial de puntajes y asignarselos a los jugadores
         // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.
+        int contador = 0;
 
-        Pregunta pregunta = lector.devolverPrimeraPregunta();
-        List<String> jugadoresNombres = manejador.obtenerAtributos().getNombres();
-        //
-        // int i =0;
-        // while(terminoJuego(i, manejador)){}
-        // List<Pregunta> ListaDePreguntasQueLeyoElParser = lector.devolverPreguntas();
-        // Pregunta pregunta = obtenerPreguntaRandom(ListaDePregnuntasQueLeyoElParser);
+        while (!terminoJuego(contador)){
+            Pregunta pregunta = manejador.obtenerAtributos().getPreguntaAleatoria();
+            Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
+            Poderes poderesUsados = new Poderes();
 
-        //for (Jugador jugador: manejador.obtenerAtributos().obtenerJugadores());
-
-            //mostrarPreguntaParaJugador(Pregunta pregunta, Jugador jugador)
-        for(String nombre : jugadoresNombres){
-            //esto deberia estar afuera para crear el puntaje general y coso
-            Jugador jugador = new Jugador(nombre);
-            mostrarPreguntaParaJugador(pregunta, jugador);
+            for(Jugador jugador: jugadores.getJugadores()){
+                mostrarPreguntaParaJugador(pregunta, jugador, poderesUsados);
+                puntajesParciales.agregarPuntaje(jugador.getPuntajeParcial());
+            }
+            poderesUsados.aplicarPoderesGrupales(puntajesParciales);
+            jugadores.actualizarPuntajes();
+            VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados);
+            rondaTerminada.mostrar();
+            contador++;
         }
     }
-    public void mostrarPreguntaParaJugador(Pregunta pregunta, Jugador jugador){
-        Button responder = new Button("Responder");
-        //Mostrar vista esto no me acuerdo como es
-        //Actualizamos puntajesParciales para sumar o restar lo del jugador
+
+    public boolean terminoJuego(int i) {
+        int limitePreguntas = manejador.obtenerAtributos().getNumPreguntas();
+        boolean hayGanador = manejador.obtenerAtributos().hayGanador();
+        return (i > limitePreguntas || hayGanador);
     }
 
-
+    public void mostrarPreguntaParaJugador(Pregunta pregunta, Jugador jugador, Poderes usados){
+        //PoderesVista poderesBox = new PoderesVista(jugador, pregunta); mandarlo por parametro en un refactor
+        ControladorFactory controladorFactory = new ControladorFactory();
+        // Dependiendo la pregunta esto deberia devolver un controlador espeifico
+        ControladorPregunta controlador = controladorFactory.crearControlador(pregunta, jugador);
+        controlador.mostrarVentanaPregunta(fondo);
+        usados.agregarPoder(controlador.poderUsado());
+    }
 }

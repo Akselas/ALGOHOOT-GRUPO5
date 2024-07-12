@@ -4,7 +4,7 @@ public class Exclusividad extends Poder implements PoderGrupal {
 
     public Exclusividad(){
         this.nombre = "Exclusividad";
-        this.cantidad = 1;
+        cantidad = 1;
     }
 
     @Override

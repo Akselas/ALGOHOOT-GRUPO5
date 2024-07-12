@@ -27,7 +27,7 @@ public class VistaPrincipal extends Application {
     @Override
     public void start(Stage stage) {
         this.ventanaPrincipal = stage;
-        String ruta = "src/main/resources/ParserTestFile.json";
+        String ruta = "src/main/resources/preguntasSource.json";
 
         try {
             FaseManejador manejadorDeFases = new FaseManejador(ventanaPrincipal,ruta );
@@ -41,28 +41,24 @@ public class VistaPrincipal extends Application {
 
 
 
-        Poderes poderes = new Poderes();
-        List<Jugador> jugadores= new ArrayList<>();
-        jugadores.add(new Jugador("Denu"));
-        jugadores.add(new Jugador("Juani"));
-        jugadores.add(new Jugador("Axel"));
-        VistaRonda vistaRonda = new VistaRonda(stage,jugadores, poderes);;
-        vistaRonda.mostrarVistaRonda();
+//        Poderes poderes = new Poderes();
+//        List<Jugador> jugadores= new ArrayList<>();
+//        jugadores.add(new Jugador("Denu"));
+//        jugadores.add(new Jugador("Juani"));
+//        jugadores.add(new Jugador("Axel"));
+//        VistaRonda vistaRonda = new VistaRonda(stage,jugadores, poderes);;
+//        vistaRonda.mostrarVistaRonda();
 
 
 
-        responder = new Button("Responder");
-        this.responder.getStyleClass().add("answer-button");
-        ventanaPrincipal.setWidth(500);
-        ventanaPrincipal.setHeight(500);
-        this.vistaPrincipal = establecerVistaPrincipal();
-        Jugador jugador = new Jugador("Axel");
-        this.poderesBox = new PoderesVista(jugador);
-        //creador.devolverPrimeraPregunta();
-        //mostrarVistaVF(jugador);
-        //mostrarVistaOC(jugador);
-        //mostrarVistaMC(jugador);
-        //mostrarVistaGC(jugador);
+//        responder = new Button("Responder");
+//        this.responder.getStyleClass().add("answer-button");
+//        ventanaPrincipal.setWidth(500);
+//        ventanaPrincipal.setHeight(500);
+//        this.vistaPrincipal = establecerVistaPrincipal();
+//        Jugador jugador = new Jugador("Axel");
+//        this.poderesBox = new PoderesVista(jugador);
+//        //creador.devolverPrimeraPregunta();
 
     }
 
@@ -73,7 +69,7 @@ public class VistaPrincipal extends Application {
         VistaGC vistaGC = new VistaGC();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
-        ControladorGC controladorGC = new ControladorGC(vistaGC, jugador, preguntaGC, poderesBox, responder);
+        ControladorGC controladorGC = new ControladorGC(preguntaGC, jugador);
         proyectarVista(vistaGC);
     }
 
@@ -83,7 +79,7 @@ public class VistaPrincipal extends Application {
         VistaVF vistaVF = new VistaVF();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
-        ControladorVF controladorVF = new ControladorVF(vistaVF, jugador, preguntaVF, poderesBox, responder);
+        ControladorVF controladorVF = new ControladorVF(preguntaVF, jugador);
         proyectarVista(vistaVF);
     }
 
@@ -93,7 +89,7 @@ public class VistaPrincipal extends Application {
         poderesBox.agregarBotones(preguntaMC);
 
         VistaMC vistaMC = new VistaMC();
-        ControladorMC controlador = new ControladorMC(jugador, preguntaMC, vistaMC, poderesBox, responder);
+        ControladorMC controlador = new ControladorMC(preguntaMC, jugador);
         proyectarVista(vistaMC);
     }
 
@@ -102,7 +98,7 @@ public class VistaPrincipal extends Application {
         PreguntaOC preguntaOC = creador.devolverPreguntaOC();
         poderesBox.agregarBotones(preguntaOC);
         VistaOC vistaOC = new VistaOC();
-        ControladorOC controlador = new ControladorOC(jugador,preguntaOC, vistaOC, poderesBox, responder);
+        ControladorOC controlador = new ControladorOC(preguntaOC, jugador);
         proyectarVista(vistaOC);
     }
 
@@ -110,7 +106,6 @@ public class VistaPrincipal extends Application {
         HBox ventanaPregunta = new HBox(20, vistaPregunta, poderesBox);
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
-        //ventanaPregunta.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         ventanaPregunta.getStyleClass().add("pregunta");
 
         vistaPrincipal.getChildren().clear();

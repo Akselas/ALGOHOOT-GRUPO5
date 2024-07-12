@@ -26,7 +26,6 @@ public class Puntaje {
         this.punto += puntaje.obtenerPuntuacion();
 
     }
-
     public void restar(int resta){
         this.punto -= resta;
     }

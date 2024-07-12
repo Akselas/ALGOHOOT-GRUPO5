@@ -4,33 +4,43 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaGC;
 import edu.fiuba.algo3.vista.VistaPrincipal;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.Node;
+import javafx.stage.Stage;
 
 public class ControladorGC implements ControladorPregunta{
-    private VistaGC vistaGC;
+    private VistaGC vista;
     private Jugador jugador;
     private Pregunta pregunta;
     private VistaPrincipal vistaPrincipal;
     private PoderesVista poderesBox;
     private Button responder;
 
-    public ControladorGC(VistaGC vistaGC, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox, Button responder) {
-        this.vistaGC = vistaGC;
+    public ControladorGC(Pregunta pregunta, Jugador jugador) {
+        this.vista = new VistaGC();
         this.jugador = jugador;
+        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
-        this.poderesBox = poderesBox;
-        this.responder = responder;
+        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
 
     @Override
+    public void mostrarVentanaPregunta(Stage fondo){
+        Scene escena = vista.proyectar(poderesBox, responder);
+        fondo.setScene(escena);
+        fondo.setTitle("AlgoHoot");
+        fondo.show();
+    }
+
+    @Override
     public void initialize() {
-        this.vistaGC.mostrarOpciones(this.pregunta.obtenerOpciones()); //esto setea opcionesListView
-        this.vistaGC.mostrarPregunta(this.pregunta);
-        this.vistaGC.mostrarNombresDeGrupos(this.pregunta);
+        this.vista.mostrarOpciones(this.pregunta.obtenerOpciones()); //esto setea opcionesListView
+        this.vista.mostrarPregunta(this.pregunta);
+        this.vista.mostrarNombresDeGrupos(this.pregunta);
         establecerManejoDeEventos();
     }
 
@@ -41,7 +51,7 @@ public class ControladorGC implements ControladorPregunta{
             //Cuando se presiona el boton responder entonces:
 
             // reviso si todas las opciones fueron asignadas
-            VBox opcionesGrupoDefault = this.vistaGC.obtenerGrupoDefault();
+            VBox opcionesGrupoDefault = this.vista.obtenerGrupoDefault();
 
             if (!opcionesGrupoDefault.getChildren().isEmpty()) {
                 System.out.println("Por favor agrupe todas las opciones");
@@ -49,8 +59,8 @@ public class ControladorGC implements ControladorPregunta{
             }
 
             // Obtengo los grupos
-            VBox grupo1 = this.vistaGC.obtenerGrupo1Opciones();
-            VBox grupo2 = this.vistaGC.obtenerGrupo2Opciones();
+            VBox grupo1 = this.vista.obtenerGrupo1Opciones();
+            VBox grupo2 = this.vista.obtenerGrupo2Opciones();
 
             // armo la respuesta del jugador
             Grupo respuestaGrupo1 = new Grupo();
@@ -72,26 +82,14 @@ public class ControladorGC implements ControladorPregunta{
             }
 
             RespuestaGC respuestaJugador = new RespuestaGC(respuestaGrupo1, respuestaGrupo2);
-
-            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
-            jugador.cargarPuntajeRonda(puntajeRonda);
-
+            jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
-            if(poderSeleccionado instanceof PoderIndividual){
-                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
-                poder.aplicarUnico(puntajeRonda);
-                poderesBox.actualizarPoderes();
-            }else{
-                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
-                //listaPoderesGrupales.agregar(poder);
-
-            }
-
-
-
-            jugador.sumarPuntaje(puntajeRonda);
-            System.out.println("Puntaje de " + jugador.getNombre() + " : " + jugador.getPuntaje());
-
+            Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
+            poderesBox.actualizarPoderes();
         });
+    }
+    @Override
+    public Poder poderUsado(){
+        return poderesBox.obtenerPoderSeleccionado();
     }
 }

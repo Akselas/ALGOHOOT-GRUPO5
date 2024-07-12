@@ -7,10 +7,7 @@ public class Poderes{
 
     public Poderes(){
         poderes = new ArrayList<>();
-        poderes.add(new Duplicador());
-        poderes.add(new Triplicador());
-        poderes.add(new Anulador());
-        poderes.add(new Exclusividad());
+
     }
 
 
@@ -19,25 +16,26 @@ public class Poderes{
     }
 
     public void agregarPoder(Poder poder){
-        poderes.add(poder);
+        if(!this.yaAgregado(poder)){
+            poderes.add(poder);
+        }
+    }
+    public boolean yaAgregado(Poder poder){
+        return poderes.contains(poder);
     }
 
-    /*private Poder buscarPoder(Poder poder) {
-        for (Poder poderAux : poderes) {
-            if (poderAux.getClass().equals(poder.getClass())) {
-                return poderAux;
+    public void aplicarPoderesGrupales(Puntajes puntajes){
+        for(Poder poder: poderes){
+            if(poder instanceof PoderGrupal){
+                ((PoderGrupal) poder).aplicar(puntajes);
             }
         }
-        return null;
-
-    }  */
-    public boolean hayPoder(Poder poder){
-        for (Poder poderAux : poderes) {
-            if (poderAux.getClass().equals(poder.getClass())) {
-                return true;
-            }
-        }
-        return false;
     }
 
+    public static void verificarPoder(Poder poderSeleccionado, Puntaje puntaje ){
+        if(poderSeleccionado instanceof PoderIndividual){
+            PoderIndividual poder = (PoderIndividual) poderSeleccionado;
+            poder.aplicarUnico(puntaje);
+        }
+    }
 }

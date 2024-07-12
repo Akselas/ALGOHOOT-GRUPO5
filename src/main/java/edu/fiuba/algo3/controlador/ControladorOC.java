@@ -4,32 +4,39 @@ import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaOC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.input.DragEvent;
-
+import javafx.stage.Stage;
 
 
 public class ControladorOC implements ControladorPregunta{
-    private PreguntaOC pregunta;
+    private Pregunta pregunta;
     private Jugador jugador;
     private VistaOC vista;
     private PoderesVista poderesBox;
     private Button responder;
 
 
-    public ControladorOC(Jugador jugador, PreguntaOC pregunta, VistaOC vista, PoderesVista poderesVista, Button responder) {
-        this.poderesBox = poderesVista; //Falta relacionar la cantidad de poderes disponibles con el jugador.
+    public ControladorOC(Pregunta pregunta, Jugador jugador) {
+        this.vista = new VistaOC();
         this.jugador = jugador;
+        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
-        this.vista = vista;
-        this.responder = responder;
+        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
-
+    @Override
+    public void mostrarVentanaPregunta(Stage fondo){
+        Scene escena = vista.proyectar(poderesBox, responder);
+        fondo.setScene(escena);
+        fondo.setTitle("AlgoHoot");
+        fondo.show();
+    }
     @Override
     public void initialize() {
         crearYConfigurarCeldas();
@@ -47,22 +54,10 @@ public class ControladorOC implements ControladorPregunta{
             for(Opcion opcionDeRespuesta : items){
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
-            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
-            jugador.cargarPuntajeRonda(puntajeRonda);
-
+            jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
-            if(poderSeleccionado instanceof PoderIndividual){
-                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
-                poder.aplicarUnico(puntajeRonda);
-                poderesBox.actualizarPoderes();
-            }else{
-                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
-                //listaPoderesGrupales.agregar(poder);
-
-            }
-
-            jugador.sumarPuntaje(puntajeRonda);
-            System.out.println("Puntaje de " + jugador.getNombre()+ " : " + jugador.getPuntaje());
+            Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
+            poderesBox.actualizarPoderes();
         });
 
     }
@@ -137,6 +132,11 @@ public class ControladorOC implements ControladorPregunta{
             configurarArrastreYSoltar(cell);
             return cell;
         });
+    }
+
+    @Override
+    public Poder poderUsado(){
+        return poderesBox.obtenerPoderSeleccionado();
     }
 
 }

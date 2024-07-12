@@ -41,7 +41,6 @@ public void actualizarPoderes(){//actualiza TODOS los poderes
             boton.setText(poder.obtenerNombre() + " (" + poder.obtenerCantidad() + ")");
         }
     }
-    poderSeleccionado = new Basico();
 }
 
 private void cargarPoder(Poder poder){//se agregan los botones al layout, junto con la logica de boton seleccionado

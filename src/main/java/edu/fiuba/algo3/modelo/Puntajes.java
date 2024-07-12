@@ -14,13 +14,6 @@ public class Puntajes {
         puntajes.add(puntaje);
     }
 
-    public int obtenerCantidadPuntajesMayorQueCero() {
-        int cantidad = 0;
-        for (Puntaje p : puntajes) {
-            if(p.obtenerPuntuacion() > 0) cantidad++;
-        }
-        return cantidad;
-    }
     public Boolean haySoloUnaCorrecta(){
         int cantidad = 0;
         for (Puntaje p : puntajes) {

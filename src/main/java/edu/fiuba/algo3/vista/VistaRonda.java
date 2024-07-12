@@ -19,10 +19,10 @@ import java.util.List;
 
 public class VistaRonda {
     Stage ventanaPrincipal;
-    List<Jugador> jugadores;
-    Poderes poderes;
+    Jugadores jugadores;
+    Poderes poderes; //Estos los poderes usados en la ronda
 
-    public VistaRonda(Stage ventanaPrincipal, List<Jugador> jugadores, Poderes poderes) {
+    public VistaRonda(Stage ventanaPrincipal, Jugadores jugadores, Poderes poderes) {
         this.ventanaPrincipal = ventanaPrincipal;
         this.jugadores = jugadores;
         this.poderes = poderes;
@@ -59,7 +59,7 @@ public class VistaRonda {
     private TableView<Jugador> crearTablaPuntaje(){
         TableView<Jugador> tablaPuntajes = new TableView<>();
         tablaPuntajes.setFixedCellSize(25); // Tamaño fijo de las celdas
-        tablaPuntajes.prefHeightProperty().bind(tablaPuntajes.fixedCellSizeProperty().multiply(jugadores.size()));
+        tablaPuntajes.prefHeightProperty().bind(tablaPuntajes.fixedCellSizeProperty().multiply(jugadores.getJugadores().size()));
 
         TableColumn<Jugador, String> nombreColumn = new TableColumn<>("Nombre");
         nombreColumn.setCellValueFactory(new PropertyValueFactory<Jugador, String>("nombre"));
@@ -69,9 +69,9 @@ public class VistaRonda {
         puntajeColumn.setCellValueFactory(new PropertyValueFactory<Jugador, Integer>("puntaje"));
         puntajeColumn.setMaxWidth(150);
 
-
+        //Agrega los puntajes a la tabla
         tablaPuntajes.getColumns().addAll(nombreColumn, puntajeColumn);
-        tablaPuntajes.getItems().addAll(jugadores);
+        tablaPuntajes.getItems().addAll(jugadores.getJugadores());
 
         tablaPuntajes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//esto es para que solo esten las columnas necesarias, y no las vacias
 
@@ -80,14 +80,14 @@ public class VistaRonda {
 
     private Text crearTextoPoderes(){
         Text textoExtra = new Text("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
-        for(Poder poder : poderes.devolverPoderes()){//aca concidero que solo hay una sola instancia por cada tipo de poder.
+        for(Poder poder : poderes.devolverPoderes()){//aca considero que solo hay una sola instancia por cada tipo de poder.
             textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
         }
         textoExtra.setWrappingWidth(150);
         return textoExtra;
     }
 
-    public void mostrarVistaRonda(){
+    public void mostrar(){
         ventanaPrincipal.show();
     }
 }

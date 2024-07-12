@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class FaseInicial implements Fase{
     Stage ventanaPrincipal;
@@ -61,8 +59,6 @@ public class FaseInicial implements Fase{
 
 
     private void pedirNombresDeJugadores() {
-//        ventanaPrincipal.setWidth(1000);
-//        ventanaPrincipal.setHeight(1000);
         if(jugadorActual < manejador.obtenerAtributos().obtenerNumJugadores()){
             VBox layout = new VBox();
             layout.setAlignment(Pos.CENTER);
@@ -90,8 +86,6 @@ public class FaseInicial implements Fase{
 
             ventanaPrincipal.setScene(scene);
             ventanaPrincipal.centerOnScreen();
-//            ventanaPrincipal.setWidth(605);
-//            ventanaPrincipal.setHeight(500);
         } else {
             pedirCondicionesDeFin();
         }
@@ -120,7 +114,7 @@ public class FaseInicial implements Fase{
             manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
             manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 
-            fasePromover();//Aca capaz solo hacer fasePromover();
+            fasePromover();
 
         });
 

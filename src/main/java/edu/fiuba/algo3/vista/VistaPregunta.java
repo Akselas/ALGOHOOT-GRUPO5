@@ -1,7 +1,9 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Pregunta;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
@@ -17,7 +19,6 @@ public abstract class VistaPregunta extends VBox {
         this.setSpacing(50);
         this.setPadding(new Insets(30, 10, 70, 10)); // arriba, der, abajo, izq
         this.enunciadoLabel.getStyleClass().add("titulo-pregunta");
-        //this.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
     }
 
     public void mostrarPregunta(Pregunta pregunta){
@@ -25,4 +26,30 @@ public abstract class VistaPregunta extends VBox {
     }
 
     public abstract void mostrarOpciones(Opciones ops);
+
+    public Scene proyectar(PoderesVista poderesBox, Button responder){
+        HBox ventanaPregunta = new HBox(20, this, poderesBox);
+        ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
+        ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
+        ventanaPregunta.getStyleClass().add("pregunta");
+
+        VBox ventanaFondo = crearVentanaFondo();
+
+        ventanaFondo.getChildren().addAll(ventanaPregunta, responder);
+        Scene scene = new Scene(ventanaFondo);
+        scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
+        return scene;
+
+    }
+    private VBox crearVentanaFondo(){
+        VBox ventana = new VBox();
+        ventana.setId("VistaPrincipal");
+        ventana.setSpacing(10);
+        ventana.setPadding(new Insets(10));
+        ventana.setAlignment(Pos.CENTER);
+        return ventana;
+    }
+
 }
+
+

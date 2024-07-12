@@ -3,29 +3,38 @@ import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaVF;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 
 
 public class ControladorVF implements ControladorPregunta{
 
-    private VistaVF vistaVF;
+    private VistaVF vista;
     private Jugador jugador;
     private Pregunta pregunta;
     private PoderesVista poderesBox;
     private Button responder;
 
-    public ControladorVF(VistaVF vistaVF, Jugador jugador, Pregunta pregunta, PoderesVista poderesBox, Button responder){
-        this.vistaVF = vistaVF;
+    public ControladorVF(Pregunta pregunta, Jugador jugador){
+        this.vista = new VistaVF();
         this.jugador = jugador;
+        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
-        this.poderesBox = poderesBox;
-        this.responder = responder;
-        initialize();
+        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
 
+        initialize();
+    }
+    @Override
+    public void mostrarVentanaPregunta(Stage fondo){
+        Scene escena = vista.proyectar(poderesBox, responder);
+        fondo.setScene(escena);
+        fondo.setTitle("AlgoHoot");
+        fondo.show();
     }
     @Override
     public void initialize(){//no me deja ponerlo en privado
-        this.vistaVF.mostrarPregunta(this.pregunta);
-        this.vistaVF.mostrarOpciones(pregunta.obtenerOpciones());
+        this.vista.mostrarPregunta(this.pregunta);
+        this.vista.mostrarOpciones(pregunta.obtenerOpciones());
         establecerManejoDeEventos();
     }
 
@@ -37,27 +46,16 @@ public class ControladorVF implements ControladorPregunta{
             RespuestaVF respuestaJugador = new RespuestaVF();
 
             // Obtengo el botón seleccionado
-            RadioButton botonSeleccionado = (RadioButton) this.vistaVF.obtenerGrupoOpciones().getSelectedToggle();
+            RadioButton botonSeleccionado = (RadioButton) this.vista.obtenerGrupoOpciones().getSelectedToggle();
             // Si se presionó el boton Responder pero no se presiono ninguna opcion entonces pregunto
             if (botonSeleccionado != null) {
                 //Obtengo el valor del boton seleccionado, que es de la clase Opcion
                 respuestaJugador.agregarOpcion((Opcion) botonSeleccionado.getUserData());
-
-                Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
-                jugador.cargarPuntajeRonda(puntajeRonda);
-
+                jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
                 Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
-                if(poderSeleccionado instanceof PoderIndividual){
-                    PoderIndividual poder = (PoderIndividual) poderSeleccionado;
-                    poder.aplicarUnico(puntajeRonda);
-                    poderesBox.actualizarPoderes();
-                }else{
-                    PoderGrupal poder = (PoderGrupal) poderSeleccionado;
-                    //listaPoderesGrupales.agregar(poder);
+                Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
+                poderesBox.actualizarPoderes();
 
-                }
-
-                jugador.sumarPuntaje(puntajeRonda);
                 System.out.println("Puntaje de " + jugador.getNombre() + " : " + jugador.getPuntaje());
 
             }else {
@@ -65,5 +63,8 @@ public class ControladorVF implements ControladorPregunta{
             }
             });
     }
-
+    @Override
+    public Poder poderUsado(){
+        return poderesBox.obtenerPoderSeleccionado();
+    }
 }

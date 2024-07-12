@@ -2,9 +2,9 @@ package edu.fiuba.algo3.controlador;
 import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.vista.PoderesVista;
 import edu.fiuba.algo3.vista.VistaMC;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-
-
+import javafx.stage.Stage;
 
 
 public class ControladorMC implements ControladorPregunta{
@@ -15,15 +15,21 @@ public class ControladorMC implements ControladorPregunta{
     private PoderesVista poderesBox;
     private Button responder;
 
-    public ControladorMC(Jugador jugador, Pregunta pregunta, VistaMC vistaMC, PoderesVista poderesBox, Button responder) {
+    public ControladorMC(Pregunta pregunta, Jugador jugador) {
+        this.vista = new VistaMC();
         this.jugador = jugador;
+        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
-        this.vista = vistaMC;
-        this.poderesBox = poderesBox;
-        this.responder = responder;
+        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
-
+    @Override
+    public void mostrarVentanaPregunta(Stage fondo){
+        Scene escena = vista.proyectar(poderesBox, responder);
+        fondo.setScene(escena);
+        fondo.setTitle("AlgoHoot");
+        fondo.show();
+    }
     @Override
     public void initialize() {
         vista.mostrarPregunta(pregunta);
@@ -44,21 +50,11 @@ public class ControladorMC implements ControladorPregunta{
                 }
             }
 
-            Puntaje puntajeRonda = pregunta.calcularPuntaje(respuestaJugador);
-            jugador.cargarPuntajeRonda(puntajeRonda);
-
+            jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
-            if(poderSeleccionado instanceof PoderIndividual){
-                PoderIndividual poder = (PoderIndividual) poderSeleccionado;
-                poder.aplicarUnico(puntajeRonda);
-                poderesBox.actualizarPoderes();
-            }else{
-                PoderGrupal poder = (PoderGrupal) poderSeleccionado;
-                //listaPoderesGrupales.agregar(poder);
-
-            }
-            jugador.sumarPuntaje(puntajeRonda);
-            showScoreAlert(puntajeRonda.obtenerPuntuacion());
+            Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
+            poderesBox.actualizarPoderes();
+            showScoreAlert(jugador.getPuntajeParcial().obtenerPuntuacion());
         });
     }
 
@@ -69,5 +65,9 @@ public class ControladorMC implements ControladorPregunta{
         alert.setContentText("El puntaje del jugador " + jugador.getNombre() + " es: " + jugador.getPuntaje());
 
         alert.showAndWait();
+    }
+    @Override
+    public Poder poderUsado(){
+        return poderesBox.obtenerPoderSeleccionado();
     }
 }
