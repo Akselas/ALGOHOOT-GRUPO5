@@ -18,7 +18,6 @@ public class FaseManejador {
         this.atributos = new AtributosIniciales();
         estadoFase = new FaseInicial(fondo, this);
         this.parser = new Parser(ruta);
-        parser.leer(ruta);
     }
     public void iniciarFase(){
         estadoFase.iniciar();

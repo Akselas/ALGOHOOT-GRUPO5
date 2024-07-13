@@ -11,9 +11,12 @@ import edu.fiuba.algo3.modelo.*;
 
 public abstract class VistaPregunta extends VBox {
     protected Label enunciadoLabel;
-
+    public static final int anchoDeTexto = 600;
     public VistaPregunta(){
-        this.enunciadoLabel = new Label();
+        this.enunciadoLabel = new Label(){{
+            setWrapText(true);
+            setMaxWidth(anchoDeTexto);
+        }};
         this.getChildren().add(enunciadoLabel);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);

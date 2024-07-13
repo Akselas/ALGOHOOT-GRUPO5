@@ -15,6 +15,8 @@ public class FaseInicial implements Fase{
     Stage ventanaPrincipal;
     FaseManejador manejador;
     int jugadorActual = 0;
+    public static final int anchoVentana = 600;
+    public static final int altoVentana = 400;
 
     public FaseInicial(Stage stage, FaseManejador manejador){
         this.ventanaPrincipal = stage;
@@ -25,7 +27,7 @@ public class FaseInicial implements Fase{
         VBox layout = new VBox();
         layout.setAlignment(Pos.CENTER);
         layout.setId("VistaInicial");
-        Scene scene = new Scene(layout, 600, 400);
+        Scene scene = new Scene(layout, anchoVentana, altoVentana);
         scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());////////
 
         // Comienza con la selección del número de jugadores
@@ -65,7 +67,7 @@ public class FaseInicial implements Fase{
             layout.setPrefWidth(600);  // Establecer un ancho prefijado
             layout.setPrefHeight(400);
 
-            Scene scene = new Scene(layout, 600, 400);
+            Scene scene = new Scene(layout, anchoVentana, altoVentana);
             scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
             layout.setId("VistaAjustesIniciales");
             // Pedir nombres de los jugadores
@@ -96,7 +98,7 @@ public class FaseInicial implements Fase{
 
     private void pedirCondicionesDeFin() {
         VBox layout = new VBox();
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, anchoVentana, altoVentana);
         scene.getStylesheets().add(getClass().getResource("/FaseInicial.css").toExternalForm());
         layout.setId("VistaAjustesIniciales");
 
