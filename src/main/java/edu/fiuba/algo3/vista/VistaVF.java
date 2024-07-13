@@ -16,7 +16,7 @@ public class VistaVF extends VistaPregunta{
 
     @Override
     public void mostrarOpciones(Opciones ops) {
-        HBox opciones = new HBox(100);
+        HBox opciones = new HBox(50);
         for(Opcion opcion: ops.devolverOpciones()){
             RadioButton boton1 = new RadioButton(opcion.obtenerTexto());
             boton1.setUserData(opcion);

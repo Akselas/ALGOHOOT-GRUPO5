@@ -24,13 +24,16 @@ public class VistaGC extends VistaPregunta{
     private Label nombreGrupo1;
     private Label nombreGrupo2;
     private VBox grupoDefault;
+    public static final int alturaMaxima = 50;
 
     public VistaGC(){
         this.grupoDefault = new VBox(10);
         this.grupo1 = new VBox(10);
         this.grupo2 = new VBox(10);
         this.grupo1Box = new VBox(5);
+        grupo1Box.setMaxHeight(alturaMaxima);
         this.grupo2Box = new VBox(5);
+        grupo2Box.setMaxHeight(alturaMaxima);
         this.nombreGrupo1 = new Label();
         this.nombreGrupo2 = new Label();
 
@@ -41,6 +44,7 @@ public class VistaGC extends VistaPregunta{
         this.grupo1.setStyle("-fx-border-color: black; -fx-padding: 10;");
         this.grupo1.setPrefSize(150, 200);
         this.grupo1Box.getChildren().addAll(nombreGrupo1, grupo1);
+
 
         this.grupo2.setStyle("-fx-border-color: black; -fx-padding: 10;");
         this.grupo2.setPrefSize(150, 200);

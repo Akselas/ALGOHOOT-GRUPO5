@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.*;
 
 public abstract class VistaPregunta extends VBox {
     protected Label enunciadoLabel;
-    public static final int anchoDeTexto = 600;
+    public static final int anchoDeTexto = 400;
     public VistaPregunta(){
         this.enunciadoLabel = new Label(){{
             setWrapText(true);

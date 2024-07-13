@@ -14,6 +14,8 @@ public class VistaOC extends VistaPregunta {
     @Override
     public void mostrarOpciones(Opciones ops){
         opcionesListView.setItems(FXCollections.observableArrayList(ops.devolverOpciones()));
+        opcionesListView.setMaxHeight(200);
+        opcionesListView.setPrefHeight(200);
         this.getChildren().add(opcionesListView);
     }
 
