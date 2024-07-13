@@ -9,6 +9,7 @@ public class Triplicador extends Poder implements PoderIndividual{
 
     public void aplicarUnico(Puntaje puntaje){
         puntaje.multiplicar(3);
+        super.utilizarPoder();
     }
 
     @Override

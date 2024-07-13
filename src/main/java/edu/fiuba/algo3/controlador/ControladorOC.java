@@ -20,13 +20,14 @@ public class ControladorOC implements ControladorPregunta{
     private VistaOC vista;
     private PoderesVista poderesBox;
     private Button responder;
+    private Runnable onResponder;
 
 
     public ControladorOC(Pregunta pregunta, Jugador jugador) {
         this.vista = new VistaOC();
         this.jugador = jugador;
-        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
+        this.poderesBox = new PoderesVista(jugador, pregunta);
         this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
@@ -58,6 +59,10 @@ public class ControladorOC implements ControladorPregunta{
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
             Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
             poderesBox.actualizarPoderes();
+
+            if (onResponder != null) {
+                onResponder.run();
+            }
         });
 
     }
@@ -137,6 +142,11 @@ public class ControladorOC implements ControladorPregunta{
     @Override
     public Poder poderUsado(){
         return poderesBox.obtenerPoderSeleccionado();
+    }
+
+    @Override
+    public void setOnResponder(Runnable onResponder) {
+        this.onResponder = onResponder;
     }
 
 }

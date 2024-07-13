@@ -56,7 +56,8 @@ public class VistaPrincipal extends Application {
 //        ventanaPrincipal.setWidth(500);
 //        ventanaPrincipal.setHeight(500);
 //        this.vistaPrincipal = establecerVistaPrincipal();
-//        Jugador jugador = new Jugador("Axel");
+         //Jugador jugador = new Jugador("Axel");
+         //mostrarVistaVF(jugador);
 //        this.poderesBox = new PoderesVista(jugador);
 //        //creador.devolverPrimeraPregunta();
 
@@ -65,7 +66,7 @@ public class VistaPrincipal extends Application {
 
     public void mostrarVistaGC(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
         PreguntaGC preguntaGC = creador.devolverPreguntaGC();
-        poderesBox.agregarBotones(preguntaGC);
+        //poderesBox.agregarBotones(preguntaGC);
         VistaGC vistaGC = new VistaGC();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
@@ -74,19 +75,31 @@ public class VistaPrincipal extends Application {
     }
 
     public void mostrarVistaVF(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
-        PreguntaVF preguntaVF = creador.devolverPreguntaVF();
-        poderesBox.agregarBotones(preguntaVF);
+        /*PreguntaVF preguntaVF = creador.devolverPreguntaVF();
+        //poderesBox.agregarBotones(preguntaVF);
         VistaVF vistaVF = new VistaVF();
 
         //Controlador llama una funcion mostrarPregunta para setear la vista
         ControladorVF controladorVF = new ControladorVF(preguntaVF, jugador);
-        proyectarVista(vistaVF);
+        proyectarVista(vistaVF);*/
+        Opcion opc1 = new Opcion("Verdadero");
+        Opcion opc2 = new Opcion("Falso");
+        Opciones opciones = new Opciones();
+        opciones.agregarOpcion(opc1);
+        opciones.agregarOpcion(opc2);
+        RespuestaVF correcta = new RespuestaVF();//Estado inconsistente no debería haber una respuesta sin opcion
+        correcta.agregarOpcion(opc1);
+        PreguntaVF pregunta = new PreguntaVF("El tomate es una fruta?", opciones, correcta);
+        ControladorFactory controladorFactory = new ControladorFactory();
+        ControladorPregunta controlador = controladorFactory.crearControlador(pregunta, jugador);
+
+        controlador.mostrarVentanaPregunta(ventanaPrincipal);
     }
 
     public void mostrarVistaMC(Jugador jugador) {
 
         PreguntaMC preguntaMC = creador.devolverPreguntaMC();
-        poderesBox.agregarBotones(preguntaMC);
+        //deresBox.agregarBotones(preguntaMC);
 
         VistaMC vistaMC = new VistaMC();
         ControladorMC controlador = new ControladorMC(preguntaMC, jugador);
@@ -96,7 +109,7 @@ public class VistaPrincipal extends Application {
     public void mostrarVistaOC(Jugador jugador){
         //return new VistaX().show()
         PreguntaOC preguntaOC = creador.devolverPreguntaOC();
-        poderesBox.agregarBotones(preguntaOC);
+      //poderesBox.agregarBotones(preguntaOC);
         VistaOC vistaOC = new VistaOC();
         ControladorOC controlador = new ControladorOC(preguntaOC, jugador);
         proyectarVista(vistaOC);

@@ -8,4 +8,5 @@ public interface ControladorPregunta {
    void establecerManejoDeEventos();
    void mostrarVentanaPregunta(Stage stage);
    Poder poderUsado();
+   void setOnResponder(Runnable onResponder);
 }

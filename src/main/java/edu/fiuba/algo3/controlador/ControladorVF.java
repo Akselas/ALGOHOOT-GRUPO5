@@ -14,12 +14,13 @@ public class ControladorVF implements ControladorPregunta{
     private Pregunta pregunta;
     private PoderesVista poderesBox;
     private Button responder;
+    private Runnable onResponder;
 
     public ControladorVF(Pregunta pregunta, Jugador jugador){
         this.vista = new VistaVF();
         this.jugador = jugador;
-        this.poderesBox = new PoderesVista(jugador); //por ahora lo dejamos adentro
         this.pregunta = pregunta;
+        this.poderesBox = new PoderesVista(jugador, pregunta); //por ahora lo dejamos adentro
         this.responder = new Button("Responder"); //por ahora lo dejamos adentro
 
         initialize();
@@ -61,10 +62,21 @@ public class ControladorVF implements ControladorPregunta{
             }else {
                 System.out.println("Por favor selecciona una opción.");
             }
+
+            if (onResponder != null) {
+                onResponder.run();
+            }
+
             });
     }
     @Override
     public Poder poderUsado(){
         return poderesBox.obtenerPoderSeleccionado();
     }
+
+    @Override
+    public void setOnResponder(Runnable onResponder) {
+        this.onResponder = onResponder;
+    }
+
 }

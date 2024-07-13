@@ -14,7 +14,7 @@ public class PoderesVista extends VBox{
     private Poder poderSeleccionado;
     private Jugador jugador;
 
-public PoderesVista(Jugador jugador){
+public PoderesVista(Jugador jugador, Pregunta pregunta){
     poderSeleccionado = new Basico();
     grupoPoderes = new ToggleGroup();
     this.jugador = jugador;
@@ -22,11 +22,11 @@ public PoderesVista(Jugador jugador){
     this.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
     this.setPadding(new Insets(10, 10, 10, 10));
     this.setAlignment(Pos.CENTER);
+    agregarBotones(pregunta);
 }
 
-public void agregarBotones(Pregunta pregunta){//se agregan los botones filtrando los poderes que no se pueden utilizar segun pregunta
+private void agregarBotones(Pregunta pregunta){//se agregan los botones filtrando los poderes que no se pueden utilizar segun pregunta
     for(Poder poder: jugador.obtenerPoderes()){
-        //mochila
         if(poder.habilitarPoder(pregunta)) {
             cargarPoder(poder);
         }

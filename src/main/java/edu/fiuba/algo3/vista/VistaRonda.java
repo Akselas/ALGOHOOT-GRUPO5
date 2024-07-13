@@ -20,7 +20,8 @@ import java.util.List;
 public class VistaRonda {
     Stage ventanaPrincipal;
     Jugadores jugadores;
-    Poderes poderes; //Estos los poderes usados en la ronda
+    Poderes poderes;//Estos los poderes usados en la ronda
+    private Button botonSiguiente;
 
     public VistaRonda(Stage ventanaPrincipal, Jugadores jugadores, Poderes poderes) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -31,7 +32,7 @@ public class VistaRonda {
 
     private void iniciar(){
         Label titulo = new Label("Resultados de la Ronda");
-        Button boton = new Button("Siguiente");
+        botonSiguiente = new Button("Siguiente");
 
         TableView<Jugador> tablaPuntajes = this.crearTablaPuntaje();
         Text textoExtra = this.crearTextoPoderes();
@@ -42,10 +43,10 @@ public class VistaRonda {
 
         VBox.setMargin(titulo, new Insets(10, 0, 40, 0)); // Espacio alrededor del título
         VBox.setMargin(contenedor, new Insets(0, 0, 20, 0)); // Espacio alrededor del contenedor
-        VBox.setMargin(boton, new Insets(40, 0, 0, 0));
+        VBox.setMargin(botonSiguiente, new Insets(40, 0, 0, 0));
         HBox.setMargin(tablaPuntajes, new Insets(0, 20, 0, 0));
 
-        VBox vistaRonda = new VBox(titulo, contenedor, boton);
+        VBox vistaRonda = new VBox(titulo, contenedor, botonSiguiente);
         vistaRonda.setId("VistaRonda");
         vistaRonda.setAlignment(Pos.CENTER);
         vistaRonda.setSpacing(10);
@@ -81,6 +82,9 @@ public class VistaRonda {
     private Text crearTextoPoderes(){
         Text textoExtra = new Text("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
         for(Poder poder : poderes.devolverPoderes()){//aca considero que solo hay una sola instancia por cada tipo de poder.
+            if(!(poder instanceof Basico)){
+                textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
+            }
             textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
         }
         textoExtra.setWrappingWidth(150);
@@ -89,6 +93,10 @@ public class VistaRonda {
 
     public void mostrar(){
         ventanaPrincipal.show();
+    }
+
+    public Button getBotonSiguiente() {
+        return botonSiguiente;
     }
 }
 

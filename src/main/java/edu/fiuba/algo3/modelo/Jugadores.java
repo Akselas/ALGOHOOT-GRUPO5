@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Jugadores {
@@ -29,5 +30,9 @@ public class Jugadores {
     }
     public ArrayList<Jugador> getJugadores(){
         return jugadores;
+    }
+
+    public Iterator<Jugador> iterador() {
+        return jugadores.iterator();
     }
 }

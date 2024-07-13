@@ -20,8 +20,13 @@ public class Poderes{
             poderes.add(poder);
         }
     }
-    public boolean yaAgregado(Poder poder){
-        return poderes.contains(poder);
+    private boolean yaAgregado(Poder poder) {
+        for (Poder p : poderes) {
+            if (p.getClass().equals(poder.getClass())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void aplicarPoderesGrupales(Puntajes puntajes){
