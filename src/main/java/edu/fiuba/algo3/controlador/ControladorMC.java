@@ -11,7 +11,6 @@ public class ControladorMC implements ControladorPregunta {
     private Pregunta pregunta;
     private VistaMC vista;
     private PoderesVista poderesBox;
-    private Button responder;
     private Runnable onResponder;
 
     public ControladorMC(Pregunta pregunta, Jugador jugador) {
@@ -19,12 +18,11 @@ public class ControladorMC implements ControladorPregunta {
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.poderesBox = new PoderesVista(jugador, pregunta);
-        this.responder = new Button("Responder");
         initialize();
     }
     @Override
     public void mostrarVentanaPregunta(Stage fondo) {
-        Scene escena = vista.proyectar(poderesBox, responder);
+        Scene escena = vista.proyectar(poderesBox);
         fondo.setScene(escena);
         fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
@@ -38,7 +36,7 @@ public class ControladorMC implements ControladorPregunta {
 
     @Override
     public void establecerManejoDeEventos() {
-        responder.setOnAction(event -> {
+        this.vista.obtenerBotonResponder().setOnAction(event -> {
             RespuestaMC respuestaJugador = new RespuestaMC();
 
             for (CheckBox checkBox : vista.obtenerBotones()) {

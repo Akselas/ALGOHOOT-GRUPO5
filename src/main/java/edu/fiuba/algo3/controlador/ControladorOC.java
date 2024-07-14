@@ -19,7 +19,6 @@ public class ControladorOC implements ControladorPregunta{
     private Jugador jugador;
     private VistaOC vista;
     private PoderesVista poderesBox;
-    private Button responder;
     private Runnable onResponder;
 
 
@@ -28,12 +27,11 @@ public class ControladorOC implements ControladorPregunta{
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.poderesBox = new PoderesVista(jugador, pregunta);
-        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
     @Override
     public void mostrarVentanaPregunta(Stage fondo){
-        Scene escena = vista.proyectar(poderesBox, responder);
+        Scene escena = vista.proyectar(poderesBox);
         fondo.setScene(escena);
         fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
@@ -49,7 +47,7 @@ public class ControladorOC implements ControladorPregunta{
     @Override
     public void establecerManejoDeEventos() {
 
-        responder.setOnAction(event -> {
+        this.vista.obtenerBotonResponder().setOnAction(event -> {
             RespuestaOC respuestaJugador = new RespuestaOC();//creo la respuesta del jugador
             ObservableList<Opcion> items = vista.obtenerOpcionesListView().getItems();//cambio li ListView en una ObservableList porque sino no me deja hacer el ciclo for
             for(Opcion opcionDeRespuesta : items){

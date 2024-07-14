@@ -13,7 +13,6 @@ public class ControladorVF implements ControladorPregunta{
     private Jugador jugador;
     private Pregunta pregunta;
     private PoderesVista poderesBox;
-    private Button responder;
     private Runnable onResponder;
 
     public ControladorVF(Pregunta pregunta, Jugador jugador){
@@ -21,13 +20,12 @@ public class ControladorVF implements ControladorPregunta{
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.poderesBox = new PoderesVista(jugador, pregunta); //por ahora lo dejamos adentro
-        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
 
         initialize();
     }
     @Override
     public void mostrarVentanaPregunta(Stage fondo){
-        Scene escena = vista.proyectar(poderesBox, responder);
+        Scene escena = vista.proyectar(poderesBox);
         fondo.setScene(escena);
         fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
@@ -41,7 +39,7 @@ public class ControladorVF implements ControladorPregunta{
 
     @Override
     public void establecerManejoDeEventos() {
-        this.responder.setOnAction(event -> {
+        this.vista.obtenerBotonResponder().setOnAction(event -> {
             //Cuando se presiona el boton responder entonces:
             //Creo la respuesta del jugador
             RespuestaVF respuestaJugador = new RespuestaVF();

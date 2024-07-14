@@ -10,10 +10,12 @@ import javafx.geometry.Insets;
 import edu.fiuba.algo3.modelo.*;
 
 public abstract class VistaPregunta extends VBox {
-    protected Label enunciadoLabel;
-    protected Label turno;
-    protected Label tema;
+    private final Label enunciadoLabel;
+    private final Label turno;
+    private final Label tema;
     public static final int anchoDeTexto = 400;
+    private final Button responder;
+
     public VistaPregunta(){
         this.enunciadoLabel = new Label(){{
             setWrapText(true);
@@ -21,6 +23,7 @@ public abstract class VistaPregunta extends VBox {
         }};
         this.tema = new Label();
         this.turno = new Label();
+        this.responder = new Button("Responder");
         this.getChildren().addAll(turno, tema, enunciadoLabel);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
@@ -35,7 +38,7 @@ public abstract class VistaPregunta extends VBox {
 
     public abstract void mostrarOpciones(Opciones ops);
 
-    public Scene proyectar(PoderesVista poderesBox, Button responder){
+    public Scene proyectar(PoderesVista poderesBox){
         HBox ventanaPregunta = new HBox(20, this, poderesBox);
         ventanaPregunta.setMaxWidth(Double.MAX_VALUE);
         ventanaPregunta.setPadding(new Insets(10, 10, 10, 10));
@@ -43,7 +46,7 @@ public abstract class VistaPregunta extends VBox {
 
         VBox ventanaFondo = crearVentanaFondo();
 
-        ventanaFondo.getChildren().addAll(ventanaPregunta, responder);
+        ventanaFondo.getChildren().addAll(ventanaPregunta, this.responder);
         Scene scene = new Scene(ventanaFondo);
         scene.getStylesheets().add(getClass().getResource("/FaseJuego.css").toExternalForm());
         return scene;
@@ -56,6 +59,10 @@ public abstract class VistaPregunta extends VBox {
         ventana.setPadding(new Insets(10));
         ventana.setAlignment(Pos.CENTER);
         return ventana;
+    }
+
+    public Button obtenerBotonResponder() {
+        return this.responder;
     }
 
 }

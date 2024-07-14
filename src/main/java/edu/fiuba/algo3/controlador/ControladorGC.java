@@ -17,7 +17,6 @@ public class ControladorGC implements ControladorPregunta{
     private Pregunta pregunta;
     private VistaPrincipal vistaPrincipal;
     private PoderesVista poderesBox;
-    private Button responder;
     private Runnable onResponder;
 
     public ControladorGC(Pregunta pregunta, Jugador jugador) {
@@ -25,13 +24,12 @@ public class ControladorGC implements ControladorPregunta{
         this.jugador = jugador;
         this.pregunta = pregunta;
         this.poderesBox = new PoderesVista(jugador, pregunta);
-        this.responder = new Button("Responder"); //por ahora lo dejamos adentro
         initialize();
     }
 
     @Override
     public void mostrarVentanaPregunta(Stage fondo){
-        Scene escena = vista.proyectar(poderesBox, responder);
+        Scene escena = vista.proyectar(poderesBox);
         fondo.setScene(escena);
         fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
@@ -48,7 +46,7 @@ public class ControladorGC implements ControladorPregunta{
 
     @Override
     public void establecerManejoDeEventos() {
-        this.responder.setOnAction(event -> {
+        this.vista.obtenerBotonResponder().setOnAction(event -> {
             //Cuando se presiona el boton responder entonces:
 
             // reviso si todas las opciones fueron asignadas
