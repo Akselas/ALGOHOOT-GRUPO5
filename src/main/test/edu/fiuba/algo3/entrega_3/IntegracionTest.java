@@ -18,7 +18,7 @@ public class IntegracionTest {
         RespuestaVF correcta = new RespuestaVF();
         correcta.agregarOpcion(new Opcion("V"));
 
-        PreguntaVF preguntaVF = new PreguntaVF(textoPregunta, new Opciones(), correcta);
+        PreguntaVF preguntaVF = new PreguntaVF(textoPregunta,"Ciencias","VerdaderoFalso", new Opciones(), correcta, "Final");
 
         //Act
         RespuestaVF resp = new RespuestaVF();

@@ -17,6 +17,7 @@ public abstract class Pregunta {
         this.textoRespuesta = textoRespuesta;
     }
 
+
     public Puntaje calcularPuntaje(Respuesta respuestaJugador) {
         if(respuestaJugador.esIgual(this.correcta)) {
             return new Puntaje(1);

@@ -1,0 +1,15 @@
+[
+  {
+    "ID": 8,
+    "Tema": "DEPORTES",
+    "Tipo": "Multiple Choice Puntaje Parcial",
+    "Pregunta": "Qué disciplinas no forman parte del DECATLON?",
+    "Respuesta": "3,5",
+    "Opcion 1": "Lanzamiento de disco",
+    "Opcion 2": "Salto en largo",
+    "Opcion 3": "Maratón",
+    "Opcion 4": "Lanzamiento de jabalina",
+    "Opcion 5": "Ciclismo",
+    "Texto respuesta": "Ni maratón ni ciclismo forman parte del decatlón."
+  }
+]

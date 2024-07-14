@@ -1,0 +1,13 @@
+[
+  {
+    "ID": 7,
+    "Tema": "DEPORTES",
+    "Tipo": "Ordered choice",
+    "Pregunta": "Ordene las siguientes superficies de juego de tenis de acuerdo a su velocidad, de LENTAS a RAPIDAS",
+    "Respuesta": "3,2,1",
+    "Opcion 1": "Carpeta sintética",
+    "Opcion 2": "Cemento",
+    "Opcion 3": "Polvo de Ladrillo Naranja",
+    "Texto respuesta": "La superficie más rápida en el tenis es la carpeta sintética, no utilizada en torneos profesionales desde el 2008"
+  }
+]

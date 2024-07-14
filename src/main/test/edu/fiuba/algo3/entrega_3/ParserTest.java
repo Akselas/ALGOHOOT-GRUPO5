@@ -13,7 +13,7 @@ public class ParserTest {
     public void test01ParserLeeUnArchivoYCreaUnaClasePregunta() throws IOException {
         //Arrange
 
-        String nombreFile = "src/main/resources/ParserTestFile.json";
+        String nombreFile = "src/main/resources/VFSimple.json";
 
         String esperado = "El punto de ebullición del agua a 3300m del mar es 100 grados centígrados";
 

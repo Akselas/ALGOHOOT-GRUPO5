@@ -1,0 +1,14 @@
+[
+  {
+    "ID": 15,
+    "Tema": "NATURALEZA",
+    "Tipo": "Multiple Choice Penalidad",
+    "Pregunta": "¿Cómo se llama el estudio de los hongos?",
+    "Respuesta": "4",
+    "Opcion 1": "Hongología",
+    "Opcion 2": "Fungilogía",
+    "Opcion 3": "Ciencias del hongo",
+    "Opcion 4": "Micología",
+    "Texto respuesta": "La respuesta correcta es micología"
+  }
+]
