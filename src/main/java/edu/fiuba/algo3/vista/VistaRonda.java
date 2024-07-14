@@ -80,12 +80,12 @@ public class VistaRonda {
     }
 
     private Text crearTextoPoderes(){
+        poderes.eliminarPoderesDuplicados();
         Text textoExtra = new Text("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
         for(Poder poder : poderes.devolverPoderes()){//aca considero que solo hay una sola instancia por cada tipo de poder.
             if(!(poder instanceof Basico)){
                 textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
             }
-            textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
         }
         textoExtra.setWrappingWidth(150);
         return textoExtra;

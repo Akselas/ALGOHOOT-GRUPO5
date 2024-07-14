@@ -44,16 +44,21 @@ public class ControladorMC implements ControladorPregunta {
             for (CheckBox checkBox : vista.obtenerBotones()) {
                 if (checkBox.isSelected()) {
                     respuestaJugador.agregarOpcionSeleccionada((Opcion) checkBox.getUserData());
+                    Opcion opcion = (Opcion) checkBox.getUserData();
+                    //System.out.println("seleccionados "+opcion.obtenerTexto());
                 } else {
                     respuestaJugador.agregarOpcionNoSeleccionada((Opcion) checkBox.getUserData());
+                    Opcion opcion = (Opcion) checkBox.getUserData();
+                    //System.out.println("no seleccionados " + opcion.obtenerTexto());
                 }
             }
 
             jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
+            //System.out.println(jugador.getPuntajeParcial().obtenerPuntuacion());
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();
             Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
             poderesBox.actualizarPoderes();
-            showScoreAlert(jugador.getPuntajeParcial().obtenerPuntuacion());
+            showScoreAlert();
 
             if (onResponder != null) {
                 onResponder.run();
@@ -61,11 +66,11 @@ public class ControladorMC implements ControladorPregunta {
         });
     }
 
-    private void showScoreAlert(int puntaje) {
+    private void showScoreAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Puntaje del Jugador");
         alert.setHeaderText(null);
-        alert.setContentText("El puntaje del jugador " + jugador.getNombre() + " es: " + jugador.getPuntaje());
+        alert.setContentText("El puntaje del jugador " + jugador.getNombre() + " es: " + jugador.getPuntajeParcial().obtenerPuntuacion());
         alert.showAndWait();
     }
 

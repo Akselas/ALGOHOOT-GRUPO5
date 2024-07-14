@@ -30,5 +30,9 @@ public class Grupo {
         }
         return false;
     }
+//despuesBorrar
+    public ArrayList<Opcion> getOpciones() {
+        return opciones;
+    }
 }
 

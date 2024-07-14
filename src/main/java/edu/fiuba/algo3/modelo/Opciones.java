@@ -22,5 +22,11 @@ public class Opciones implements Iterable<Opcion> {
     public ArrayList<Opcion> devolverOpciones(){
         return opciones;
     }
+    public boolean hayOpcion(Opcion opcion){
+        for(Opcion op: opciones){
+            if(op.obtenerTexto().equals(opcion.obtenerTexto()))return true;
+        }
+        return false;
+    }
 
 }

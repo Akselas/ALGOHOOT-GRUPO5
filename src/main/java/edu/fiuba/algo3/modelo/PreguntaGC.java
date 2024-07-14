@@ -4,8 +4,9 @@ public class PreguntaGC extends Pregunta{
     private final String nombreG1;
     private final String nombreG2;
 
-    public PreguntaGC(String texto, Opciones opciones, String nombreG1, String nombreG2, RespuestaGC correcta){
-        super(texto, opciones, correcta);
+
+    public PreguntaGC(String texto, String tema, String tipo, Opciones opciones, String nombreG1, String nombreG2, RespuestaGC correcta, String textoRespuesta){
+        super(texto, tema, tipo, opciones, correcta, textoRespuesta);
         this.nombreG1 = nombreG1;
         this.nombreG2 = nombreG2;
     }

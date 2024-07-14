@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -57,7 +56,8 @@ public class VistaPrincipal extends Application {
 //        ventanaPrincipal.setHeight(500);
 //        this.vistaPrincipal = establecerVistaPrincipal();
          //Jugador jugador = new Jugador("Axel");
-         //mostrarVistaVF(jugador);
+         //mostrarVistaGC(jugador);
+        //mostrarVistaMC();
 //        this.poderesBox = new PoderesVista(jugador);
 //        //creador.devolverPrimeraPregunta();
 
@@ -65,13 +65,35 @@ public class VistaPrincipal extends Application {
 
 
     public void mostrarVistaGC(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
-        PreguntaGC preguntaGC = creador.devolverPreguntaGC();
-        //poderesBox.agregarBotones(preguntaGC);
-        VistaGC vistaGC = new VistaGC();
 
-        //Controlador llama una funcion mostrarPregunta para setear la vista
-        ControladorGC controladorGC = new ControladorGC(preguntaGC, jugador);
-        proyectarVista(vistaGC);
+
+       /* Grupo frutas = new Grupo();
+        frutas.agregar(new Opcion("tomate"));
+        frutas.agregar(new Opcion("mandarina"));
+        frutas.agregar(new Opcion("manzana"));
+
+        Grupo verduras = new Grupo();
+        verduras.agregar(new Opcion("cebolla"));
+        verduras.agregar(new Opcion("lechuga"));
+        verduras.agregar(new Opcion("zanahoria"));
+
+        Opciones opciones = new Opciones();
+        opciones.agregarOpcion(new Opcion("tomate"));
+        opciones.agregarOpcion(new Opcion("mandarina"));
+        opciones.agregarOpcion(new Opcion("manzana"));
+        opciones.agregarOpcion(new Opcion("cebolla"));
+        opciones.agregarOpcion(new Opcion("lechuga"));
+        opciones.agregarOpcion(new Opcion("zanahoria"));
+
+        RespuestaGC correcta = new RespuestaGC(frutas, verduras);
+
+
+
+        PreguntaGC preguntaGC = new PreguntaGC("ordenar Frutas y Verduras", opciones, "Frutas", "Verduras", correcta);
+        ControladorFactory controladorFactory = new ControladorFactory();
+        ControladorPregunta controlador = controladorFactory.crearControlador(preguntaGC, jugador);
+
+        controlador.mostrarVentanaPregunta(ventanaPrincipal);*/
     }
 
     public void mostrarVistaVF(Jugador jugador) { //debería ser mostrarVistaPregunta para encapsular
@@ -82,7 +104,8 @@ public class VistaPrincipal extends Application {
         //Controlador llama una funcion mostrarPregunta para setear la vista
         ControladorVF controladorVF = new ControladorVF(preguntaVF, jugador);
         proyectarVista(vistaVF);*/
-        Opcion opc1 = new Opcion("Verdadero");
+       // Jugador jugador = new Jugador("Axel");
+        /*Opcion opc1 = new Opcion("Verdadero");
         Opcion opc2 = new Opcion("Falso");
         Opciones opciones = new Opciones();
         opciones.agregarOpcion(opc1);
@@ -93,26 +116,73 @@ public class VistaPrincipal extends Application {
         ControladorFactory controladorFactory = new ControladorFactory();
         ControladorPregunta controlador = controladorFactory.crearControlador(pregunta, jugador);
 
-        controlador.mostrarVentanaPregunta(ventanaPrincipal);
+        controlador.mostrarVentanaPregunta(ventanaPrincipal);*/
     }
 
-    public void mostrarVistaMC(Jugador jugador) {
+    public void mostrarVistaMC() {
 
-        PreguntaMC preguntaMC = creador.devolverPreguntaMC();
-        //deresBox.agregarBotones(preguntaMC);
+        /*Jugador jugador = new Jugador("Axel");
 
-        VistaMC vistaMC = new VistaMC();
-        ControladorMC controlador = new ControladorMC(preguntaMC, jugador);
-        proyectarVista(vistaMC);
+        Opciones opciones = new Opciones();
+        Opcion opcion1 = new Opcion("Elefante");
+        Opcion opcion2 = new Opcion("Mono");
+        Opcion opcion3 = new Opcion("Pato");
+        Opcion opcion4 = new Opcion("Ave");
+
+        opciones.agregarOpcion(opcion1);
+        opciones.agregarOpcion(opcion2);
+        opciones.agregarOpcion(opcion3);
+        opciones.agregarOpcion(opcion4);
+
+        RespuestaMC correcta = new RespuestaMC();
+        correcta.agregarOpcionSeleccionada(opcion1);
+        correcta.agregarOpcionSeleccionada(opcion2);
+        correcta.agregarOpcionNoSeleccionada(opcion3);
+        correcta.agregarOpcionNoSeleccionada(opcion4);
+
+
+        PreguntaMC pregunta = new PreguntaMC("Que animal es mamifero?", opciones, correcta);
+
+        ControladorFactory controladorFactory = new ControladorFactory();
+        ControladorPregunta controlador = controladorFactory.crearControlador(pregunta, jugador);
+
+        controlador.mostrarVentanaPregunta(ventanaPrincipal);*/
+
+        /*Jugador jugador = new Jugador("Axel");
+
+        Opciones opciones = new Opciones();
+        Opcion opcion1 = new Opcion("Elefante");
+        Opcion opcion2 = new Opcion("Tiburon");
+        Opcion opcion3 = new Opcion("Pato");
+
+        opciones.agregarOpcion(opcion1);
+        opciones.agregarOpcion(opcion2);
+        opciones.agregarOpcion(opcion3);
+
+        RespuestaMC correcta = new RespuestaMC();
+        correcta.agregarOpcionSeleccionada(opcion1);
+        correcta.agregarOpcionSeleccionada(opcion2);
+        correcta.agregarOpcionNoSeleccionada(opcion3);
+
+        PreguntaMC pregunta = new PreguntaMC("Que animal es mamifero?", opciones, correcta);
+
+        RespuestaMC respuestaJugador = new RespuestaMC();
+        respuestaJugador.agregarOpcionSeleccionada(opcion1);
+        respuestaJugador.agregarOpcionSeleccionada(opcion2);
+        respuestaJugador.agregarOpcionNoSeleccionada(opcion3);
+
+        jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
+        System.out.println(jugador.getPuntajeParcial().obtenerPuntuacion());*/
+
     }
 
     public void mostrarVistaOC(Jugador jugador){
         //return new VistaX().show()
-        PreguntaOC preguntaOC = creador.devolverPreguntaOC();
+        //PreguntaOC preguntaOC = creador.devolverPreguntaOC();
       //poderesBox.agregarBotones(preguntaOC);
         VistaOC vistaOC = new VistaOC();
-        ControladorOC controlador = new ControladorOC(preguntaOC, jugador);
-        proyectarVista(vistaOC);
+       // ControladorOC controlador = new ControladorOC(preguntaOC, jugador);
+        //proyectarVista(vistaOC);
     }
 
     private void proyectarVista(VistaPregunta vistaPregunta) {

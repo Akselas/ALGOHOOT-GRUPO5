@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 public class PreguntaMCPenalidad extends Pregunta {
 
-    public PreguntaMCPenalidad(String texto, Opciones opciones, RespuestaMC respuesta) {
-        super(texto, opciones, respuesta);
+    public PreguntaMCPenalidad(String texto, String tema, String tipo, Opciones opciones, Respuesta correcta, String textoRespuesta) {
+        super(texto, tema, tipo, opciones, correcta, textoRespuesta);
     }
 
     @Override
@@ -13,7 +13,9 @@ public class PreguntaMCPenalidad extends Pregunta {
 
         Puntaje p = new Puntaje();
         p.sumar(respuesta.cantidadOpcionesIguales(respuestaCorrecta));
+        System.out.println("cantidad de respuestas correctas seleccionadas " + respuesta.cantidadOpcionesIguales(respuestaCorrecta));
         p.restar(respuesta.cantidadOpcionesDesiguales(respuestaCorrecta));
+        System.out.println("cantidad de respuestas incorrectas seleccionadas " + respuesta.cantidadOpcionesDesiguales(respuestaCorrecta));
 
         return p;
     }

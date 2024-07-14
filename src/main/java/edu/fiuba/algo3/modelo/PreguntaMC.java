@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
 public class PreguntaMC extends Pregunta{
-    public PreguntaMC(String texto, Opciones opciones, RespuestaMC correcta) {
-        super(texto, opciones, correcta);
+    public PreguntaMC(String texto, String tema, String tipo, Opciones opciones, Respuesta correcta, String textoRespuesta) {
+        super(texto, tema, tipo, opciones, correcta, textoRespuesta);
     }
 
     public String obtenerTexto(){

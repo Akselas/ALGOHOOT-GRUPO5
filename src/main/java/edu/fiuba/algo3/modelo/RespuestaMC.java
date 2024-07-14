@@ -22,7 +22,11 @@ public class RespuestaMC extends Respuesta {
 
     public Boolean contieneOpcionSeleccionada(Opcion otraOpcion) {
         for(Opcion opcion : this.opcionesSeleccionadas) {
-            if(opcion.esIgual(otraOpcion)) return true;
+            if(opcion.esIgual(otraOpcion)) {
+                System.out.println(opcion.obtenerTexto() + " es igual a " + otraOpcion.obtenerTexto());
+                return true;
+
+            }
         }
         return false;
     }
@@ -34,19 +38,6 @@ public class RespuestaMC extends Respuesta {
         return false;
     }
 
-    public Boolean esIgual(RespuestaMC otraRespuesta) {
-        for(Opcion opcion : this.opcionesSeleccionadas) {
-            if (!otraRespuesta.contieneOpcionSeleccionada(opcion)) {
-                return false;
-            }
-        }
-        for(Opcion opcion : this.opcionesNoSeleccionadas) {
-            if (!otraRespuesta.contieneOpcionNoSeleccionada(opcion)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     @Override
     public Boolean esIgual(Respuesta jugador) {
@@ -74,7 +65,18 @@ public class RespuestaMC extends Respuesta {
                 iguales++;
             }
         }
-        for(Opcion opcion : this.opcionesNoSeleccionadas) {
+        /*for(Opcion opcion : this.opcionesNoSeleccionadas) {
+            if (otraRespuesta.contieneOpcionNoSeleccionada(opcion)) {
+                iguales++;
+            }
+        }*/
+        return iguales;
+    }
+
+    public int cantidadOpcionesDesiguales(RespuestaMC otraRespuesta){
+        //return cantidadOpcionesTotales() - cantidadOpcionesIguales(otraRespuesta);
+        int iguales = 0;
+        for(Opcion opcion : this.opcionesSeleccionadas) {
             if (otraRespuesta.contieneOpcionNoSeleccionada(opcion)) {
                 iguales++;
             }
@@ -82,13 +84,6 @@ public class RespuestaMC extends Respuesta {
         return iguales;
     }
 
-    public int cantidadOpcionesDesiguales(RespuestaMC otraRespuesta){
-        return cantidadOpcionesTotales() - cantidadOpcionesIguales(otraRespuesta);
-    }
-
-    public int cantidadOpcionesTotales() {
-        return (this.opcionesSeleccionadas.size() + this.opcionesNoSeleccionadas.size());
-    }
 
     public boolean noSeleccionadasSeleccionadas(RespuestaMC otraRespuesta){
         for(Opcion opcion : this.opcionesNoSeleccionadas) {
@@ -96,8 +91,12 @@ public class RespuestaMC extends Respuesta {
         }
         return false;
     }
-
-    public int cantidadOpcionesSeleccionadas() {
-        return this.opcionesSeleccionadas.size();
+    //despues borrar
+    /*public ArrayList<Opcion> obtenerCorrectas(){
+        return opcionesSeleccionadas;
     }
+
+    public ArrayList<Opcion> obtenerIncorrectas(){
+        return opcionesNoSeleccionadas;
+    }*/
 }

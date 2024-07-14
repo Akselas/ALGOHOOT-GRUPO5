@@ -87,6 +87,7 @@ public class ControladorGC implements ControladorPregunta{
             Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
             Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
             poderesBox.actualizarPoderes();
+            showScoreAlert();
 
             if (onResponder != null) {
                 onResponder.run();
@@ -94,6 +95,15 @@ public class ControladorGC implements ControladorPregunta{
 
         });
     }
+
+    private void showScoreAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Puntaje del Jugador");
+        alert.setHeaderText(null);
+        alert.setContentText("El puntaje del jugador " + jugador.getNombre() + " es: " + jugador.getPuntajeParcial().obtenerPuntuacion());
+        alert.showAndWait();
+    }
+
     @Override
     public Poder poderUsado(){
         return poderesBox.obtenerPoderSeleccionado();
