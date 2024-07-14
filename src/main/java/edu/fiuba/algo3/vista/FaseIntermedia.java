@@ -27,7 +27,6 @@ public class FaseIntermedia implements Fase {
         // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
         // Crear tabla parcial de puntajes y asignarselos a los jugadores
         // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.
-        sonidoFondo.sonar();
         int contador = 0;
         Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
         procesarJuego(contador, jugadores);
@@ -40,6 +39,7 @@ public class FaseIntermedia implements Fase {
     }
 
     private void procesarJuego(int contador, Jugadores jugadores){
+        sonidoFondo.sonar();
         if (!terminoJuego(contador)) {//aca es la condicion de corte para que termine el juego
             Iterator<Jugador> iteradorJugadores = jugadores.iterador();//si no termina prepara los parametros para iniciar una ronda
             Pregunta pregunta = manejador.obtenerAtributos().getPreguntaAleatoria();
@@ -58,10 +58,14 @@ public class FaseIntermedia implements Fase {
         if (!iteradorJugadores.hasNext()) {//si ya no hay mas jugadores aplicar poderes grupales y actualizar puntajes
             poderesUsados.aplicarPoderesGrupales(puntajesParciales);
             jugadores.actualizarPuntajes();
+            sonidoFondo.parar();
             VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados, pregunta.textoRespuesta);
             rondaTerminada.mostrar();
 
-            rondaTerminada.getBotonSiguiente().setOnAction(event -> procesarJuego(contador + 1, jugadores));//aca prepara para la siguiente ronda, sumando uno al contador(esto seria necesario para la condicion de corte del juego, contador = la cantidad de rondas o preguntas que pasaron(aplicar refactor))
+            rondaTerminada.getBotonSiguiente().setOnAction(event -> {
+                rondaTerminada.getSonido().parar();
+                procesarJuego(contador + 1, jugadores);}
+            );//aca prepara para la siguiente ronda, sumando uno al contador(esto seria necesario para la condicion de corte del juego, contador = la cantidad de rondas o preguntas que pasaron(aplicar refactor))
             //en el refactor podriamos iterarlas preguntas.
         } else {
             Jugador jugador = iteradorJugadores.next();
@@ -84,10 +88,10 @@ public class FaseIntermedia implements Fase {
         }
     }
     @Override
-    public void fasePromover(){
+    public void fasePromover() {
+        this.sonidoFondo.parar();
         manejador.cambiarFase(new FaseFinal(this.fondo, this.manejador));
         manejador.iniciarFase();
         System.out.println("Ganador: " + manejador.obtenerAtributos().obtenerGanador());
-        this.sonidoFondo.parar();
-
+    }
 }

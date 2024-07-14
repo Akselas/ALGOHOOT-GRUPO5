@@ -117,7 +117,7 @@ public class FaseInicial implements Fase{
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
-            this.sonidoInicio.parar();
+            sonidoInicio.parar();
             manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
             manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 

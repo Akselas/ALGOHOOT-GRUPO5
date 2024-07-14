@@ -27,16 +27,19 @@ public class VistaRonda {
     private Button botonSiguiente;
     String tituloRespuesta;
     public static final int anchoDeTexto = 600;
+    Sonidos sonidoPuntuacion;
 
     public VistaRonda(Stage ventanaPrincipal, Jugadores jugadores, Poderes poderes, String tituloRespuesta) {
         this.ventanaPrincipal = ventanaPrincipal;
         this.jugadores = jugadores;
         this.poderes = poderes;
         this.tituloRespuesta = tituloRespuesta;
+        this.sonidoPuntuacion = new Sonidos("musicaPuntuacion.mp3");
         iniciar();
     }
 
     private void iniciar(){
+        this.sonidoPuntuacion.sonar();
         Label titulo = new Label(tituloRespuesta);
         titulo.setWrapText(true);
         titulo.setMaxWidth(anchoDeTexto);
@@ -117,6 +120,10 @@ public class VistaRonda {
 
     public Button getBotonSiguiente() {
         return botonSiguiente;
+    }
+
+    public Sonidos getSonido(){
+        return this.sonidoPuntuacion;
     }
 }
 
