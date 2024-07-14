@@ -138,7 +138,7 @@ public class Parser {
                 correcta.agregarOpcionNoSeleccionada(opcion);
             }
         }
-        return new PreguntaMCPenalidad(pregunta, tema, tipo, opciones, correcta, textoRespuesta);
+        return new PreguntaMCPenalidad(pregunta, tema, tipo, opciones, correcta, textoRespuesta); //return build.construirMCP
     }
 
     private Pregunta crearPreguntaGC(JsonObject preguntaJson, String pregunta, String tema, String tipo, String opcionCorrecta, Opciones opciones, Map<String, Opcion> opcionesMap, String textoRespuesta) {

@@ -32,8 +32,11 @@ public abstract class VistaPregunta extends VBox {
 
     public void mostrarPregunta(Pregunta pregunta, Jugador jugador){
         this.turno.setText("Turno: " + jugador.getNombre());
+        turno.getStyleClass().add("titulo-pregunta");
         this.tema.setText("Tema: "+ pregunta.obtenerTema());
+        tema.getStyleClass().add("titulo-pregunta");
         this.enunciadoLabel.setText(pregunta.obtenerTexto());
+        enunciadoLabel.getStyleClass().add("titulo-pregunta");
     }
 
     public abstract void mostrarOpciones(Opciones ops);
