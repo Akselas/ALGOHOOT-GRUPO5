@@ -26,12 +26,12 @@ public class ControladorMC implements ControladorPregunta {
     public void mostrarVentanaPregunta(Stage fondo) {
         Scene escena = vista.proyectar(poderesBox, responder);
         fondo.setScene(escena);
-        fondo.setTitle("AlgoHoot");
+        fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
     }
     @Override
     public void initialize() {
-        vista.mostrarPregunta(pregunta);
+        vista.mostrarPregunta(pregunta, jugador);
         vista.mostrarOpciones(pregunta.obtenerOpciones());
         establecerManejoDeEventos();
     }

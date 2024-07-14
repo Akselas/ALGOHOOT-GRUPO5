@@ -29,12 +29,12 @@ public class ControladorVF implements ControladorPregunta{
     public void mostrarVentanaPregunta(Stage fondo){
         Scene escena = vista.proyectar(poderesBox, responder);
         fondo.setScene(escena);
-        fondo.setTitle("AlgoHoot");
+        fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
     }
     @Override
     public void initialize(){//no me deja ponerlo en privado
-        this.vista.mostrarPregunta(this.pregunta);
+        this.vista.mostrarPregunta(this.pregunta, this.jugador);
         this.vista.mostrarOpciones(pregunta.obtenerOpciones());
         establecerManejoDeEventos();
     }

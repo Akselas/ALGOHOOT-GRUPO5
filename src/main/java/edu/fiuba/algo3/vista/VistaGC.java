@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.vista;
 
-import edu.fiuba.algo3.modelo.Opcion;
-import edu.fiuba.algo3.modelo.Opciones;
-import edu.fiuba.algo3.modelo.Pregunta;
-import edu.fiuba.algo3.modelo.PreguntaGC;
+import edu.fiuba.algo3.modelo.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -58,10 +55,12 @@ public class VistaGC extends VistaPregunta{
         this.setAlignment(Pos.CENTER);
     }
 
-    @Override
-    public void mostrarPregunta(Pregunta pregunta) {
+    /*@Override
+    public void mostrarPregunta(Pregunta pregunta, Jugador jugador) {
+        this.turno.setText("Turno: " + jugador.getNombre());
+        this.tema.setText("Tema: "+ pregunta.obtenerTema());
         this.enunciadoLabel.setText(pregunta.obtenerTexto());
-    }
+    }*/
 
     public void mostrarNombresDeGrupos(Pregunta pregunta){
         PreguntaGC preguntaGC = (PreguntaGC) pregunta;

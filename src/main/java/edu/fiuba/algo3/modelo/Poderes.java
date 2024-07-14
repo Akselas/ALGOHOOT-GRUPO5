@@ -12,12 +12,18 @@ public class Poderes{
     }
 
 
+    public boolean vacio(){
+        return poderes.isEmpty();
+    }
+
     public ArrayList<Poder> devolverPoderes() {
         return poderes;
     }
 
     public void agregarPoder(Poder poder){
-        poderes.add(poder);
+        if(!(poder instanceof Basico)){
+            poderes.add(poder);
+        }
     }
 /*
     public void eliminarPoderesDuplicados() {

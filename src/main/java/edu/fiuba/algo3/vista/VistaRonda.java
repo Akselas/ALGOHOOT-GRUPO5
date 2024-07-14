@@ -7,12 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import edu.fiuba.algo3.modelo.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -22,34 +24,46 @@ public class VistaRonda {
     Jugadores jugadores;
     Poderes poderes;//Estos los poderes usados en la ronda
     private Button botonSiguiente;
+    String tituloRespuesta;
+    public static final int anchoDeTexto = 600;
 
-    public VistaRonda(Stage ventanaPrincipal, Jugadores jugadores, Poderes poderes) {
+    public VistaRonda(Stage ventanaPrincipal, Jugadores jugadores, Poderes poderes, String tituloRespuesta) {
         this.ventanaPrincipal = ventanaPrincipal;
         this.jugadores = jugadores;
         this.poderes = poderes;
+        this.tituloRespuesta = tituloRespuesta;
         iniciar();
     }
 
     private void iniciar(){
-        Label titulo = new Label("Resultados de la Ronda");
+        Label titulo = new Label(tituloRespuesta);
+        titulo.setWrapText(true);
+        titulo.setMaxWidth(anchoDeTexto);
         botonSiguiente = new Button("Siguiente");
 
         TableView<Jugador> tablaPuntajes = this.crearTablaPuntaje();
         Text textoExtra = this.crearTextoPoderes();
 
         HBox contenedor = new HBox(tablaPuntajes, textoExtra);
-        contenedor.setAlignment(Pos.CENTER);
-        contenedor.setPadding(new Insets(10)); // Añade padding si deseas más espacio alrededor de los nodos
+       // contenedor.setAlignment(Pos.CENTER);
+        contenedor.setSpacing(20);
+        contenedor.setMinHeight(200);
+        contenedor.setMaxWidth(700);
+
+        HBox.setHgrow(tablaPuntajes, Priority.ALWAYS);
+        HBox.setHgrow(textoExtra, Priority.NEVER);
 
         VBox.setMargin(titulo, new Insets(10, 0, 40, 0)); // Espacio alrededor del título
-        VBox.setMargin(contenedor, new Insets(0, 0, 20, 0)); // Espacio alrededor del contenedor
         VBox.setMargin(botonSiguiente, new Insets(40, 0, 0, 0));
-        HBox.setMargin(tablaPuntajes, new Insets(0, 20, 0, 0));
+
+
 
         VBox vistaRonda = new VBox(titulo, contenedor, botonSiguiente);
         vistaRonda.setId("VistaRonda");
         vistaRonda.setAlignment(Pos.CENTER);
         vistaRonda.setSpacing(10);
+        vistaRonda.setMinHeight(500);
+        vistaRonda.setMaxWidth(800);
         vistaRonda.setPadding(new Insets(20));
         Scene scene = new Scene(vistaRonda);
         scene.getStylesheets().add(getClass().getResource("/FaseIntermedia.css").toExternalForm());
@@ -80,14 +94,19 @@ public class VistaRonda {
     }
 
     private Text crearTextoPoderes(){
-        poderes.eliminarPoderesDuplicados();
-        Text textoExtra = new Text("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
-        for(Poder poder : poderes.devolverPoderes()){//aca considero que solo hay una sola instancia por cada tipo de poder.
-            if(!(poder instanceof Basico)){
+        Text textoExtra = new Text();
+        textoExtra.setWrappingWidth(250);
+        textoExtra.setTextAlignment(TextAlignment.JUSTIFY);
+        if(poderes.vacio()){
+            textoExtra.setText("En esta ronda se utilizó no se utilizo poderes\n");
+        }else{
+            poderes.eliminarPoderesDuplicados();
+            textoExtra.setText("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");
+            for(Poder poder : poderes.devolverPoderes()){//aca considero que solo hay una sola instancia por cada tipo de poder.
                 textoExtra.setText(textoExtra.getText() + "• " + poder.obtenerNombre() + " de puntaje\n");
             }
+            textoExtra.setWrappingWidth(250);
         }
-        textoExtra.setWrappingWidth(150);
         return textoExtra;
     }
 

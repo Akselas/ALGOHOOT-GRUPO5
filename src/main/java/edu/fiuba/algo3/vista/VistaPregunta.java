@@ -11,20 +11,25 @@ import edu.fiuba.algo3.modelo.*;
 
 public abstract class VistaPregunta extends VBox {
     protected Label enunciadoLabel;
+    protected Label turno;
+    protected Label tema;
     public static final int anchoDeTexto = 400;
     public VistaPregunta(){
         this.enunciadoLabel = new Label(){{
             setWrapText(true);
             setMaxWidth(anchoDeTexto);
         }};
-        this.getChildren().add(enunciadoLabel);
+        this.tema = new Label();
+        this.turno = new Label();
+        this.getChildren().addAll(turno, tema, enunciadoLabel);
         this.setAlignment(Pos.CENTER);
         this.setSpacing(50);
         this.setPadding(new Insets(30, 10, 70, 10)); // arriba, der, abajo, izq
-        this.enunciadoLabel.getStyleClass().add("titulo-pregunta");
     }
 
-    public void mostrarPregunta(Pregunta pregunta){
+    public void mostrarPregunta(Pregunta pregunta, Jugador jugador){
+        this.turno.setText("Turno: " + jugador.getNombre());
+        this.tema.setText("Tema: "+ pregunta.obtenerTema());
         this.enunciadoLabel.setText(pregunta.obtenerTexto());
     }
 

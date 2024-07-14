@@ -103,7 +103,7 @@ public class FaseIntermedia implements Fase {
         if (!iteradorJugadores.hasNext()) {//si ya no hay mas jugadores aplicar poderes grupales y actualizar puntajes
             poderesUsados.aplicarPoderesGrupales(puntajesParciales);
             jugadores.actualizarPuntajes();
-            VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados);
+            VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados, pregunta.textoRespuesta);
             rondaTerminada.mostrar();
 
             rondaTerminada.getBotonSiguiente().setOnAction(event -> procesarJuego(contador + 1, jugadores));//aca prepara para la siguiente ronda, sumando uno al contador(esto seria necesario para la condicion de corte del juego, contador = la cantidad de rondas o preguntas que pasaron(aplicar refactor))

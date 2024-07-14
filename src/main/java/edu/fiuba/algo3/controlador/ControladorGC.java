@@ -33,14 +33,14 @@ public class ControladorGC implements ControladorPregunta{
     public void mostrarVentanaPregunta(Stage fondo){
         Scene escena = vista.proyectar(poderesBox, responder);
         fondo.setScene(escena);
-        fondo.setTitle("AlgoHoot");
+        fondo.setTitle(pregunta.obtenerTipo());
         fondo.show();
     }
 
     @Override
     public void initialize() {
         this.vista.mostrarOpciones(this.pregunta.obtenerOpciones()); //esto setea opcionesListView
-        this.vista.mostrarPregunta(this.pregunta);
+        this.vista.mostrarPregunta(this.pregunta, this.jugador);
         this.vista.mostrarNombresDeGrupos(this.pregunta);
         establecerManejoDeEventos();
     }
