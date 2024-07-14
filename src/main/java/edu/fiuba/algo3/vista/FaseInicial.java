@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.vista.recursos.Sonidos;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -17,13 +18,16 @@ public class FaseInicial implements Fase{
     int jugadorActual = 0;
     public static final int anchoVentana = 600;
     public static final int altoVentana = 400;
+    Sonidos sonidoInicio;
 
     public FaseInicial(Stage stage, FaseManejador manejador){
         this.ventanaPrincipal = stage;
         this.manejador = manejador;
+        this.sonidoInicio = new Sonidos("musicaInicio.mp3");
         iniciar();
     }
     public void iniciar(){
+        this.sonidoInicio.sonar();
         VBox layout = new VBox();
         layout.setAlignment(Pos.CENTER);
         layout.setId("VistaInicial");
@@ -113,6 +117,7 @@ public class FaseInicial implements Fase{
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
+            this.sonidoInicio.parar();
             manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
             manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
 

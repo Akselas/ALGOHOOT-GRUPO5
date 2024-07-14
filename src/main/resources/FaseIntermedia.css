@@ -1,5 +1,5 @@
 #VistaRonda {
-    -fx-background-color: linear-gradient(to bottom, #2c3e50, #8e44ad);
+    -fx-background-color: linear-gradient(to bottom, #b54709, #dfd093);
     -fx-padding: 20px;
     -fx-spacing: 10px;
     -fx-alignment: center;
@@ -26,7 +26,7 @@ TableView {
     -fx-border-color: #FFFFFF;
     -fx-border-width: 2px;
     -fx-selection-bar: rgba(0, 0, 0, 0);
-    -fx-selection-bar-non-focused: #8e44ad;
+    /*-fx-selection-bar-non-focused: #8e44ad;*/
     -fx-table-cell-border-color: transparent;
 }
 
@@ -38,7 +38,7 @@ TableColumn {
 }
 
 .table-view .column-header .label {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #1b1932;
     -fx-alignment: center;
 }
 
@@ -52,11 +52,11 @@ TableColumn {
 }
 
 .table-row-cell:odd {
-    -fx-background-color: #2c3e50;
+    -fx-background-color: #d3c5a1;
 }
 
 .table-row-cell:even {
-    -fx-background-color: #8e44ad;
+    -fx-background-color: #b37d5e;
 }
 
 .table-row-cell:selected {
