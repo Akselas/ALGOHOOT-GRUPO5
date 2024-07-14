@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.*;
 
+import edu.fiuba.algo3.vista.recursos.Sonidos;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.controlador.*;
 
@@ -14,18 +15,21 @@ public class FaseIntermedia implements Fase {
     FaseManejador manejador;
     Puntajes puntajesParciales;
     Puntajes puntajesGenerales;
+    Sonidos sonidoFondo;
 
     public FaseIntermedia(Stage stage, FaseManejador manejador){
         this.fondo = stage;
         this.manejador = manejador;
         this.puntajesParciales = new Puntajes();
         this.puntajesGenerales = new Puntajes();
+        this.sonidoFondo = new Sonidos("musicaFondo.mp3");
     }
 
     public void iniciar(){
         // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
         // Crear tabla parcial de puntajes y asignarselos a los jugadores
         // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.
+        sonidoFondo.sonar();
         int contador = 0;
         Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
         procesarJuego(contador, jugadores);
@@ -130,6 +134,7 @@ public class FaseIntermedia implements Fase {
     }
 
     private void finJuego(){
+        this.sonidoFondo.parar();
     }
 
 }
