@@ -31,9 +31,11 @@ public class AtributosIniciales {
     public void guardarJugador(String nombre){
         this.jugadores.agregarJugador(new Jugador(nombre));
     }
+
     public boolean hayGanador(){
         return jugadores.algunoSuperaPuntaje(puntajeParaGanar);
     }
+    public String obtenerGanador(){return jugadores.obtenerJugadorConMayorPuntaje();}
 
     public int getNumPreguntas() {
         return numPreguntas;

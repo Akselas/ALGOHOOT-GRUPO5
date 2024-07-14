@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Parser;
-import edu.fiuba.algo3.modelo.Pregunta;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class FaseManejador {
     Fase estadoFase;
