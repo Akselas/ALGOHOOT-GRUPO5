@@ -131,7 +131,6 @@ public class FaseInicial implements Fase{
     }
     @Override
     public void fasePromover(){
-        System.out.println("Iniciando el juego con " + manejador.obtenerAtributos().getNumPreguntas() + " preguntas y " + manejador.obtenerAtributos().getPuntajeParaGanar() + " puntos para ganar.");
         manejador.cambiarFase(new FaseIntermedia(this.ventanaPrincipal, this.manejador));
         manejador.iniciarFase();
     }

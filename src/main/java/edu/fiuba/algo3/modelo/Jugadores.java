@@ -58,7 +58,7 @@ public class Jugadores {
     }
 
     public void ordenarPorPuntaje() {
-        Collections.sort(jugadores, new Comparator<Jugador>() {
+        Collections.sort(jugadores, new Comparator<>() {
             @Override
             public int compare(Jugador j1, Jugador j2) {
                 return Integer.compare(j2.getPuntaje(), j1.getPuntaje()); // Orden descendente

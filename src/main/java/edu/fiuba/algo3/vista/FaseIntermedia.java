@@ -6,7 +6,6 @@ import edu.fiuba.algo3.vista.recursos.Sonidos;
 import javafx.stage.Stage;
 import edu.fiuba.algo3.controlador.*;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FaseIntermedia implements Fase {
@@ -23,9 +22,6 @@ public class FaseIntermedia implements Fase {
     }
 
     public void iniciar(){
-        // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
-        // Crear tabla parcial de puntajes y asignarselos a los jugadores
-        // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.
         int contador = 1;
         Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
         procesarJuego(contador, jugadores);
@@ -75,12 +71,7 @@ public class FaseIntermedia implements Fase {
             controlador.setOnResponder(() -> {
                 puntajesParciales.agregarPuntaje(jugador.getPuntajeParcial());
                 poderesUsados.agregarPoder(controlador.poderUsado());
-                for(Poder p: poderesUsados.devolverPoderes()){
-                    System.out.println(p.obtenerNombre()+ "\n");
-                }
-
-
-                // Continuar con el siguiente jugador después de que se procese la respuesta
+                //sigue con el siguiente jugador después de que se procese la respuesta
                 procesarRonda(iteradorJugadores, pregunta, poderesUsados, contador, jugadores);
             });
 
@@ -91,6 +82,5 @@ public class FaseIntermedia implements Fase {
         this.sonidoFondo.parar();
         manejador.cambiarFase(new FaseFinal(this.fondo, this.manejador));
         manejador.iniciarFase();
-        System.out.println("Ganador: " + manejador.obtenerAtributos().obtenerGanador());
     }
 }

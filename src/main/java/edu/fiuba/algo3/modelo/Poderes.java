@@ -25,25 +25,6 @@ public class Poderes{
             poderes.add(poder);
         }
     }
-/*
-    public void eliminarPoderesDuplicados() {
-        ArrayList<Poder> poderesSinRepe = new ArrayList<>();
-        for(Poder p: poderes){
-            if (!yaAgregado(p)) {
-                poderesSinRepe.add(p);
-            }
-        }
-        poderes.clear();
-        poderes = poderesSinRepe;
-    }
-    private boolean yaAgregado(Poder poder) {
-        for (Poder p : poderes) {
-            if (p.getClass().equals(poder.getClass())) {
-                return true;
-            }
-        }
-        return false;
-    }*/
 
     public void eliminarPoderesDuplicados(){
         ArrayList<Poder> poderesUnicos = new ArrayList<>();

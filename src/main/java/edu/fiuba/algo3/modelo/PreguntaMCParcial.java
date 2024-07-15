@@ -13,9 +13,6 @@ public class PreguntaMCParcial extends Pregunta {
 
         Puntaje p = new Puntaje();
 
-
-
-
         //Puntaje lo creo aca asi cada clase de pregunta crea su propio tipo de puntaje
         if (!respuestaCorrecta.noSeleccionadasSeleccionadas(respuesta)) {
             p.sumar(respuesta.cantidadOpcionesIguales(respuestaCorrecta));

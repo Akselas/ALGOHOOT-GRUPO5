@@ -5,30 +5,6 @@ import com.google.gson.JsonObject;
 import java.util.Map;
 
 public class PreguntaFactory {
-
-//    public static Pregunta fabricar(PreguntaBuilder builder){
-//
-//        if (builder.getTipo() == "Verdadero Falso" && builder.getTipo() =="Verdadero Falso Simple") {
-//            return builder.buildVF();
-//        } else if (builder.getTipo() == "Verdadero Falso Penalidad") {
-//            return builder.buildVF();
-//        } else if (builder.getTipo()=="Ordered Choice") {
-//            return builder.buildOC();
-//        } else if (builder.getTipo() == "Multiple Choice Simple") {
-//            return builder.buildMC();
-//        }
-//        else if (builder.getTipo() == "Multiple Choice Puntaje Parcial") {
-//            return builder.buildMC();
-//        }
-//        else if (builder.getTipo() == "Multiple Choice Penalidad") {
-//            return builder.buildMC();
-//        } else if (builder.getTipo() == "Group Choice") {
-//            return builder.buildGC();
-//        }
-//
-//    }
-
-
     public static Pregunta crearPregunta(JsonObject preguntaJson, Opciones opciones, Map<String, Opcion> opcionesMap){
 
         String texto = preguntaJson.get("Pregunta").getAsString();

@@ -21,7 +21,6 @@ public class VistaMC extends VistaPregunta{
     public void mostrarOpciones(Opciones ops) {
         VBox opciones = new VBox(20);
         opciones.setPadding(new Insets(10, 10, 10, 10));
-        //opciones.setStyle("-fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;");
         opciones.getStyleClass().add("question-area");
         for(Opcion opcion: ops.devolverOpciones()){
             CheckBox boton = new CheckBox(opcion.obtenerTexto());

@@ -13,9 +13,7 @@ public class PreguntaMCPenalidad extends Pregunta {
 
         Puntaje p = new Puntaje();
         p.sumar(respuesta.cantidadOpcionesIguales(respuestaCorrecta));
-        System.out.println("cantidad de respuestas correctas seleccionadas " + respuesta.cantidadOpcionesIguales(respuestaCorrecta));
         p.restar(respuesta.cantidadOpcionesDesiguales(respuestaCorrecta));
-        System.out.println("cantidad de respuestas incorrectas seleccionadas " + respuesta.cantidadOpcionesDesiguales(respuestaCorrecta));
 
         return p;
     }

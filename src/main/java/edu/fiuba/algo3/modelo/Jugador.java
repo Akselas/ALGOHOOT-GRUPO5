@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 
 public class Jugador {
-    private Puntaje puntaje; //usar clase puntaje para guardar el atributo
+    private Puntaje puntaje;
     private final String nombre;
     private Poderes poderes;
     private Respuesta respuesta;

@@ -49,7 +49,6 @@ public class VistaRonda {
         Text textoExtra = this.crearTextoPoderes();
 
         HBox contenedor = new HBox(tablaPuntajes, textoExtra);
-       // contenedor.setAlignment(Pos.CENTER);
         contenedor.setSpacing(20);
         contenedor.setMinHeight(200);
         contenedor.setMaxWidth(700);
@@ -77,15 +76,15 @@ public class VistaRonda {
 
     private TableView<Jugador> crearTablaPuntaje(){
         TableView<Jugador> tablaPuntajes = new TableView<>();
-        tablaPuntajes.setFixedCellSize(25); // Tamaño fijo de las celdas
+        tablaPuntajes.setFixedCellSize(25);
         tablaPuntajes.prefHeightProperty().bind(tablaPuntajes.fixedCellSizeProperty().multiply(jugadores.getJugadores().size()));
 
         TableColumn<Jugador, String> nombreColumn = new TableColumn<>("Nombre");
-        nombreColumn.setCellValueFactory(new PropertyValueFactory<Jugador, String>("nombre"));
+        nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         nombreColumn.setMaxWidth(150);
 
         TableColumn<Jugador, Integer> puntajeColumn = new TableColumn<>("Puntaje");
-        puntajeColumn.setCellValueFactory(new PropertyValueFactory<Jugador, Integer>("puntaje"));
+        puntajeColumn.setCellValueFactory(new PropertyValueFactory<>("puntaje"));
         puntajeColumn.setMaxWidth(150);
 
         //Agrega los puntajes a la tabla

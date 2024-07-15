@@ -54,7 +54,7 @@ public class ControladorOC implements ControladorPregunta{
                 respuestaJugador.agregar(opcionDeRespuesta);//agrego la opcion a la respuesta
             }
             jugador.cargarPuntajeRonda(pregunta.calcularPuntaje(respuestaJugador));
-            Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();//este if esta expuesto logica de negocios
+            Poder poderSeleccionado = poderesBox.obtenerPoderSeleccionado();
             Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
             poderesBox.actualizarPoderes();
 
@@ -82,14 +82,14 @@ public class ControladorOC implements ControladorPregunta{
         };
     }
 
-    private void configurarArrastreYSoltar(ListCell<Opcion> cell){//Aca se hace el metodo de arrastre, soltar, y se reemplaza
+    private void configurarArrastreYSoltar(ListCell<Opcion> cell){//aca se hace el metodo de arrastre, soltar, y se reemplaza
         cell.setOnDragDetected(event -> {
             if(cell.getItem() == null){
                 return;
             }
             Dragboard db = cell.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent content = new ClipboardContent();
-            content.putString(Integer.toString(cell.getIndex())); // Transferimos el índice del item
+            content.putString(Integer.toString(cell.getIndex()));
             db.setContent(content);
             event.consume();
         });

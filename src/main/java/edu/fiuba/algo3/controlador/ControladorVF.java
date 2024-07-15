@@ -19,7 +19,7 @@ public class ControladorVF implements ControladorPregunta{
         this.vista = new VistaVF();
         this.jugador = jugador;
         this.pregunta = pregunta;
-        this.poderesBox = new PoderesVista(jugador, pregunta); //por ahora lo dejamos adentro
+        this.poderesBox = new PoderesVista(jugador, pregunta);
 
         initialize();
     }
@@ -31,7 +31,7 @@ public class ControladorVF implements ControladorPregunta{
         fondo.show();
     }
     @Override
-    public void initialize(){//no me deja ponerlo en privado
+    public void initialize(){
         this.vista.mostrarPregunta(this.pregunta, this.jugador);
         this.vista.mostrarOpciones(pregunta.obtenerOpciones());
         establecerManejoDeEventos();
@@ -55,7 +55,6 @@ public class ControladorVF implements ControladorPregunta{
                 Poderes.verificarPoder(poderSeleccionado, jugador.getPuntajeParcial());
                 poderesBox.actualizarPoderes();
 
-                System.out.println("Puntaje de " + jugador.getNombre() + " : " + jugador.getPuntaje());
 
             }else {
                 System.out.println("Por favor selecciona una opción.");

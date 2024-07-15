@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class RespuestaMC extends Respuesta {
     private ArrayList<Opcion> opcionesSeleccionadas;
@@ -23,7 +23,6 @@ public class RespuestaMC extends Respuesta {
     public Boolean contieneOpcionSeleccionada(Opcion otraOpcion) {
         for(Opcion opcion : this.opcionesSeleccionadas) {
             if(opcion.esIgual(otraOpcion)) {
-                System.out.println(opcion.obtenerTexto() + " es igual a " + otraOpcion.obtenerTexto());
                 return true;
 
             }
@@ -65,16 +64,10 @@ public class RespuestaMC extends Respuesta {
                 iguales++;
             }
         }
-        /*for(Opcion opcion : this.opcionesNoSeleccionadas) {
-            if (otraRespuesta.contieneOpcionNoSeleccionada(opcion)) {
-                iguales++;
-            }
-        }*/
         return iguales;
     }
 
     public int cantidadOpcionesDesiguales(RespuestaMC otraRespuesta){
-        //return cantidadOpcionesTotales() - cantidadOpcionesIguales(otraRespuesta);
         int iguales = 0;
         for(Opcion opcion : this.opcionesSeleccionadas) {
             if (otraRespuesta.contieneOpcionNoSeleccionada(opcion)) {
@@ -91,12 +84,4 @@ public class RespuestaMC extends Respuesta {
         }
         return false;
     }
-    //despues borrar
-    /*public ArrayList<Opcion> obtenerCorrectas(){
-        return opcionesSeleccionadas;
-    }
-
-    public ArrayList<Opcion> obtenerIncorrectas(){
-        return opcionesNoSeleccionadas;
-    }*/
 }

@@ -8,9 +8,6 @@ public class RespuestaVF extends Respuesta {
         this.elegida = opcion;
     }
 
-    public Boolean esIgual(RespuestaVF otraRespuesta){//Aca deberia comparar los de su tipo
-        return elegida.esIgual(otraRespuesta.obtenerOpcion());
-    }
 
     @Override
     public Boolean esIgual(Respuesta jugador) {

@@ -2,8 +2,6 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.Jugadores;
-import edu.fiuba.algo3.modelo.Poder;
-import edu.fiuba.algo3.modelo.Puntajes;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,7 +34,11 @@ public class FaseFinal implements Fase {
     public void iniciar(){
         String ganador = manejador.obtenerAtributos().obtenerGanador();
         Label mensajeGanador = new Label("¡Felicidades " + ganador + " sos el ganador!");
-        Button botonTerminado = new Button("Siguiente");
+        Button botonTerminado = new Button("Terminar juego");
+
+        botonTerminado.setOnAction(event -> {
+            fondo.close();
+        });
 
         TableView<Jugador> tablaPuntajes = this.crearTablaPuntaje();
         Text textoExtra = this.crearTextoPoderes();

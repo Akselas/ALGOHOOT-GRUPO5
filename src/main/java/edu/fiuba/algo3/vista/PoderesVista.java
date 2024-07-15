@@ -13,6 +13,7 @@ public class PoderesVista extends VBox{
     private ToggleGroup grupoPoderes;
     private Poder poderSeleccionado;
     private Jugador jugador;
+    private ToggleButton botonSeleccionado;
 
 public PoderesVista(Jugador jugador, Pregunta pregunta){
     poderSeleccionado = new Basico();
@@ -50,13 +51,17 @@ private void cargarPoder(Poder poder){//se agregan los botones al layout, junto 
     boton.setUserData(poder);
     boton.getStyleClass().add("boton-poder");
     boton.setOnAction(event -> {
-        if(boton.isSelected()){
+        if (boton.isSelected()) {
             poderSeleccionado = poder;
-            System.out.println("Poder seleccionado: " + poder.obtenerNombre());
-        }else{
-            System.out.println("Poder deseleccionado: " + poder.obtenerNombre());
+            if (botonSeleccionado != null) {
+                botonSeleccionado.getStyleClass().remove("boton-poder-seleccionado");
+            }
+            boton.getStyleClass().add("boton-poder-seleccionado");
+            botonSeleccionado = boton;
+        } else {
             poderSeleccionado = new Basico();
-            System.out.println("Poder seleccionado: " + poderSeleccionado.obtenerNombre());
+            botonSeleccionado.getStyleClass().remove("boton-poder-seleccionado");
+            botonSeleccionado = null;
         }
     });
     this.getChildren().add(boton);

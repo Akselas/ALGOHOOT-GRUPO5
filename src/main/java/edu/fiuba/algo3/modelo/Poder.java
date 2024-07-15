@@ -10,7 +10,7 @@ public abstract class Poder {
 
     public int obtenerCantidad(){return cantidad;}
 
-    public void utilizarPoder(){
+    protected void utilizarPoder(){
         cantidad--;
     }
     public abstract boolean habilitarPoder(Pregunta pregunta);

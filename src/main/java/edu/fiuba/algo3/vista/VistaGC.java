@@ -55,13 +55,6 @@ public class VistaGC extends VistaPregunta{
         this.setAlignment(Pos.CENTER);
     }
 
-    /*@Override
-    public void mostrarPregunta(Pregunta pregunta, Jugador jugador) {
-        this.turno.setText("Turno: " + jugador.getNombre());
-        this.tema.setText("Tema: "+ pregunta.obtenerTema());
-        this.enunciadoLabel.setText(pregunta.obtenerTexto());
-    }*/
-
     public void mostrarNombresDeGrupos(Pregunta pregunta){
         PreguntaGC preguntaGC = (PreguntaGC) pregunta;
         this.nombreGrupo1.setText(preguntaGC.obtenerNombreGrupo1());
