@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.modelo.Alerta;
 import edu.fiuba.algo3.vista.recursos.Sonidos;
 import javafx.geometry.Pos;
 import javafx.scene.*;
@@ -40,9 +41,17 @@ public class FaseInicial implements Fase{
         numJugadoresField.setPromptText("Selecciona el número de jugadores:");
         Button nextButton = new Button("Siguiente");
         nextButton.setOnAction(e -> {
-            //Guardo en atributos el numero de jugadores.
-            manejador.obtenerAtributos().guardarNumJugadores(Integer.parseInt(numJugadoresField.getText()));
-            pedirNombresDeJugadores();
+
+            try {
+                int numJugadores = Integer.parseInt(numJugadoresField.getText());
+                if (numJugadores <= 0) {
+                    Alerta.mostrarAlerta("El número de jugadores debe ser mayor que 0.");
+                }
+                manejador.obtenerAtributos().guardarNumJugadores(numJugadores);
+                pedirNombresDeJugadores();
+            } catch (NumberFormatException ex) {
+                Alerta.mostrarAlerta( "Por favor, ingrese un número entero");
+            }
         });
 
 
@@ -118,12 +127,23 @@ public class FaseInicial implements Fase{
 
         Button startGameButton = new Button("Iniciar Juego");
         startGameButton.setOnAction(e ->{
-            this.sonidoInicio.parar();
-            manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
-            manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
-
-            fasePromover();
-
+            try {
+                int numPreguntas = Integer.parseInt(preguntasField.getText());
+                int numPuntajes = Integer.parseInt(puntajeField.getText());
+                if (numPreguntas <= 0 || numPuntajes <= 0) {
+                    Alerta.mostrarAlerta("Ingrese valores mayores a 0, porfavor");
+                }
+                else if(numPreguntas > manejador.obtenerCantidadaPreguntasParser()){
+                    Alerta.mostrarAlerta("La cantidad de preguntas no debe superar el numero" + manejador.obtenerCantidadaPreguntasParser());
+                }else{
+                    this.sonidoInicio.parar();
+                    manejador.configurarCantidadPreguntas(Integer.parseInt(preguntasField.getText()));
+                    manejador.obtenerAtributos().setPuntajeParaGanar(Integer.parseInt(puntajeField.getText()));
+                    fasePromover();
+                }
+            } catch (NumberFormatException ex) {
+                Alerta.mostrarAlerta( "Por favor, ingrese un número entero");
+            }
         });
 
         layout.getChildren().addAll(label1, preguntasField, label2, puntajeField, startGameButton);
@@ -139,4 +159,7 @@ public class FaseInicial implements Fase{
         ventanaPrincipal.show();
     }
 }
+
+
+
 

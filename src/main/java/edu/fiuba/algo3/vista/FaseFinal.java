@@ -32,11 +32,13 @@ public class FaseFinal implements Fase {
     }
     @Override
     public void iniciar(){
+        this.sonidoFinal.sonar();
         String ganador = manejador.obtenerAtributos().obtenerGanador();
         Label mensajeGanador = new Label("¡Felicidades " + ganador + " sos el ganador!");
         Button botonTerminado = new Button("Terminar juego");
 
         botonTerminado.setOnAction(event -> {
+            this.sonidoFinal.parar();
             fondo.close();
         });
 

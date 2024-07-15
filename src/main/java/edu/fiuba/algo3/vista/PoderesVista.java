@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
@@ -52,12 +53,16 @@ private void cargarPoder(Poder poder){//se agregan los botones al layout, junto 
     boton.getStyleClass().add("boton-poder");
     boton.setOnAction(event -> {
         if (boton.isSelected()) {
-            poderSeleccionado = poder;
-            if (botonSeleccionado != null) {
-                botonSeleccionado.getStyleClass().remove("boton-poder-seleccionado");
+            if(!poder.agotado()){
+                poderSeleccionado = poder;
+                if (botonSeleccionado != null) {
+                    botonSeleccionado.getStyleClass().remove("boton-poder-seleccionado");
+                }
+                boton.getStyleClass().add("boton-poder-seleccionado");
+                botonSeleccionado = boton;
+            }else{
+                Alerta.mostrarAlerta("Agotaste el poder " + poder.obtenerNombre());
             }
-            boton.getStyleClass().add("boton-poder-seleccionado");
-            botonSeleccionado = boton;
         } else {
             poderSeleccionado = new Basico();
             botonSeleccionado.getStyleClass().remove("boton-poder-seleccionado");

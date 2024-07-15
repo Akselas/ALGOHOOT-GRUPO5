@@ -38,4 +38,12 @@ public class Puntajes {
             p.restar(p.obtenerPuntuacion());
         }
     }
+
+    public void exclusividadPuntajes(){
+        if(haySoloUnaCorrecta()) {
+            duplicarPuntajes();
+        }else{
+            anularPuntajes();
+        }
+    }
 }

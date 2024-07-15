@@ -14,12 +14,12 @@ public class Sonidos {
     public Sonidos(String nombreArchivo){
         this.fondo = new File(nombreArchivo);
         this.dir_fondo = "file:///" + fondo.getAbsolutePath();
-    }
-
-    public void sonar(){
         dir_fondo = dir_fondo.replace("\\", "/");
         Media musica = new Media(dir_fondo);
         reproductor = new MediaPlayer(musica);
+    }
+
+    public void sonar(){
         reproductor.play();
     }
     public void parar(){
