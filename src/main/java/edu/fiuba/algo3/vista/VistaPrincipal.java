@@ -1,20 +1,8 @@
 package edu.fiuba.algo3.vista;
-import edu.fiuba.algo3.controlador.*;
-import edu.fiuba.algo3.vista.recursos.Sonidos;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import edu.fiuba.algo3.modelo.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class VistaPrincipal extends Application {

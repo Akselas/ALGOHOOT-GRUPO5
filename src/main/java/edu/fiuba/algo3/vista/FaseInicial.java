@@ -26,6 +26,7 @@ public class FaseInicial implements Fase{
         this.sonidoInicio = new Sonidos("musicaInicio.mp3");
         iniciar();
     }
+    @Override
     public void iniciar(){
         this.sonidoInicio.sonar();
         VBox layout = new VBox();

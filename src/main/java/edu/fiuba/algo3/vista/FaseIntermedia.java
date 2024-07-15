@@ -20,7 +20,7 @@ public class FaseIntermedia implements Fase {
         this.puntajesParciales = new Puntajes();
         this.sonidoFondo = new Sonidos("musicaFondo.mp3");
     }
-
+    @Override
     public void iniciar(){
         int contador = 1;
         Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
@@ -44,7 +44,6 @@ public class FaseIntermedia implements Fase {
         }else{
             fasePromover();
         }
-
     }
 
     private void procesarRonda(Iterator<Jugador> iteradorJugadores, Pregunta pregunta, Poderes poderesUsados, int contador, Jugadores jugadores) {
