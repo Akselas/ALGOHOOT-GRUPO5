@@ -13,7 +13,6 @@ public class FaseIntermedia implements Fase {
     Stage fondo;
     FaseManejador manejador;
     Puntajes puntajesParciales;
-    Puntajes puntajesGenerales;
     Sonidos sonidoFondo;
 
     public FaseIntermedia(Stage stage, FaseManejador manejador){
@@ -27,7 +26,7 @@ public class FaseIntermedia implements Fase {
         // Crear la tabla general de puntajes y asociarla a los jugadores, no se si crear un objeto tabla
         // Crear tabla parcial de puntajes y asignarselos a los jugadores
         // Esto lo vamos a mandar a fase inicial y acá directamente arrancamos el juego.
-        int contador = 0;
+        int contador = 1;
         Jugadores jugadores = manejador.obtenerAtributos().getJugadores();
         procesarJuego(contador, jugadores);
         }
@@ -59,7 +58,7 @@ public class FaseIntermedia implements Fase {
             poderesUsados.aplicarPoderesGrupales(puntajesParciales);
             jugadores.actualizarPuntajes();
             sonidoFondo.parar();
-            VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados, pregunta.textoRespuesta);
+            VistaRonda rondaTerminada = new VistaRonda(fondo, jugadores, poderesUsados, pregunta.obtenerTextoRespuesta());
             rondaTerminada.mostrar();
 
             rondaTerminada.getBotonSiguiente().setOnAction(event -> {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Jugador {
     private Puntaje puntaje; //usar clase puntaje para guardar el atributo
-    final String nombre;
+    private final String nombre;
     private Poderes poderes;
     private Respuesta respuesta;
     private Puntaje puntajeRonda;

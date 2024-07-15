@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 
 public class Jugadores {
@@ -13,6 +11,16 @@ public class Jugadores {
 
     public void agregarJugador(Jugador jugador){
         this.jugadores.add(jugador);
+    }
+
+    public List<String> obtenerPodio() {
+        List<String> podio = new ArrayList<>();
+
+        for (int i = 0; i < Math.min(3, jugadores.size()); i++) {
+            podio.add(jugadores.get(i).getNombre());
+        }
+
+        return podio;
     }
 
     public boolean algunoSuperaPuntaje(int numero){
@@ -47,5 +55,14 @@ public class Jugadores {
             }
         }
         return nombreDelMayor;
+    }
+
+    public void ordenarPorPuntaje() {
+        Collections.sort(jugadores, new Comparator<Jugador>() {
+            @Override
+            public int compare(Jugador j1, Jugador j2) {
+                return Integer.compare(j2.getPuntaje(), j1.getPuntaje()); // Orden descendente
+            }
+        });
     }
 }

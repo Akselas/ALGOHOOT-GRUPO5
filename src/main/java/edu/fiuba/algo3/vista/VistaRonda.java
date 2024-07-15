@@ -102,7 +102,7 @@ public class VistaRonda {
         textoExtra.setWrappingWidth(250);
         textoExtra.setTextAlignment(TextAlignment.JUSTIFY);
         if(poderes.vacio()){
-            textoExtra.setText("En esta ronda se utilizó no se utilizo poderes\n");
+            textoExtra.setText("En esta ronda no se utilizó poderes\n");
         }else{
             poderes.eliminarPoderesDuplicados();
             textoExtra.setText("En esta ronda se utilizó al menos una vez los siguientes poderes:\n");

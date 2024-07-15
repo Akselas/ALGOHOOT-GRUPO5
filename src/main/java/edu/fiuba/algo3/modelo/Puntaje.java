@@ -14,10 +14,6 @@ public class Puntaje {
         return this.punto;
     }
 
-    public void sumar(){
-        this.punto += 1;
-    }
-
     public void sumar(int suma){
         this.punto += suma;
     }

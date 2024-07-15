@@ -3,10 +3,10 @@ package edu.fiuba.algo3.modelo;
 public abstract class Pregunta {
     protected String texto;
     protected final Respuesta correcta;
-    private final String tema;
-    private final String tipo;
-    public final Opciones opciones;
-    public final String textoRespuesta;
+    protected final String tema;
+    protected final String tipo;
+    protected final Opciones opciones;
+    protected final String textoRespuesta;
 
     public Pregunta(String texto, String tema, String tipo, Opciones opciones, Respuesta correcta, String textoRespuesta) {
         this.texto = texto;
