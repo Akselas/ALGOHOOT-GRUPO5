@@ -13,6 +13,10 @@ public abstract class Poder {
     protected void utilizarPoder(){
         cantidad--;
     }
+
+    public boolean agotado(){
+        return cantidad <= 0;
+    }
     public abstract boolean habilitarPoder(Pregunta pregunta);
 
 

@@ -30,4 +30,7 @@ public class FaseManejador {
         atributos.setCantidadDePreguntas(cantidad);
         atributos.guardarPreguntas(parser.devolverPreguntasRandom(cantidad));
     }
+    public int obtenerCantidadaPreguntasParser(){
+        return parser.obtenerCantPreguntas();
+    }
 }

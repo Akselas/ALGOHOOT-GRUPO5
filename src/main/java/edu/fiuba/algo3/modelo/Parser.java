@@ -16,6 +16,9 @@ public class Parser {
         preguntas = new ArrayList<>();
         this.leer(ruta);
     }
+    public int obtenerCantPreguntas(){
+        return preguntas.size();
+    }
     //test
     public Pregunta devolverPrimeraPregunta(){
         return preguntas.get(0);
